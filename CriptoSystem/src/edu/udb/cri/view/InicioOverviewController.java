@@ -20,6 +20,8 @@ public class InicioOverviewController {
 	private Button asimetricoButton;
 	@FXML
 	private Button digitalSingButton;
+	
+	private MainApp mainApp;
 
 	public InicioOverviewController() {
 
@@ -71,6 +73,11 @@ public class InicioOverviewController {
 			}
 		});
 	}
+	
+	
+	public void handleDigitalSing() {
+		mainApp.showDigitalSingOverview();
+	}
 
 	/**
 	 * Is called by the main application to give a reference back to itself.
@@ -78,9 +85,7 @@ public class InicioOverviewController {
 	 * @param mainApp
 	 */
 	public void setMainApp(MainApp mainApp) {
-
-		// Add observable list data to the table
-		// personTable.setItems(mainApp.getPersonData());
+		this.mainApp = mainApp;
 	}
 
 }

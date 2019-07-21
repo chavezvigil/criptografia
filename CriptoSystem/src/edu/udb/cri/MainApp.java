@@ -2,6 +2,7 @@ package edu.udb.cri;
 
 import java.io.IOException;
 
+import edu.udb.cri.view.DigitalSingController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -60,6 +61,25 @@ public class MainApp extends Application {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public void showDigitalSingOverview() {
+	    try {
+	        // Load digital sing overview.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource("view/DigitalSing.fxml"));
+	        AnchorPane digitalSingOverview = (AnchorPane) loader.load();
+
+	        // Set digital sing overview into the center of root layout.
+	        rootLayout.setCenter(digitalSingOverview);
+
+	        // Give the controller access to the main app
+	        DigitalSingController controller = loader.getController();
+	        controller.setMainApp(this);
+
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
 	}
 
 }

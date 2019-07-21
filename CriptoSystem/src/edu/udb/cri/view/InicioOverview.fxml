@@ -23,7 +23,7 @@
                      <children>
                         <Button fx:id="simetricoButton" mnemonicParsing="false" prefHeight="75.0" prefWidth="150.0" text="Criptografía Simétrica" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" />
                         <Button fx:id="asimetricoButton" mnemonicParsing="false" prefHeight="73.0" prefWidth="150.0" text="Criptografía Asimétrica" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="1" />
-                        <Button fx:id="digitalSingButton" mnemonicParsing="false" prefHeight="73.0" prefWidth="150.0" text="Firma Digital" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="2" />
+                        <Button fx:id="digitalSingButton" mnemonicParsing="false" onAction="#handleDigitalSing" prefHeight="73.0" prefWidth="150.0" text="Firma Digital" textAlignment="CENTER" textOverrun="CLIP" wrapText="true" GridPane.rowIndex="2" />
                      </children>
                   </GridPane>
                </children>
