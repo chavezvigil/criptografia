@@ -27,9 +27,16 @@ public class InicioOverviewController {
 
 	@FXML
 	private void initialize() {
-		// Initialize the start buttons
-
 		// Symmetric button
+		simetricCipher();
+		// Asymmetric button
+		asimetricCipher();
+		// Digital sing button
+		digitalSing();
+
+	}
+
+	public void simetricCipher() {
 		URL imgSimetric = getClass().getResource("/resources/simetric.png");
 		Image imageSimetric = new Image(imgSimetric.toString());
 		simetricoButton.setGraphic(new ImageView(imageSimetric));
@@ -39,8 +46,9 @@ public class InicioOverviewController {
 				JOptionPane.showMessageDialog(null, "Click en boton simetrico");
 			}
 		});
+	}
 
-		// Asymmetric button
+	public void asimetricCipher() {
 		URL imgAsimetric = getClass().getResource("/resources/asimetric.png");
 		Image imageAsimetric = new Image(imgAsimetric.toString());
 		asimetricoButton.setGraphic(new ImageView(imageAsimetric));
@@ -50,8 +58,9 @@ public class InicioOverviewController {
 				JOptionPane.showMessageDialog(null, "Click en boton asimetrico");
 			}
 		});
+	}
 
-		// Digital sing button
+	public void digitalSing() {
 		URL imgDs = getClass().getResource("/resources/digital_sing.png");
 		Image imageDs = new Image(imgDs.toString());
 		digitalSingButton.setGraphic(new ImageView(imageDs));
@@ -61,10 +70,6 @@ public class InicioOverviewController {
 				JOptionPane.showMessageDialog(null, "Click en boton firma digital");
 			}
 		});
-	}
-
-	public void simetricCipher() {
-
 	}
 
 	/**
