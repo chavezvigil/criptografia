@@ -41,13 +41,13 @@ public class InicioOverviewController {
 		});
 
 		// Asymmetric button
-		URL imgAsimetric = getClass().getResource("/resources/simetric.png");
+		URL imgAsimetric = getClass().getResource("/resources/asimetric.png");
 		Image imageAsimetric = new Image(imgAsimetric.toString());
 		asimetricoButton.setGraphic(new ImageView(imageAsimetric));
 		asimetricoButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Click en boton simetrico");
+				JOptionPane.showMessageDialog(null, "Click en boton asimetrico");
 			}
 		});
 
@@ -58,7 +58,7 @@ public class InicioOverviewController {
 		digitalSingButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Click en boton simetrico");
+				JOptionPane.showMessageDialog(null, "Click en boton firma digital");
 			}
 		});
 	}
