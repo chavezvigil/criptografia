@@ -1,5 +1,7 @@
 package edu.udb.cri.view;
 
+import java.net.URL;
+
 import javax.swing.JOptionPane;
 
 
@@ -27,9 +29,10 @@ public class InicioOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the start buttons
-		//System.out.println("Path: ");
-		//Image image = new Image(getClass().getResourceAsStream("simetric_cipher.png"));
-		//simetricoButton.setGraphic(new ImageView(image));
+
+		URL imgUrl = getClass().getResource("/simetric_cipher.png");
+		Image image = new Image(imgUrl.toString());
+		simetricoButton.setGraphic(new ImageView(image));
 		simetricoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Click en boton simetrico");
