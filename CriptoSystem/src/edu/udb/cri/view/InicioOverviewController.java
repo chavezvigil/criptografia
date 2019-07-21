@@ -52,7 +52,7 @@ public class InicioOverviewController {
 		});
 
 		// Digital sing button
-		URL imgDs = getClass().getResource("/resources/simetric.png");
+		URL imgDs = getClass().getResource("/resources/digital_sing.png");
 		Image imageDs = new Image(imgDs.toString());
 		digitalSingButton.setGraphic(new ImageView(imageDs));
 		digitalSingButton.setOnAction(new EventHandler<ActionEvent>() {
