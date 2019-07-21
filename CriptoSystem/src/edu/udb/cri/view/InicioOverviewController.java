@@ -27,8 +27,9 @@ public class InicioOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the start buttons
-		Image image = new Image(getClass().getResourceAsStream("da.png"));
-		simetricoButton.setGraphic(new ImageView(image));
+		//System.out.println("Path: ");
+		//Image image = new Image(getClass().getResourceAsStream("simetric_cipher.png"));
+		//simetricoButton.setGraphic(new ImageView(image));
 		simetricoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
                 JOptionPane.showMessageDialog(null, "Click en boton simetrico");
