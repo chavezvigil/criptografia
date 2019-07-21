@@ -27,7 +27,7 @@ public class InicioOverviewController {
 	@FXML
 	private void initialize() {
 		// Initialize the start buttons
-		Image image = new Image(getClass().getResourceAsStream("a.png"));
+		Image image = new Image(getClass().getResourceAsStream("da.png"));
 		simetricoButton.setGraphic(new ImageView(image));
 		simetricoButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override public void handle(ActionEvent e) {
