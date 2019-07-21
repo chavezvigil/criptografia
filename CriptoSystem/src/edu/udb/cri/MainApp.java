@@ -50,13 +50,13 @@ public class MainApp extends Application {
 	 */
 	public void showInicioOverview() {
 		try {
-			// Load inicio overview.
+			// Load begin overview.
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(MainApp.class.getResource("view/InicioOverview.fxml"));
-			AnchorPane personOverview = (AnchorPane) loader.load();
+			AnchorPane inicioOverview = (AnchorPane) loader.load();
 
-			// Set inicio overview into the center of root layout.
-			rootLayout.setCenter(personOverview);
+			// Set begin overview into the center of root layout.
+			rootLayout.setCenter(inicioOverview);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
