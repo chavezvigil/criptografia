@@ -22,6 +22,17 @@ public class InicioOverviewController {
 	private Button digitalSingButton;
 	
 	private MainApp mainApp;
+	
+	
+	/**
+	 * Is called by the main application to give a reference back to itself.
+	 * 
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
+	
 
 	public InicioOverviewController() {
 
@@ -66,12 +77,6 @@ public class InicioOverviewController {
 		URL imgDs = getClass().getResource("/resources/digital_sing.png");
 		Image imageDs = new Image(imgDs.toString());
 		digitalSingButton.setGraphic(new ImageView(imageDs));
-		digitalSingButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Click en boton firma digital");
-			}
-		});
 	}
 	
 	
@@ -79,13 +84,6 @@ public class InicioOverviewController {
 		mainApp.showDigitalSingOverview();
 	}
 
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
+	
 
 }
