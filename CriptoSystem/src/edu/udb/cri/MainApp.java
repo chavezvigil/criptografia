@@ -100,5 +100,13 @@ public class MainApp extends Application {
 	        return false;
 	    }
 	}
+	
+	 /**
+     * Returns the main stage.
+     * @return
+     */
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
 
 }
