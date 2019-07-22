@@ -15,7 +15,7 @@ public class DigitalSingController {
 	private void initialize() {
 		
 	
-	}
+	} 
 	
 	
 	
