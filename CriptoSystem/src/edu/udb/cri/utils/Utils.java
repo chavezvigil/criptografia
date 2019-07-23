@@ -10,7 +10,7 @@ public class Utils {
 			MessageDigest md = MessageDigest.getInstance(digesto);
 			byte[] byteDataToTransmit = message.getBytes();
 
-			// 3. Crear un resumen del mensaje de los datos a transmitir
+			// Crear un resumen del mensaje de los datos a transmitir
 			md.update(byteDataToTransmit);
 			byte byteMDofDataToTransmit[] = md.digest();
 
