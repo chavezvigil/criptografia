@@ -36,6 +36,7 @@ public class DigitalSingController {
 	@FXML
 	private TextArea publicKeyText;
 	
+	
 	@FXML
 	private TextArea firmaText;
 
@@ -139,7 +140,7 @@ public class DigitalSingController {
 			X509Certificate cert = Utils.getX509Certificate(getClass().getResource("/resources/keystore/testkeystore.ks"), "recev", "test1234");
 			certText.setText(String.valueOf(cert));
 			
-			//Extraer clave pública
+			//Extraer clave pï¿½blica
 			PublicKey publicKey = Utils.getPublicKey(cert);
 			publicKeyText.setText(String.valueOf(publicKey));
 			
