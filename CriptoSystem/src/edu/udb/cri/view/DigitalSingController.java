@@ -3,11 +3,13 @@ package edu.udb.cri.view;
 import java.io.File;
 import java.net.URL;
 import edu.udb.cri.MainApp;
+import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -22,6 +24,8 @@ public class DigitalSingController {
 	private TextArea messageText;
 	@FXML
 	private Button firmarButton;
+	@FXML
+	private TextField digestText;
 
 	private MainApp mainApp;
 
@@ -115,8 +119,9 @@ public class DigitalSingController {
 	
 	public void firmarMensaje() {
 		try {
-			
-			messageText.setText("Clicked button");
+			String message = messageText.getText();
+			String digesto = Utils.stringToDigest(message);
+			digestText.setText(digesto);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

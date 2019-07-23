@@ -28,7 +28,7 @@
                               <Label text="Mensaje" />
                               <TextArea fx:id="messageText" prefHeight="125.0" prefWidth="406.0" GridPane.columnIndex="1" />
                               <Label text="Digesto" GridPane.rowIndex="1" />
-                              <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <TextField fx:id="digestText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                               <Button fx:id="firmarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Firmar" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                            </children>
                         </GridPane>
