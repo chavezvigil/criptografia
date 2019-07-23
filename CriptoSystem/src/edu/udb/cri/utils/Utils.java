@@ -1,10 +1,19 @@
 package edu.udb.cri.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
+import java.util.Enumeration;
+
 import org.apache.commons.codec.binary.Base64;
 
 public class Utils {
@@ -73,6 +82,37 @@ public class Utils {
 		}
 
 		return strSenbyteEncryptWithPublicKey;
+	}
+
+	public static void printAllCerts(URL keyStoreUrl, String password) {
+		try {
+
+			File file = new File(keyStoreUrl.getPath());
+			InputStream is = new FileInputStream(file);
+			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+			
+			keystore.load(is, password.toCharArray());
+
+			Enumeration<String> enumeration = keystore.aliases();
+			while (enumeration.hasMoreElements()) {
+				String alias = enumeration.nextElement();
+				System.out.println("alias name: " + alias);
+				X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
+				System.out.println(certificate.toString());
+
+			}
+
+		} catch (java.security.cert.CertificateException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
