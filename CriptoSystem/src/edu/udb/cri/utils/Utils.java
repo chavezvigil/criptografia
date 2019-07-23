@@ -101,7 +101,7 @@ public class Utils {
 				System.out.println(certificate.toString());
 
 			}
-
+ 
 		} catch (java.security.cert.CertificateException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
