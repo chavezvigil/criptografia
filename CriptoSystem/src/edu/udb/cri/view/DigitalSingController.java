@@ -2,6 +2,8 @@ package edu.udb.cri.view;
 
 import java.io.File;
 import java.net.URL;
+import java.security.cert.X509Certificate;
+
 import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
@@ -26,6 +28,12 @@ public class DigitalSingController {
 	private Button firmarButton;
 	@FXML
 	private TextField digestText;
+	
+	@FXML
+	private TextArea certText;
+	
+	@FXML
+	private TextArea publicKeyText;
 
 	private MainApp mainApp;
 
@@ -122,6 +130,9 @@ public class DigitalSingController {
 			String message = messageText.getText();
 			String digesto = Utils.stringToDigest(message,"MD5");
 			digestText.setText(digesto);
+			X509Certificate cert = Utils.getX509Certificate("test1234","recev", getClass().getResource("/resources/keystore/testkeystore.ks"));
+			certText.setText(String.valueOf(cert));
+			publicKeyText.setText(String.valueOf(Utils.getPublicKey(cert)));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

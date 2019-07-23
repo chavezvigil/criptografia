@@ -1,5 +1,6 @@
 package edu.udb.cri.utils;
 
+import java.net.URL;
 import java.security.*;
 import java.security.cert.*;
 import javax.crypto.*;
@@ -26,7 +27,7 @@ public class PublicKeyCryptography {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) {
+	public void main() {
 
 		SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 		String strDataToEncrypt = "Hello World";
@@ -44,16 +45,18 @@ public class PublicKeyCryptography {
 			// 2.1 Especifique el almacén de claves que se haya importado el certificado
 			// Receptores
 			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-			char[] password = "testpwd".toCharArray();
-			java.io.FileInputStream fis = new java.io.FileInputStream(
-					"/home/luis/workspace/OWASP_Crypto/org/owasp/crypto/testkeystore.ks");
+			char[] password = "test1234".toCharArray();
+			
+			URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
+			
+			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.toString());
 			ks.load(fis, password);
 			fis.close();
 
 			// 2.2 Creación de un certificado X509 del receptor
 			X509Certificate recvcert;
 			MessageDigest md = MessageDigest.getInstance("MD5");
-			recvcert = (X509Certificate) ks.getCertificate("testrecv");
+			recvcert = (X509Certificate) ks.getCertificate("recev");
 			// 2.3 Obtención de la llave pública de los certificados
 			PublicKey pubKeyReceiver = recvcert.getPublicKey();
 
@@ -80,8 +83,8 @@ public class PublicKeyCryptography {
 			// 4.1 Obtener la clave privada del remitente desde el almacén de claves,
 			// proporcionando la contraseña establecida para la llave privada mientras se
 			// crea las llaves usados.
-			char[] keypassword = "send123".toCharArray();
-			Key myKey = ks.getKey("testsender", keypassword);
+			char[] keypassword = "test1234".toCharArray();
+			Key myKey = ks.getKey("sender", keypassword);
 			PrivateKey myPrivateKey = (PrivateKey) myKey;
 
 			// 4.2 Firmar el mensaje
@@ -96,7 +99,7 @@ public class PublicKeyCryptography {
 			// 6. Validar la firma
 			// 6.1 Extraer la clave pública de su certificado de remitentes
 			X509Certificate sendercert;
-			sendercert = (X509Certificate) ks.getCertificate("testsender");
+			sendercert = (X509Certificate) ks.getCertificate("sender");
 			PublicKey pubKeySender = sendercert.getPublicKey();
 			// 6.2 Verificar la Firma
 			Signature myVerifySign = Signature.getInstance("MD5withRSA");
