@@ -4,10 +4,10 @@ import java.security.MessageDigest;
 
 public class Utils {
 
-	public static String stringToDigest(String message) {
+	public static String stringToDigest(String message, String digesto) {
 		String strMDofDataToTransmit = new String();
 		try {
-			MessageDigest md = MessageDigest.getInstance("MD5");
+			MessageDigest md = MessageDigest.getInstance(digesto);
 			byte[] byteDataToTransmit = message.getBytes();
 
 			// 3. Crear un resumen del mensaje de los datos a transmitir

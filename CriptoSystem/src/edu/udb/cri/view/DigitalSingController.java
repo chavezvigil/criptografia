@@ -120,7 +120,7 @@ public class DigitalSingController {
 	public void firmarMensaje() {
 		try {
 			String message = messageText.getText();
-			String digesto = Utils.stringToDigest(message);
+			String digesto = Utils.stringToDigest(message,"MD5");
 			digestText.setText(digesto);
 		} catch (Exception e) {
 			e.printStackTrace();
