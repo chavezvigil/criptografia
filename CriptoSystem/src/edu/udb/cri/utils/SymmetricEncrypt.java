@@ -11,8 +11,7 @@ import java.security.InvalidAlgorithmParameterException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
-
-import sun.misc.BASE64Encoder;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  * @author Luis Chávez Este programa ofrece las funcionalidades criptográficas
@@ -77,7 +76,7 @@ public class SymmetricEncrypt {
 			 * bytes, utilizando el método doFinal
 			 */
 			byteCipherText = aesCipher.doFinal(byteDataToEncrypt);
-			strCipherText = new BASE64Encoder().encode(byteCipherText);
+			strCipherText = new Base64().encodeToString(byteCipherText);
 
 		}
 

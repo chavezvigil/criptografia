@@ -2,9 +2,6 @@ package edu.udb.cri.view;
 
 import java.io.File;
 import java.net.URL;
-
-import javax.swing.JOptionPane;
-
 import edu.udb.cri.MainApp;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

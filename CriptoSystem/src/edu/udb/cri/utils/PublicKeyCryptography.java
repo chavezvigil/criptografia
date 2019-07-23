@@ -3,8 +3,7 @@ package edu.udb.cri.utils;
 import java.security.*;
 import java.security.cert.*;
 import javax.crypto.*;
-import sun.misc.BASE64Encoder;
-import sun.misc.BASE64Decoder;
+import org.apache.commons.codec.binary.Base64;
 
 
 /**
@@ -38,7 +37,7 @@ public class PublicKeyCryptography {
 
 		// 1. Cifrar los datos utilizando una clave simétrica
 		byte[] byteCipherText = encryptUtil.encryptData(byteDataToTransmit, senderSecretKey, "AES");
-		String strCipherText = new BASE64Encoder().encode(byteCipherText);
+		//String strCipherText = new Base64().encodeToString(byteCipherText);
 
 		// 2. Cifrar la clave simétrica con la clave pública
 		try {
@@ -61,7 +60,7 @@ public class PublicKeyCryptography {
 			// 2.4 Cifrado de la SecretKey con la clave pública Receptores
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(senderSecretKey.getEncoded(), pubKeyReceiver,
 					"RSA/ECB/PKCS1Padding");
-			String strSenbyteEncryptWithPublicKey = new BASE64Encoder().encode(byteEncryptWithPublicKey);
+			String strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 
 			// 3. Crear un resumen del mensaje de los datos a transmitir
 			md.update(byteDataToTransmit);
@@ -119,15 +118,15 @@ public class PublicKeyCryptography {
 			PrivateKey recvPrivateKey = (PrivateKey) recvKey;
 
 			// Analizar el MessageDigest y el valor cifrado
-			String strRecvSignedData = new String(byteSignedData);
-			String[] strRecvSignedDataArray = new String[10];
-			strRecvSignedDataArray = strMsgToSign.split("|");
+			//String strRecvSignedData = new String(byteSignedData);
+			//String[] strRecvSignedDataArray = new String[10];
+			//strRecvSignedDataArray = strMsgToSign.split("|");
 			int intindexofsep = strMsgToSign.indexOf("|");
-			String strEncryptWithPublicKey = strMsgToSign.substring(0, intindexofsep);
+			//String strEncryptWithPublicKey = strMsgToSign.substring(0, intindexofsep);
 			String strHashOfData = strMsgToSign.substring(intindexofsep + 1);
 
 			// Descifrado para obtener la clave simétrica
-			byte[] bytestrEncryptWithPublicKey = new BASE64Decoder().decodeBuffer(strEncryptWithPublicKey);
+			//byte[] bytestrEncryptWithPublicKey = new Base64().decode(strEncryptWithPublicKey);
 			byte[] byteDecryptWithPrivateKey = encryptUtil.decryptData(byteEncryptWithPublicKey, recvPrivateKey,
 					"RSA/ECB/PKCS1Padding");
 
