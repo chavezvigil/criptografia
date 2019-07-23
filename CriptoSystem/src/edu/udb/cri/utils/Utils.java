@@ -5,7 +5,6 @@ import java.security.KeyStore;
 import java.security.MessageDigest;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
-
 import org.apache.commons.codec.binary.Base64;
 
 public class Utils {
