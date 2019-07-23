@@ -1,9 +1,18 @@
 package edu.udb.cri.view;
 
 import java.io.File;
+import java.net.URL;
+
+import javax.swing.JOptionPane;
 
 import edu.udb.cri.MainApp;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -11,6 +20,11 @@ public class DigitalSingController {
 
 	private Stage dialogStage;
 	private boolean okClicked = false;
+
+	@FXML
+	private TextArea messageText;
+	@FXML
+	private Button firmarButton;
 
 	private MainApp mainApp;
 
@@ -29,7 +43,19 @@ public class DigitalSingController {
 
 	@FXML
 	private void initialize() {
-
+		firmarInitialize();
+	}
+	
+	public void firmarInitialize() {
+		URL imgSimetric = getClass().getResource("/resources/digital_sing.png");
+		Image imageSimetric = new Image(imgSimetric.toString());
+		firmarButton.setGraphic(new ImageView(imageSimetric));
+		firmarButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				firmarMensaje();
+			}
+		});
 	}
 
 	/**
@@ -87,6 +113,15 @@ public class DigitalSingController {
 				file = new File(file.getPath() + ".xml");
 			}
 
+		}
+	}
+	
+	public void firmarMensaje() {
+		try {
+			
+			messageText.setText("Clicked button");
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 
