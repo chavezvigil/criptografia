@@ -6,8 +6,11 @@ import java.security.MessageDigest;
 import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 
+import org.apache.commons.codec.binary.Base64;
+
 public class Utils {
 
+	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 
 	public static String stringToDigest(String message, String digesto) {
 		String strMDofDataToTransmit = new String();
@@ -51,13 +54,26 @@ public class Utils {
 		PublicKey pubKeyReceiver = null;
 		try {
 			if (cert != null) {
-				//Obtencion de la llave publica de los certificados
+				// Obtencion de la llave publica de los certificados
 				pubKeyReceiver = cert.getPublicKey();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return pubKeyReceiver;
+	}
+
+	public static String singMessage(PublicKey pubKeyReceiver, byte[] byteDataToSing) {
+		String strSenbyteEncryptWithPublicKey = new String();
+		try {
+			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(byteDataToSing, pubKeyReceiver,
+					"RSA/ECB/PKCS1Padding");
+			strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return strSenbyteEncryptWithPublicKey;
 	}
 
 }

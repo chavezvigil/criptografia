@@ -2,6 +2,7 @@ package edu.udb.cri.view;
 
 import java.io.File;
 import java.net.URL;
+import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 
 import edu.udb.cri.MainApp;
@@ -34,6 +35,9 @@ public class DigitalSingController {
 	
 	@FXML
 	private TextArea publicKeyText;
+	
+	@FXML
+	private TextArea firmaText;
 
 	private MainApp mainApp;
 
@@ -130,9 +134,18 @@ public class DigitalSingController {
 			String message = messageText.getText();
 			String digesto = Utils.stringToDigest(message,"MD5");
 			digestText.setText(digesto);
+			
+			//Extraer certificado de almacen
 			X509Certificate cert = Utils.getX509Certificate(getClass().getResource("/resources/keystore/testkeystore.ks"), "recev", "test1234");
 			certText.setText(String.valueOf(cert));
-			publicKeyText.setText(String.valueOf(Utils.getPublicKey(cert)));
+			
+			//Extraer clave pública
+			PublicKey publicKey = Utils.getPublicKey(cert);
+			publicKeyText.setText(String.valueOf(publicKey));
+			
+			//Firmar mensaje
+			String firma = Utils.singMessage(publicKey, digesto.getBytes());
+			firmaText.setText(firma);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
