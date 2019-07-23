@@ -130,7 +130,7 @@ public class DigitalSingController {
 			String message = messageText.getText();
 			String digesto = Utils.stringToDigest(message,"MD5");
 			digestText.setText(digesto);
-			X509Certificate cert = Utils.getX509Certificate("test1234","recev", getClass().getResource("/resources/keystore/testkeystore.ks"));
+			X509Certificate cert = Utils.getX509Certificate(getClass().getResource("/resources/keystore/testkeystore.ks"), "recev", "test1234");
 			certText.setText(String.valueOf(cert));
 			publicKeyText.setText(String.valueOf(Utils.getPublicKey(cert)));
 		} catch (Exception e) {

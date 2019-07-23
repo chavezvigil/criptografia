@@ -29,7 +29,7 @@ public class Utils {
 		return strMDofDataToTransmit;
 	}
 
-	public static X509Certificate getX509Certificate(String passKeyStore, String certName, URL keyStoreUrl) {
+	public static X509Certificate getX509Certificate(URL keyStoreUrl, String certName, String passKeyStore) {
 		X509Certificate recvcert = null;
 		try {
 			// Especifique el almacen de claves que se haya importado el certificado para
