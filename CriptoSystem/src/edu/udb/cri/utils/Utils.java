@@ -14,7 +14,11 @@ import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
+
 import org.apache.commons.codec.binary.Base64;
+
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class Utils {
 
@@ -90,7 +94,7 @@ public class Utils {
 			File file = new File(keyStoreUrl.getPath());
 			InputStream is = new FileInputStream(file);
 			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-			
+
 			keystore.load(is, password.toCharArray());
 
 			Enumeration<String> enumeration = keystore.aliases();
@@ -101,18 +105,50 @@ public class Utils {
 				System.out.println(certificate.toString());
 
 			}
- 
+
 		} catch (java.security.cert.CertificateException e) {
 			e.printStackTrace();
 		} catch (NoSuchAlgorithmException e) {
 			e.printStackTrace();
 		} catch (FileNotFoundException e) {
-			e.printStackTrace(); 
+			e.printStackTrace();
 		} catch (KeyStoreException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static ObservableList<String> getAllNameCerts(URL keyStoreUrl, String password) {
+		ObservableList<String> items = FXCollections.observableArrayList();
+		try {
+
+			File file = new File(keyStoreUrl.getPath());
+			InputStream is = new FileInputStream(file);
+			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+			keystore.load(is, password.toCharArray());
+
+			Enumeration<String> enumeration = keystore.aliases();
+			while (enumeration.hasMoreElements()) {
+				String alias = enumeration.nextElement();
+				if (alias != null && !alias.isEmpty()) {
+					items.add(alias);
+				}
+			}
+
+		} catch (java.security.cert.CertificateException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return items;
 	}
 
 }

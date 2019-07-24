@@ -10,7 +10,11 @@ import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,6 +26,8 @@ public class DigitalSingController {
 
 	private Stage dialogStage;
 	private boolean okClicked = false;
+	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
+	private String keyStorePass = "test1234";
 
 	@FXML
 	private TextArea messageText;
@@ -29,16 +35,14 @@ public class DigitalSingController {
 	private Button firmarButton;
 	@FXML
 	private TextField digestText;
-	
 	@FXML
 	private TextArea certText;
-	
 	@FXML
 	private TextArea publicKeyText;
-	
-	
 	@FXML
 	private TextArea firmaText;
+	@FXML
+	private ComboBox<String> certList;
 
 	private MainApp mainApp;
 
@@ -58,8 +62,9 @@ public class DigitalSingController {
 	@FXML
 	private void initialize() {
 		firmarInitialize();
+		certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
 	}
-	
+
 	public void firmarInitialize() {
 		URL imgSimetric = getClass().getResource("/resources/digital_sing.png");
 		Image imageSimetric = new Image(imgSimetric.toString());
@@ -129,24 +134,38 @@ public class DigitalSingController {
 
 		}
 	}
-	
+
 	public void firmarMensaje() {
 		try {
-			String message = messageText.getText();
-			String digesto = Utils.stringToDigest(message,"MD5");
-			digestText.setText(digesto);
-			
-			//Extraer certificado de almacen
-			X509Certificate cert = Utils.getX509Certificate(getClass().getResource("/resources/keystore/testkeystore.ks"), "recev", "test1234");
-			certText.setText(String.valueOf(cert));
-			
-			//Extraer clave pï¿½blica
-			PublicKey publicKey = Utils.getPublicKey(cert);
-			publicKeyText.setText(String.valueOf(publicKey));
-			
-			//Firmar mensaje
-			String firma = Utils.singMessage(publicKey, digesto.getBytes());
-			firmaText.setText(firma);
+			String nameCert = certList.getValue();
+			if (nameCert != null && !nameCert.isEmpty()) {
+				Alert alert = new Alert(AlertType.CONFIRMATION,
+						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
+						ButtonType.NO, ButtonType.CANCEL);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.YES) {
+					String message = messageText.getText();
+					String digesto = Utils.stringToDigest(message, "MD5");
+					digestText.setText(digesto);
+
+					// Extraer certificado de almacen
+					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
+					certText.setText(String.valueOf(cert));
+
+					// Extraer clave publica
+					PublicKey publicKey = Utils.getPublicKey(cert);
+					publicKeyText.setText(String.valueOf(publicKey));
+
+					// Firmar mensaje
+					String firma = Utils.singMessage(publicKey, digesto.getBytes());
+					firmaText.setText(firma);
+				}
+			} else {
+				Alert alert = new Alert(AlertType.INFORMATION, "Por favor, seleccione un certificado para firmar");
+				alert.showAndWait();
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
