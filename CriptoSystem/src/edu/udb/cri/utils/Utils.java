@@ -23,7 +23,7 @@ import javafx.collections.ObservableList;
 public class Utils {
 
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
-	static String algoritmoAsimetrico = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
+	static String algoritmoAsimetrico = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
 
 	public static String stringToDigest(String message, String digesto) {
 		String strMDofDataToTransmit = new String();
