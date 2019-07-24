@@ -13,21 +13,14 @@ import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import org.apache.commons.codec.binary.Base64;
 
-/**
- * @author Luis Chávez Este programa ofrece las funcionalidades criptográficas
- *         siguientes 1. Cifrado con AES 2. El descifrado con AES
- *
- *         Algoritmo de alto nivel: 1. Generar una clave DES (especificar el
- *         tamaño de la clave durante esta fase) 2. Cree el Cipher 3. Para
- *         cifrar: Inicializar el cifrado para el cifrado 4. Para descifrar:
- *         Inicializar el cifrado para descifrar
- */
 public class SymmetricEncrypt {
+	
 	String strDataToEncrypt = new String();
 	String strCipherText = new String();
 	String strDecryptedText = new String();
 	static KeyGenerator keyGen;
 	private static String strHexVal = "0123456789abcdef";
+	static String algoritmoAsimetrico = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
 
 	public static SecretKey getSecret() {
 		/**
@@ -66,7 +59,7 @@ public class SymmetricEncrypt {
 			 */
 			if (Algorithm.equals("AES")) {
 				aesCipher.init(Cipher.ENCRYPT_MODE, secretKey, aesCipher.getParameters());
-			} else if (Algorithm.equals("RSA/ECB/PKCS1Padding")) {
+			} else if (Algorithm.equals(algoritmoAsimetrico)) {
 				aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
 			}
 
@@ -118,7 +111,7 @@ public class SymmetricEncrypt {
 			Cipher aesCipher = Cipher.getInstance(Algorithm);
 			if (Algorithm.equals("AES")) {
 				aesCipher.init(Cipher.DECRYPT_MODE, secretKey, aesCipher.getParameters());
-			} else if (Algorithm.equals("RSA/ECB/PKCS1Padding")) {
+			} else if (Algorithm.equals(algoritmoAsimetrico)) {
 				aesCipher.init(Cipher.DECRYPT_MODE, secretKey);
 			}
 

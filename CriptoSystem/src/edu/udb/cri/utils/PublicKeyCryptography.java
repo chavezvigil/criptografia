@@ -6,23 +6,6 @@ import java.security.cert.*;
 import javax.crypto.*;
 import org.apache.commons.codec.binary.Base64;
 
-
-/**
- * 
- * @author Luis Chávez
- * 
- *         1. Cifrar los datos utilizando una clave simétrica 2. Cifrar la clave
- *         simétrica con la clave pública Receptores 3. Crear un resumen del
- *         mensaje de los datos a transmitir 4. Firma el mensaje a transmitir 5.
- *         Envíe los datos a través de un canal no seguro 6. Validar la firma 7.
- *         Descifrar el mensaje usando la llave privada Pets para obtener la
- *         clave simétrica 8. Descifrar los datos usando la clave simétrica 9.
- *         Calcule MessageDigest de datos + mensaje firmado 10.Valide si la
- *         síntesis del mensaje del texto descifrado coincide con el resumen de
- *         mensaje del mensaje original
- * 
- */
-
 public class PublicKeyCryptography {
 	/**
 	 * @param args
@@ -62,7 +45,7 @@ public class PublicKeyCryptography {
 
 			// 2.4 Cifrado de la SecretKey con la clave pública Receptores
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(senderSecretKey.getEncoded(), pubKeyReceiver,
-					"RSA/ECB/PKCS1Padding");
+					"RSA/ECB/OAEPWithSHA1AndMGF1Padding");
 			String strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 
 			// 3. Crear un resumen del mensaje de los datos a transmitir

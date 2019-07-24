@@ -49,7 +49,8 @@
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="201.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="217.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
                                         <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
@@ -57,13 +58,13 @@
                                       </rowConstraints>
                                        <children>
                                           <Label text="Digesto" />
-                                          <TextField fx:id="digestText" GridPane.columnIndex="1" />
-                                          <Label text="Certificado" GridPane.rowIndex="1" />
-                                          <TextArea fx:id="certText" prefHeight="145.0" prefWidth="430.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <Label text="Llave pública" GridPane.rowIndex="3" />
-                                          <TextArea fx:id="publicKeyText" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <Label text="Firma digital" GridPane.rowIndex="5" />
-                                          <TextArea fx:id="firmaText" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <Label text="Certificado" GridPane.rowIndex="2" />
+                                          <TextArea fx:id="certText" prefHeight="145.0" prefWidth="430.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Llave pública" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="publicKeyText" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <Label text="Firma digital" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="firmaText" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="digestText" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>

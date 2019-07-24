@@ -23,6 +23,7 @@ import javafx.collections.ObservableList;
 public class Utils {
 
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
+	static String algoritmoAsimetrico = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
 
 	public static String stringToDigest(String message, String digesto) {
 		String strMDofDataToTransmit = new String();
@@ -79,7 +80,7 @@ public class Utils {
 		String strSenbyteEncryptWithPublicKey = new String();
 		try {
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(byteDataToSing, pubKeyReceiver,
-					"RSA/ECB/PKCS1Padding");
+					algoritmoAsimetrico);
 			strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -88,37 +89,7 @@ public class Utils {
 		return strSenbyteEncryptWithPublicKey;
 	}
 
-	public static void printAllCerts(URL keyStoreUrl, String password) {
-		try {
-
-			File file = new File(keyStoreUrl.getPath());
-			InputStream is = new FileInputStream(file);
-			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
-
-			keystore.load(is, password.toCharArray());
-
-			Enumeration<String> enumeration = keystore.aliases();
-			while (enumeration.hasMoreElements()) {
-				String alias = enumeration.nextElement();
-				System.out.println("alias name: " + alias);
-				X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
-				System.out.println(certificate.toString());
-
-			}
-
-		} catch (java.security.cert.CertificateException e) {
-			e.printStackTrace();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (KeyStoreException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
+	
 	public static ObservableList<String> getAllNameCerts(URL keyStoreUrl, String password) {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		try {

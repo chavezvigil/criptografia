@@ -16,7 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -28,13 +27,14 @@ public class DigitalSingController {
 	private boolean okClicked = false;
 	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
 	private String keyStorePass = "test1234";
+	private String digestAlgoritm = "SHA-512";
 
 	@FXML
 	private TextArea messageText;
 	@FXML
 	private Button firmarButton;
 	@FXML
-	private TextField digestText;
+	private TextArea digestText;
 	@FXML
 	private TextArea certText;
 	@FXML
@@ -134,11 +134,19 @@ public class DigitalSingController {
 
 		}
 	}
+	
+	public void inicializarCampos() {	
+		digestText.setDisable(false);
+		certText.setDisable(false);
+		publicKeyText.setDisable(false);
+		firmaText.setDisable(false);
+	}
 
 	public void firmarMensaje() {
 		try {
 			String nameCert = certList.getValue();
 			if (nameCert != null && !nameCert.isEmpty()) {
+			
 				Alert alert = new Alert(AlertType.CONFIRMATION,
 						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
 						ButtonType.NO, ButtonType.CANCEL);
@@ -146,7 +154,7 @@ public class DigitalSingController {
 
 				if (alert.getResult() == ButtonType.YES) {
 					String message = messageText.getText();
-					String digesto = Utils.stringToDigest(message, "MD5");
+					String digesto = Utils.stringToDigest(message, digestAlgoritm);
 					digestText.setText(digesto);
 
 					// Extraer certificado de almacen
