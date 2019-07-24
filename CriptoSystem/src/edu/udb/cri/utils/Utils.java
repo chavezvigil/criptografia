@@ -75,7 +75,7 @@ public class Utils {
 		return pubKeyReceiver;
 	}
 
-	public static String singMessage(PublicKey pubKeyReceiver, byte[] byteDataToSing) {
+	public static String signMessage(PublicKey pubKeyReceiver, byte[] byteDataToSing) {
 		String strSenbyteEncryptWithPublicKey = new String();
 		try {
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(byteDataToSing, pubKeyReceiver,

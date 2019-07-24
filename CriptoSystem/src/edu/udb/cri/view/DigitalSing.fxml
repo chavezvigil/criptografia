@@ -32,7 +32,7 @@
                                       </rowConstraints>
                                        <children>
                                           <Label text="Mensaje" />
-                                          <TextArea fx:id="messageText" prefHeight="33.0" prefWidth="406.0" GridPane.columnIndex="1" />
+                                          <TextArea fx:id="messageText" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
                                           <Button fx:id="firmarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Firmar" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <ComboBox fx:id="certList" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="Certificado" GridPane.rowIndex="1" />

@@ -158,7 +158,7 @@ public class DigitalSingController {
 					publicKeyText.setText(String.valueOf(publicKey));
 
 					// Firmar mensaje
-					String firma = Utils.singMessage(publicKey, digesto.getBytes());
+					String firma = Utils.signMessage(publicKey, digesto.getBytes());
 					firmaText.setText(firma);
 				}
 			} else {
