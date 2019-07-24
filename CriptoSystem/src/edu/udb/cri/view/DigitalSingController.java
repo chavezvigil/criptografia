@@ -154,7 +154,7 @@ public class DigitalSingController {
 
 				if (alert.getResult() == ButtonType.YES) {
 					String message = messageText.getText();
-					String digesto = Utils.stringToDigest(message, digestAlgoritm);
+					String digesto = Utils.dataToDigest(message.getBytes(), digestAlgoritm);
 					digestText.setText(digesto);
 
 					// Extraer certificado de almacen

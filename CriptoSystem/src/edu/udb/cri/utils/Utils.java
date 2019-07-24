@@ -25,24 +25,22 @@ public class Utils {
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 	static String algoritmoAsimetrico = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
 
-	public static String stringToDigest(String message, String digesto) {
-		String strMDofDataToTransmit = new String();
+	public static String dataToDigest(byte[] byteDataToDigest, String digesto) {
+		String strMDofDataToDigest = new String();
 		try {
 			MessageDigest md = MessageDigest.getInstance(digesto);
-			byte[] byteDataToTransmit = message.getBytes();
+			// Crear un resumen del mensaje de los datos
+			md.update(byteDataToDigest);
+			byte byteMDofDataToDigest[] = md.digest();
 
-			// Crear un resumen del mensaje de los datos a transmitir
-			md.update(byteDataToTransmit);
-			byte byteMDofDataToTransmit[] = md.digest();
-
-			for (int i = 0; i < byteMDofDataToTransmit.length; i++) {
-				strMDofDataToTransmit = strMDofDataToTransmit
-						+ Integer.toHexString((int) byteMDofDataToTransmit[i] & 0xFF);
+			for (int i = 0; i < byteMDofDataToDigest.length; i++) {
+				strMDofDataToDigest = strMDofDataToDigest
+						+ Integer.toHexString((int) byteMDofDataToDigest[i] & 0xFF);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return strMDofDataToTransmit;
+		return strMDofDataToDigest;
 	}
 
 	public static X509Certificate getX509Certificate(URL keyStoreUrl, String certName, String passKeyStore) {
