@@ -162,7 +162,7 @@ public class DigitalSingController {
 					firmaText.setText(firma);
 				}
 			} else {
-				Alert alert = new Alert(AlertType.INFORMATION, "Por favor, seleccione un certificado para firmar");
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para firmar");
 				alert.showAndWait();
 			}
 
