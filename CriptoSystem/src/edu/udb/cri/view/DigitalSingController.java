@@ -183,6 +183,13 @@ public class DigitalSingController {
 					// Firmar mensaje
 					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase, digesto.getBytes());
 					firmaText.setText(firma);
+					
+					boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, 
+							digesto.getBytes(), firma);
+					if (valido == true) {
+						Alert msg = new Alert(AlertType.INFORMATION, "Firma verificada!");
+						msg.showAndWait();
+					}
 				}
 			}
 

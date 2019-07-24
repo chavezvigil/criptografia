@@ -14,6 +14,8 @@ import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
+import edu.udb.cri.utils.PublicKeyCryptography;
+
 public class TestMain {
 
 	public static void main(String[] arg) {
@@ -21,6 +23,7 @@ public class TestMain {
 		String password = "test1234";
 		printAllCerts(keyStoreUrl, password);
 		algoritmosProvider();
+		PublicKeyCryptography.cipherMain();
 	}
 
 	public static void printAllCerts(URL keyStoreUrl, String password) {

@@ -10,7 +10,7 @@ public class PublicKeyCryptography {
 	/**
 	 * @param args
 	 */
-	public void main() {
+	public static void cipherMain() {
 
 		SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 		String strDataToEncrypt = "Hello World";
@@ -21,7 +21,7 @@ public class PublicKeyCryptography {
 
 		// 1. Cifrar los datos utilizando una clave simétrica
 		byte[] byteCipherText = encryptUtil.encryptData(byteDataToTransmit, senderSecretKey, "AES");
-		//String strCipherText = new Base64().encodeToString(byteCipherText);
+		// String strCipherText = new Base64().encodeToString(byteCipherText);
 
 		// 2. Cifrar la clave simétrica con la clave pública
 		try {
@@ -29,10 +29,10 @@ public class PublicKeyCryptography {
 			// Receptores
 			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
 			char[] password = "test1234".toCharArray();
-			
-			URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
-			
-			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.toString());
+
+			URL keyStoreUrl = PublicKeyCryptography.class.getResource("/resources/keystore/testkeystore.ks");
+
+			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.getPath());
 			ks.load(fis, password);
 			fis.close();
 
@@ -45,7 +45,7 @@ public class PublicKeyCryptography {
 
 			// 2.4 Cifrado de la SecretKey con la clave pública Receptores
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(senderSecretKey.getEncoded(), pubKeyReceiver,
-					"RSA/ECB/OAEPWithSHA1AndMGF1Padding");
+					"RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
 			String strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 
 			// 3. Crear un resumen del mensaje de los datos a transmitir
@@ -94,27 +94,29 @@ public class PublicKeyCryptography {
 				System.out.println(" Error in validating Signature ");
 			}
 
-			else
+			else {
 				System.out.println(" Successfully validated Signature ");
+			}
 
 			// 7. Descifrar el mensaje usando la llave privada Pets para obtener la clave
 			// simétrica
-			char[] recvpassword = "recv123".toCharArray();
-			Key recvKey = ks.getKey("testrecv", recvpassword);
+			char[] recvpassword = "test1234".toCharArray();
+			Key recvKey = ks.getKey("sender", recvpassword);
 			PrivateKey recvPrivateKey = (PrivateKey) recvKey;
 
 			// Analizar el MessageDigest y el valor cifrado
-			//String strRecvSignedData = new String(byteSignedData);
-			//String[] strRecvSignedDataArray = new String[10];
-			//strRecvSignedDataArray = strMsgToSign.split("|");
+			// String strRecvSignedData = new String(byteSignedData);
+			// String[] strRecvSignedDataArray = new String[10];
+			// strRecvSignedDataArray = strMsgToSign.split("|");
 			int intindexofsep = strMsgToSign.indexOf("|");
-			//String strEncryptWithPublicKey = strMsgToSign.substring(0, intindexofsep);
+			// String strEncryptWithPublicKey = strMsgToSign.substring(0, intindexofsep);
 			String strHashOfData = strMsgToSign.substring(intindexofsep + 1);
 
 			// Descifrado para obtener la clave simétrica
-			//byte[] bytestrEncryptWithPublicKey = new Base64().decode(strEncryptWithPublicKey);
+			// byte[] bytestrEncryptWithPublicKey = new
+			// Base64().decode(strEncryptWithPublicKey);
 			byte[] byteDecryptWithPrivateKey = encryptUtil.decryptData(byteEncryptWithPublicKey, recvPrivateKey,
-					"RSA/ECB/PKCS1Padding");
+					"RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING");
 
 			// 8. Descifrar los datos usando la clave simétrica
 			javax.crypto.spec.SecretKeySpec secretKeySpecDecrypted = new javax.crypto.spec.SecretKeySpec(

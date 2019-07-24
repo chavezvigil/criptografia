@@ -17,7 +17,6 @@ import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
-
 import org.apache.commons.codec.binary.Base64;
 
 import javafx.collections.FXCollections;
@@ -38,8 +37,7 @@ public class Utils {
 			byte byteMDofDataToDigest[] = md.digest();
 
 			for (int i = 0; i < byteMDofDataToDigest.length; i++) {
-				strMDofDataToDigest = strMDofDataToDigest
-						+ Integer.toHexString((int) byteMDofDataToDigest[i] & 0xFF);
+				strMDofDataToDigest = strMDofDataToDigest + Integer.toHexString((int) byteMDofDataToDigest[i] & 0xFF);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -50,8 +48,7 @@ public class Utils {
 	public static X509Certificate getX509Certificate(URL keyStoreUrl, String certName, String passKeyStore) {
 		X509Certificate recvcert = null;
 		try {
-			// Especifique el almacen de claves que se haya importado el certificado para
-			// receptores
+			// Especifique el almacen de claves que se haya importado el certificado
 			KeyStore ks = getKeyStore(keyStoreUrl, passKeyStore);
 			recvcert = (X509Certificate) ks.getCertificate(certName);
 		} catch (Exception e) {
@@ -59,7 +56,7 @@ public class Utils {
 		}
 		return recvcert;
 	}
-	
+
 	public static KeyStore getKeyStore(URL keyStoreUrl, String passKeyStore) {
 		KeyStore ks = null;
 		try {
@@ -88,11 +85,11 @@ public class Utils {
 		return pubKeyReceiver;
 	}
 
-	public static String signMessage(PublicKey pubKeyReceiver, byte[] byteDataToSing) {
+	public static String cypherMessageWithPublicKey(PublicKey pubKeyReceiver, byte[] byteDataToSing) {
 		String strSenbyteEncryptWithPublicKey = new String();
 		try {
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(byteDataToSing, pubKeyReceiver,
-					algoritmoAsimetrico);			
+					algoritmoAsimetrico);
 			strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -100,30 +97,71 @@ public class Utils {
 
 		return strSenbyteEncryptWithPublicKey;
 	}
-	
-	public static String signMessageWithPrivateKey(URL keyStoreUrl, String passKeyStore, String certName, String passphase, byte[] byteDataToSing) throws Exception{
-		String strSenbyteEncryptWithPrivateKey = new String();
-		try {			
+
+	public static String signMessageWithPrivateKey(URL keyStoreUrl, String passKeyStore, String certName,
+			String passphase, byte[] byteDataToSing) throws Exception {
+
+		String strgSignedData = null;
+		try {
 			KeyStore ks = getKeyStore(keyStoreUrl, passKeyStore);
 			char[] keypassword = passphase.toCharArray();
 			Key myKey = ks.getKey(certName, keypassword);
 			PrivateKey myPrivateKey = (PrivateKey) myKey;
 
-			//Firmar el mensaje
+			// Firmar el mensaje
 			Signature mySign = Signature.getInstance(algoritmoFirma);
 			mySign.initSign(myPrivateKey);
 			mySign.update(byteDataToSing);
 			byte[] byteSignedData = mySign.sign();
 			
-			strSenbyteEncryptWithPrivateKey = new Base64().encodeToString(byteSignedData);
+			strgSignedData = bytesToBase64(byteSignedData);
 		} catch (Exception exception) {
 			throw exception;
 		}
 
+		return strgSignedData;
+	}
+
+	public static boolean validateSign(URL keyStoreUrl, String passKeyStore, String certName, byte[] digestMessage,
+			String stringDataToVerify) throws Exception {
+		boolean verifySign = false;
+		try {
+			X509Certificate cert = getX509Certificate(keyStoreUrl, certName, passKeyStore);
+			PublicKey pubKey = cert.getPublicKey();
+			// Verificar la Firma
+			Signature myVerifySign = Signature.getInstance(algoritmoFirma);
+			myVerifySign.initVerify(pubKey);
+			myVerifySign.update(digestMessage);
+
+			byte[] byteDataToVerify = base64ToBytes(stringDataToVerify);
+			verifySign = myVerifySign.verify(byteDataToVerify);
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return verifySign;
+
+	}
+
+	public static String bytesToBase64(byte[] byteDataToTransform) throws Exception {
+		String strSenbyteEncryptWithPrivateKey = new String();
+		try {
+			strSenbyteEncryptWithPrivateKey = new Base64().encodeToString(byteDataToTransform);
+		} catch (Exception exception) {
+			throw exception;
+		}
 		return strSenbyteEncryptWithPrivateKey;
 	}
 
-	
+	public static byte[] base64ToBytes(String stringDataToTransform) throws Exception {
+		byte[] bytesRecoverer = null;
+		try {
+			bytesRecoverer = new Base64().decode(stringDataToTransform);
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return bytesRecoverer;
+	}
+
 	public static ObservableList<String> getAllNameCerts(URL keyStoreUrl, String password) {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		try {
