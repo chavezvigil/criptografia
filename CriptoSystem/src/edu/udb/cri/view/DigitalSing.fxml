@@ -45,29 +45,29 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <GridPane layoutX="24.0" layoutY="28.0" prefHeight="550.0" prefWidth="596.0">
+                                    <GridPane layoutX="24.0" layoutY="28.0" prefHeight="544.0" prefWidth="596.0">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="139.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="457.0" minWidth="10.0" prefWidth="430.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="91.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.0" minWidth="10.0" prefWidth="505.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="65.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="217.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="31.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="194.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="129.0" minHeight="0.0" prefHeight="55.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="17.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="155.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="125.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label text="Digesto" />
                                           <Label text="Certificado" GridPane.rowIndex="2" />
-                                          <TextArea fx:id="certText" prefHeight="145.0" prefWidth="430.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Llave pública" GridPane.rowIndex="4" />
-                                          <TextArea fx:id="publicKeyText" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <Label text="Firma digital" GridPane.rowIndex="6" />
-                                          <TextArea fx:id="firmaText" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="certText" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Firma digital" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="firmaText" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                           <TextArea fx:id="digestText" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="Mensaje a transmitir" wrapText="true" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="messageToTransmitText" prefHeight="161.0" prefWidth="443.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                        </children>
                                     </GridPane>
                                  </children>

@@ -2,7 +2,6 @@ package edu.udb.cri.view;
 
 import java.io.File;
 import java.net.URL;
-import java.security.PublicKey;
 import java.security.cert.X509Certificate;
 
 import edu.udb.cri.MainApp;
@@ -40,7 +39,7 @@ public class DigitalSingController {
 	@FXML
 	private TextArea certText;
 	@FXML
-	private TextArea publicKeyText;
+	private TextArea messageToTransmitText;
 	@FXML
 	private TextArea firmaText;
 	@FXML
@@ -142,7 +141,7 @@ public class DigitalSingController {
 	public void inicializarCampos() {	
 		digestText.setDisable(false);
 		certText.setDisable(false);
-		publicKeyText.setDisable(false);
+		messageToTransmitText.setDisable(false);
 		firmaText.setDisable(false);
 	}
 
@@ -176,13 +175,13 @@ public class DigitalSingController {
 					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
 					certText.setText(String.valueOf(cert));
 
-					// Extraer clave publica
-					PublicKey publicKey = Utils.getPublicKey(cert);
-					publicKeyText.setText(String.valueOf(publicKey));
-
 					// Firmar mensaje
 					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase, digesto.getBytes());
 					firmaText.setText(firma);
+					
+					// Mensaje a transmitir
+					//PublicKey publicKey = Utils.getPublicKey(cert);
+					//messageToTransmitText.setText(String.valueOf(publicKey));
 					
 					/*boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, 
 							digesto.getBytes(), firma);
