@@ -28,7 +28,7 @@ public class DigitalSingController {
 	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
 	private String keyStorePass = "test1234";
 	private String digestAlgoritm = "SHA-512";
-	//private String passPhaseSender = "test1234";
+	// private String passPhaseSender = "test1234";
 
 	@FXML
 	private TextArea messageText;
@@ -137,13 +137,6 @@ public class DigitalSingController {
 
 		}
 	}
-	
-	public void inicializarCampos() {	
-		digestText.setDisable(false);
-		certText.setDisable(false);
-		messageToTransmitText.setDisable(false);
-		firmaText.setDisable(false);
-	}
 
 	public void firmarMensaje() {
 		try {
@@ -158,8 +151,8 @@ public class DigitalSingController {
 				valid = false;
 				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el passphase de la clave privada");
 				alert.showAndWait();
-			} 
-			
+			}
+
 			if (valid == true) {
 				Alert alert = new Alert(AlertType.CONFIRMATION,
 						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
@@ -176,22 +169,30 @@ public class DigitalSingController {
 					certText.setText(String.valueOf(cert));
 
 					// Firmar mensaje
-					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase, digesto.getBytes());
+					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase,
+							digesto.getBytes());
 					firmaText.setText(firma);
-					
+
 					// Mensaje a transmitir
-					String messageToTransmit =  Utils.messageToTransmit(message, firma);
+					String messageToTransmit = Utils.messageToTransmit(message, firma);
 					messageToTransmitText.setText(messageToTransmit);
-					
-					/*boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, 
-							digesto.getBytes(), firma);
-					if (valido == true) {
-						Alert msg = new Alert(AlertType.INFORMATION, "Firma verificada!");
-						msg.showAndWait();
-					}*/
+
 				}
 			}
 
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+
+	public void verificarFirma() {
+		try {
+			/*boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, digesto.getBytes(), firma);
+			if (valido == true) {
+				Alert msg = new Alert(AlertType.INFORMATION, "Firma verificada!");
+				msg.showAndWait();
+			}*/
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
 			alert.showAndWait();
