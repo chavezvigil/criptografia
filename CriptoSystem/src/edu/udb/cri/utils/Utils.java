@@ -6,11 +6,14 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
 import java.security.PublicKey;
+import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
@@ -24,6 +27,7 @@ public class Utils {
 
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 	static String algoritmoAsimetrico = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
+	static String algoritmoFirma = "SHA512withRSA";
 
 	public static String dataToDigest(byte[] byteDataToDigest, String digesto) {
 		String strMDofDataToDigest = new String();
@@ -48,17 +52,27 @@ public class Utils {
 		try {
 			// Especifique el almacen de claves que se haya importado el certificado para
 			// receptores
-			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-			char[] password = passKeyStore.toCharArray();
-			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.getPath());
-			ks.load(fis, password);
-			fis.close();
-
+			KeyStore ks = getKeyStore(keyStoreUrl, passKeyStore);
 			recvcert = (X509Certificate) ks.getCertificate(certName);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return recvcert;
+	}
+	
+	public static KeyStore getKeyStore(URL keyStoreUrl, String passKeyStore) {
+		KeyStore ks = null;
+		try {
+			ks = KeyStore.getInstance(KeyStore.getDefaultType());
+			char[] password = passKeyStore.toCharArray();
+			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.getPath());
+			ks.load(fis, password);
+			fis.close();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return ks;
 	}
 
 	public static PublicKey getPublicKey(X509Certificate cert) {
@@ -78,13 +92,35 @@ public class Utils {
 		String strSenbyteEncryptWithPublicKey = new String();
 		try {
 			byte[] byteEncryptWithPublicKey = encryptUtil.encryptData(byteDataToSing, pubKeyReceiver,
-					algoritmoAsimetrico);
+					algoritmoAsimetrico);			
 			strSenbyteEncryptWithPublicKey = new Base64().encodeToString(byteEncryptWithPublicKey);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return strSenbyteEncryptWithPublicKey;
+	}
+	
+	public static String signMessageWithPrivateKey(URL keyStoreUrl, String passKeyStore, String certName, String passphase, byte[] byteDataToSing) throws Exception{
+		String strSenbyteEncryptWithPrivateKey = new String();
+		try {			
+			KeyStore ks = getKeyStore(keyStoreUrl, passKeyStore);
+			char[] keypassword = passphase.toCharArray();
+			Key myKey = ks.getKey(certName, keypassword);
+			PrivateKey myPrivateKey = (PrivateKey) myKey;
+
+			//Firmar el mensaje
+			Signature mySign = Signature.getInstance(algoritmoFirma);
+			mySign.initSign(myPrivateKey);
+			mySign.update(byteDataToSing);
+			byte[] byteSignedData = mySign.sign();
+			
+			strSenbyteEncryptWithPrivateKey = new Base64().encodeToString(byteSignedData);
+		} catch (Exception exception) {
+			throw exception;
+		}
+
+		return strSenbyteEncryptWithPrivateKey;
 	}
 
 	

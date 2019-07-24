@@ -15,6 +15,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -28,6 +29,7 @@ public class DigitalSingController {
 	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
 	private String keyStorePass = "test1234";
 	private String digestAlgoritm = "SHA-512";
+	//private String passPhaseSender = "test1234";
 
 	@FXML
 	private TextArea messageText;
@@ -43,6 +45,8 @@ public class DigitalSingController {
 	private TextArea firmaText;
 	@FXML
 	private ComboBox<String> certList;
+	@FXML
+	PasswordField passPhaseField;
 
 	private MainApp mainApp;
 
@@ -144,9 +148,20 @@ public class DigitalSingController {
 
 	public void firmarMensaje() {
 		try {
+			boolean valid = true;
 			String nameCert = certList.getValue();
-			if (nameCert != null && !nameCert.isEmpty()) {
+			String passphase = passPhaseField.getText();
+			if (nameCert == null || nameCert.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para firmar");
+				alert.showAndWait();
+			} else if (passphase == null || passphase.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el passphase de la clave privada");
+				alert.showAndWait();
+			} 
 			
+			if (valid == true) {
 				Alert alert = new Alert(AlertType.CONFIRMATION,
 						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
 						ButtonType.NO, ButtonType.CANCEL);
@@ -166,16 +181,14 @@ public class DigitalSingController {
 					publicKeyText.setText(String.valueOf(publicKey));
 
 					// Firmar mensaje
-					String firma = Utils.signMessage(publicKey, digesto.getBytes());
+					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase, digesto.getBytes());
 					firmaText.setText(firma);
 				}
-			} else {
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para firmar");
-				alert.showAndWait();
 			}
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
 		}
 	}
 

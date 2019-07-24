@@ -9,9 +9,10 @@ import java.net.URL;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.Provider;
+import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
-
 
 public class TestMain {
 
@@ -19,7 +20,9 @@ public class TestMain {
 		URL keyStoreUrl = TestMain.class.getResource("/resources/keystore/testkeystore.ks");
 		String password = "test1234";
 		printAllCerts(keyStoreUrl, password);
+		algoritmosProvider();
 	}
+
 	public static void printAllCerts(URL keyStoreUrl, String password) {
 		try {
 
@@ -49,5 +52,20 @@ public class TestMain {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void algoritmosProvider() {
+
+		try {
+			Provider p[] = Security.getProviders();
+			for (int i = 0; i < p.length; i++) {
+				System.out.println(p[i]);
+				for (Enumeration<Object> e = p[i].keys(); e.hasMoreElements();)
+					System.out.println("\t" + e.nextElement());
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }
