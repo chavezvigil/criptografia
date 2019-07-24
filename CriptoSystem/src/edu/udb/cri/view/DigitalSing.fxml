@@ -67,7 +67,7 @@
                                           <TextArea fx:id="firmaText" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                           <TextArea fx:id="digestText" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
                                           <Label text="Mensaje a transmitir" wrapText="true" GridPane.rowIndex="6" />
-                                          <TextArea fx:id="messageToTransmitText" prefHeight="161.0" prefWidth="443.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="messageToTransmitText" prefHeight="161.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                        </children>
                                     </GridPane>
                                  </children>

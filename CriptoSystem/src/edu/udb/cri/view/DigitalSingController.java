@@ -180,8 +180,8 @@ public class DigitalSingController {
 					firmaText.setText(firma);
 					
 					// Mensaje a transmitir
-					//PublicKey publicKey = Utils.getPublicKey(cert);
-					//messageToTransmitText.setText(String.valueOf(publicKey));
+					String messageToTransmit =  Utils.messageToTransmit(message, firma);
+					messageToTransmitText.setText(messageToTransmit);
 					
 					/*boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, 
 							digesto.getBytes(), firma);

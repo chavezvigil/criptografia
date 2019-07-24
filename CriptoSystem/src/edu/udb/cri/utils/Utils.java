@@ -113,13 +113,36 @@ public class Utils {
 			mySign.initSign(myPrivateKey);
 			mySign.update(byteDataToSing);
 			byte[] byteSignedData = mySign.sign();
-			
+
 			strgSignedData = bytesToBase64(byteSignedData);
 		} catch (Exception exception) {
 			throw exception;
 		}
 
 		return strgSignedData;
+	}
+
+	public static String messageToTransmitBase64(byte[] message, String digitalSing) throws Exception {
+		String strgDataToTransmit = new String();
+		try {
+			String messageBase64 = bytesToBase64(message);
+			strgDataToTransmit = messageBase64 + "|" + digitalSing;
+		} catch (Exception exception) {
+			throw exception;
+		}
+
+		return strgDataToTransmit;
+	}
+	
+	public static String messageToTransmit(String message, String digitalSing) throws Exception {
+		String strgDataToTransmit = new String();
+		try {
+			strgDataToTransmit = message + "|" + digitalSing;
+		} catch (Exception exception) {
+			throw exception;
+		}
+
+		return strgDataToTransmit;
 	}
 
 	public static boolean validateSign(URL keyStoreUrl, String passKeyStore, String certName, byte[] digestMessage,
