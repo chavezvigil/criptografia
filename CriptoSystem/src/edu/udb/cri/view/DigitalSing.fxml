@@ -101,13 +101,13 @@
                                     <GridPane layoutX="28.0" layoutY="23.0" prefHeight="525.0" prefWidth="480.0">
                                        <children>
                                           <Label text="Mensaje a verificar" wrapText="true" />
-                                          <TextArea fx:id="messageText1" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
-                                          <ComboBox fx:id="certList1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextArea fx:id="messageTextVerify" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="certListVerify" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Label text="Certificado" GridPane.rowIndex="1" />
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
-                                                <Button fx:id="firmarButton1" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Verificar" />
-                                                <Button fx:id="restaurarButton1" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Restaurar" GridPane.columnIndex="1" />
+                                                <Button fx:id="verifyButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Verificar" />
+                                                <Button fx:id="restaurarButtonVerify" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Restaurar" GridPane.columnIndex="1" />
                                              </children>
                                              <columnConstraints>
                                                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="134.0" />
@@ -140,12 +140,12 @@
                                        <children>
                                           <Label text="Certificado" />
                                           <Label text="Llave pública" GridPane.rowIndex="2" />
-                                          <TextArea fx:id="certText1" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextArea fx:id="publicKey" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <Label text="Firma digital" GridPane.rowIndex="4" />
-                                          <TextArea fx:id="firmaText1" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                          <TextArea fx:id="digestText1" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <TextArea fx:id="firmaTextVerify" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="certTextVerify" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
                                           <Label text="Mensaje original" wrapText="true" GridPane.rowIndex="6" />
-                                          <TextArea fx:id="messageToTransmitText1" prefHeight="161.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="originalMessage" prefHeight="161.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                        </children>
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="91.0" />

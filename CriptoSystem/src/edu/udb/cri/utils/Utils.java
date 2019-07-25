@@ -56,7 +56,7 @@ public class Utils {
 		}
 		return recvcert;
 	}
-
+	
 	public static KeyStore getKeyStore(URL keyStoreUrl, String passKeyStore) {
 		KeyStore ks = null;
 		try {
@@ -137,10 +137,8 @@ public class Utils {
 	public static String messageToTransmit(String message, String digitalSing) throws Exception {
 		String strgDataToTransmit = new String();
 		try {
-			strgDataToTransmit = message + "|" + digitalSing;
+			strgDataToTransmit = message + "_" + digitalSing;
 			strgDataToTransmit = bytesToBase64(strgDataToTransmit.getBytes());
-			
-			//System.out.println("Mensaje original: " + bytesToString(base64ToBytes(strgDataToTransmit)));
 		} catch (Exception exception) {
 			throw exception;
 		}
@@ -229,6 +227,43 @@ public class Utils {
 		}
 
 		return items;
+	}
+	
+	
+	public static String getOriginalMessageFromTrama(String tramaOriginal) throws Exception{
+		String originalMessage = new String ();
+		try {
+			String[] arreglo = tramaOriginal.split("_");
+			if (arreglo != null && arreglo.length > 0) {
+				originalMessage = arreglo[0];
+			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return originalMessage;
+	}
+	
+	public static String getDigitalSignFromTrama(String tramaOriginal) throws Exception{
+		String originalMessage = new String ();
+		try {
+			String[] arreglo = tramaOriginal.split("_");
+			if (arreglo != null && arreglo.length > 1) {
+				originalMessage = arreglo[1];
+			}
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return originalMessage;
+	}
+	
+	public static boolean isStringBase64(String mensajeBase64) throws Exception{
+		boolean valid = true;
+		try {
+			valid = Base64.isBase64(mensajeBase64.getBytes());
+		} catch (Exception exception) {
+			throw exception;
+		}
+		return valid;
 	}
 
 }

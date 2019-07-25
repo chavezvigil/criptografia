@@ -1,10 +1,7 @@
 package edu.udb.cri.view;
 
-import java.io.File;
 import java.net.URL;
 import java.security.cert.X509Certificate;
-
-import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,7 +15,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class DigitalSingController {
@@ -29,12 +25,13 @@ public class DigitalSingController {
 	private String keyStorePass = "test1234";
 	private String digestAlgoritm = "SHA-512";
 
-	@FXML
-	private TextArea messageText;
+	// Fields for signing
 	@FXML
 	private Button firmarButton;
 	@FXML
 	private Button restaurarButton;
+	@FXML
+	private TextArea messageText;
 	@FXML
 	private TextArea digestText;
 	@FXML
@@ -48,16 +45,23 @@ public class DigitalSingController {
 	@FXML
 	PasswordField passPhaseField;
 
-	private MainApp mainApp;
-
-	/**
-	 * Is called by the main application to give a reference back to itself.
-	 * 
-	 * @param mainApp
-	 */
-	public void setMainApp(MainApp mainApp) {
-		this.mainApp = mainApp;
-	}
+	// Fields for verify
+	@FXML
+	private Button verifyButton;
+	@FXML
+	private Button restaurarButtonVerify;
+	@FXML
+	private TextArea messageTextVerify;
+	@FXML
+	private TextArea publicKey;
+	@FXML
+	private TextArea certTextVerify;
+	@FXML
+	private TextArea originalMessage;
+	@FXML
+	private TextArea firmaTextVerify;
+	@FXML
+	private ComboBox<String> certListVerify;
 
 	public DigitalSingController() {
 
@@ -67,15 +71,19 @@ public class DigitalSingController {
 	private void initialize() {
 		firmarInitialize();
 		certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
+		certListVerify.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
 	}
 
 	public void firmarInitialize() {
-		URL imgSimetric = getClass().getResource("/resources/digital_sing.png");
+		URL imgDigital = getClass().getResource("/resources/digital_sing.png");
 		URL imgReset = getClass().getResource("/resources/reset.png");
-		Image imageSimetric = new Image(imgSimetric.toString());
-		Image imageReset = new Image(imgReset.toString());
+		URL imgEscaneo = getClass().getResource("/resources/escaneo_sign.png");
 
-		firmarButton.setGraphic(new ImageView(imageSimetric));
+		Image imageDigital = new Image(imgDigital.toString());
+		Image imageReset = new Image(imgReset.toString());
+		Image imageEscaneo = new Image(imgEscaneo.toString());
+
+		firmarButton.setGraphic(new ImageView(imageDigital));
 		firmarButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
@@ -88,6 +96,22 @@ public class DigitalSingController {
 			@Override
 			public void handle(ActionEvent e) {
 				restablecerDatos();
+			}
+		});
+
+		verifyButton.setGraphic(new ImageView(imageEscaneo));
+		verifyButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				verificarFirma();
+			}
+		});
+
+		restaurarButtonVerify.setGraphic(new ImageView(imageReset));
+		restaurarButtonVerify.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				restablecerDatosVerify();
 			}
 		});
 	}
@@ -127,35 +151,18 @@ public class DigitalSingController {
 		dialogStage.close();
 	}
 
-	/**
-	 * Opens a FileChooser to let the user select a file to save to.
-	 */
-	@FXML
-	private void handleSaveAs() {
-		FileChooser fileChooser = new FileChooser();
-
-		// Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-		fileChooser.getExtensionFilters().add(extFilter);
-
-		// Show save file dialog
-		File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
-
-		if (file != null) {
-			// Make sure it has the correct extension
-			if (!file.getPath().endsWith(".xml")) {
-				file = new File(file.getPath() + ".xml");
-			}
-
-		}
-	}
-
 	public void firmarMensaje() {
 		try {
 			boolean valid = true;
 			String nameCert = certList.getValue();
 			String passphase = passPhaseField.getText();
-			if (nameCert == null || nameCert.isEmpty()) {
+			String msg = messageText.getText();
+
+			if (msg == null || msg.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el texto a firmar");
+				alert.showAndWait();
+			} else if (nameCert == null || nameCert.isEmpty()) {
 				valid = false;
 				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para firmar");
 				alert.showAndWait();
@@ -197,10 +204,10 @@ public class DigitalSingController {
 
 	public void restablecerDatos() {
 		try {
-			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?",ButtonType.YES,
+			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?", ButtonType.YES,
 					ButtonType.CANCEL);
 			alert.showAndWait();
-			
+
 			if (alert.getResult() == ButtonType.YES) {
 				messageText.setText("");
 				certList.setValue("");
@@ -216,13 +223,81 @@ public class DigitalSingController {
 		}
 	}
 
+	public void restablecerDatosVerify() {
+		try {
+			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?", ButtonType.YES,
+					ButtonType.CANCEL);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES) {
+				messageTextVerify.setText("");
+				certListVerify.setValue("");
+				publicKey.setText("");
+				certTextVerify.setText("");
+				firmaTextVerify.setText("");
+				originalMessage.setText("");
+			}
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+
 	public void verificarFirma() {
 		try {
-			/*
-			 * boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert,
-			 * digesto.getBytes(), firma); if (valido == true) { Alert msg = new
-			 * Alert(AlertType.INFORMATION, "Firma verificada!"); msg.showAndWait(); }
-			 */
+			boolean valid = true;
+			String nameCert = certListVerify.getValue();
+			String msg = messageTextVerify.getText();
+
+			if (msg == null || msg.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el texto a verificar");
+				alert.showAndWait();
+			} else if (nameCert == null || nameCert.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para verificar");
+				alert.showAndWait();
+			}
+
+			if (valid == true) {
+				Alert alert = new Alert(AlertType.CONFIRMATION,
+						"¿Esta seguro de verificar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
+						ButtonType.CANCEL);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.YES) {
+					String message = messageTextVerify.getText();
+					
+					boolean base64 = Utils.isStringBase64(message);
+					if (base64 == true) {
+						String tramaOriginal = Utils.bytesToString(Utils.base64ToBytes(message));
+						String originalText = Utils.getOriginalMessageFromTrama(tramaOriginal);
+						String digesto = Utils.dataToDigest(originalText.getBytes(),
+								digestAlgoritm);
+						String firma = Utils.getDigitalSignFromTrama(tramaOriginal);
+						boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, digesto.getBytes(),
+								firma);
+						if (valido == true) {
+							X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
+							certTextVerify.setText(String.valueOf(cert));
+							publicKey.setText(String.valueOf(Utils.getPublicKey(cert)));
+							firmaTextVerify.setText(firma);
+							originalMessage.setText(originalText);
+							
+							Alert msgVerify = new Alert(AlertType.INFORMATION, "Firma verificada!");
+							msgVerify.showAndWait();
+							
+						} else {
+							Alert msgVerify = new Alert(AlertType.ERROR, "No se pudo verificar firma!");
+							msgVerify.showAndWait();
+						}
+					} else {
+						Alert msgBase64 = new Alert(AlertType.ERROR, "Estimado usuario, el texto ingresado no es formato base64!");
+						msgBase64.showAndWait();
+					}
+					
+				}
+			}
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
 			alert.showAndWait();
