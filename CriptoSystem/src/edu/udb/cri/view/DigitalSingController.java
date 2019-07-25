@@ -28,7 +28,6 @@ public class DigitalSingController {
 	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
 	private String keyStorePass = "test1234";
 	private String digestAlgoritm = "SHA-512";
-	// private String passPhaseSender = "test1234";
 
 	@FXML
 	private TextArea messageText;
