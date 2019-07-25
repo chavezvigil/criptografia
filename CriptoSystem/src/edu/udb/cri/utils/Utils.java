@@ -138,6 +138,9 @@ public class Utils {
 		String strgDataToTransmit = new String();
 		try {
 			strgDataToTransmit = message + "|" + digitalSing;
+			strgDataToTransmit = bytesToBase64(strgDataToTransmit.getBytes());
+			
+			//System.out.println("Mensaje original: " + bytesToString(base64ToBytes(strgDataToTransmit)));
 		} catch (Exception exception) {
 			throw exception;
 		}
@@ -183,6 +186,17 @@ public class Utils {
 			throw exception;
 		}
 		return bytesRecoverer;
+	}
+	
+	public static String bytesToString(byte[] bytesConvert) throws Exception {
+		String strResult = new String();
+		try {
+			strResult = new String(bytesConvert);
+		} catch (Exception exception) {
+			throw exception;
+		}
+		
+		return strResult;
 	}
 
 	public static ObservableList<String> getAllNameCerts(URL keyStoreUrl, String password) {

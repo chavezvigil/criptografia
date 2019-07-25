@@ -40,8 +40,8 @@
                                           <PasswordField fx:id="passPhaseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="137.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="269.0" />
                                             </columnConstraints>
                                             <rowConstraints>
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -92,7 +92,79 @@
           </Tab>
           <Tab text="Verificar mensajes">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <SplitPane dividerPositions="0.4590984974958264" layoutX="156.0" layoutY="97.0" prefHeight="621.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <items>
+                              <AnchorPane prefHeight="619.0" prefWidth="570.0">
+                                 <children>
+                                    <GridPane layoutX="28.0" layoutY="23.0" prefHeight="525.0" prefWidth="480.0">
+                                       <children>
+                                          <Label text="Mensaje a verificar" wrapText="true" />
+                                          <TextArea fx:id="messageText1" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="certList1" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Certificado" GridPane.rowIndex="1" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                             <children>
+                                                <Button fx:id="firmarButton1" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Verificar" />
+                                                <Button fx:id="restaurarButton1" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Restaurar" GridPane.columnIndex="1" />
+                                             </children>
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="134.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="268.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                          </GridPane>
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="83.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="406.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="48.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="51.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                              <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                                 <children>
+                                    <GridPane layoutX="19.0" layoutY="22.0" prefHeight="553.0" prefWidth="600.0">
+                                       <children>
+                                          <Label text="Certificado" />
+                                          <Label text="Llave pública" GridPane.rowIndex="2" />
+                                          <TextArea fx:id="certText1" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <Label text="Firma digital" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="firmaText1" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="digestText1" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <Label text="Mensaje original" wrapText="true" GridPane.rowIndex="6" />
+                                          <TextArea fx:id="messageToTransmitText1" prefHeight="161.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                       </children>
+                                       <columnConstraints>
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="91.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.0" minWidth="10.0" prefWidth="505.0" />
+                                       </columnConstraints>
+                                       <rowConstraints>
+                                          <RowConstraints maxHeight="150.0" minHeight="0.0" prefHeight="150.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                                       </rowConstraints>
+                                    </GridPane>
+                                 </children></AnchorPane>
+                           </items>
+                        </SplitPane>
+                     </children></AnchorPane>
             </content>
           </Tab>
         </tabs>
