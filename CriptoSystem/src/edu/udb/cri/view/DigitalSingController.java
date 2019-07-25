@@ -35,6 +35,8 @@ public class DigitalSingController {
 	@FXML
 	private Button firmarButton;
 	@FXML
+	private Button restaurarButton;
+	@FXML
 	private TextArea digestText;
 	@FXML
 	private TextArea certText;
@@ -70,12 +72,23 @@ public class DigitalSingController {
 
 	public void firmarInitialize() {
 		URL imgSimetric = getClass().getResource("/resources/digital_sing.png");
+		URL imgReset = getClass().getResource("/resources/reset.png");
 		Image imageSimetric = new Image(imgSimetric.toString());
+		Image imageReset = new Image(imgReset.toString());
+
 		firmarButton.setGraphic(new ImageView(imageSimetric));
 		firmarButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				firmarMensaje();
+			}
+		});
+
+		restaurarButton.setGraphic(new ImageView(imageReset));
+		restaurarButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				restablecerDatos();
 			}
 		});
 	}
@@ -156,27 +169,24 @@ public class DigitalSingController {
 			if (valid == true) {
 				Alert alert = new Alert(AlertType.CONFIRMATION,
 						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
-						ButtonType.NO, ButtonType.CANCEL);
+						ButtonType.CANCEL);
 				alert.showAndWait();
 
 				if (alert.getResult() == ButtonType.YES) {
 					String message = messageText.getText();
 					String digesto = Utils.dataToDigest(message.getBytes(), digestAlgoritm);
-					digestText.setText(digesto);
-
 					// Extraer certificado de almacen
 					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
-					certText.setText(String.valueOf(cert));
-
 					// Firmar mensaje
 					String firma = Utils.signMessageWithPrivateKey(keyStoreUrl, keyStorePass, nameCert, passphase,
 							digesto.getBytes());
-					firmaText.setText(firma);
-
 					// Mensaje a transmitir
 					String messageToTransmit = Utils.messageToTransmit(message, firma);
-					messageToTransmitText.setText(messageToTransmit);
 
+					digestText.setText(digesto);
+					certText.setText(String.valueOf(cert));
+					firmaText.setText(firma);
+					messageToTransmitText.setText(messageToTransmit);
 				}
 			}
 
@@ -186,13 +196,34 @@ public class DigitalSingController {
 		}
 	}
 
+	public void restablecerDatos() {
+		try {
+			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?",ButtonType.YES,
+					ButtonType.CANCEL);
+			alert.showAndWait();
+			
+			if (alert.getResult() == ButtonType.YES) {
+				messageText.setText("");
+				certList.setValue("");
+				passPhaseField.setText("");
+				digestText.setText("");
+				certText.setText("");
+				firmaText.setText("");
+				messageToTransmitText.setText("");
+			}
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+
 	public void verificarFirma() {
 		try {
-			/*boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, digesto.getBytes(), firma);
-			if (valido == true) {
-				Alert msg = new Alert(AlertType.INFORMATION, "Firma verificada!");
-				msg.showAndWait();
-			}*/
+			/*
+			 * boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert,
+			 * digesto.getBytes(), firma); if (valido == true) { Alert msg = new
+			 * Alert(AlertType.INFORMATION, "Firma verificada!"); msg.showAndWait(); }
+			 */
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
 			alert.showAndWait();
