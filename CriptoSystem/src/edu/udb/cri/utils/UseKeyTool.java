@@ -144,13 +144,13 @@ public class UseKeyTool {
 		return ks;
 	}
 
-	/*private static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
+	public static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
 		try {
 			keystore.deleteEntry(alias);
 		} catch (Exception exception) {
 			throw exception;
 		}
-	}*/
+	}
 
 	public static void printAllCerts(KeyStore keystore) {
 		try {
