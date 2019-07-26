@@ -24,20 +24,27 @@ import sun.security.x509.X509CertInfo;
 public class UseKeyTool {
 
 	private static final int keysize = 4096;
-	private static final String commonName = "Luis Chavez";
-	private static final String organizationalUnit = "IT";
-	private static final String organization = "BANDESAL";
-	private static final String city = "San Salvador";
-	private static final String state = "San Salvador";
-	private static final String country = "SV";
 	private static final String rsa = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa");
 	private static final String asimetricalgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
+	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
+	private static final String keystore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test.path");
 
 	public static void main(String[] args) throws Exception {
+		String alias = "Luis Chavez";
+		String commonName = "Luis Chavez";
+		String organizationalUnit = "IT";
+		String organization = "BANDESAL";
+		String city = "San Salvador";
+		String state = "San Salvador";
+		String country = "SV";
+		String passnewentry = "lchavez1234";
+		
+		createCertificate(alias, commonName, organizationalUnit, organization, city, state, country, passnewentry);
+	}
 
-		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
-		String keystore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test.path");
-
+	public static void createCertificate(String alias, String commonName, String organizationalUnit, String organization,
+			String city, String state, String country, String passnewentry) {
+		
 		try {
 			CertAndKeyGen keyGen = new CertAndKeyGen(rsa, asimetricalgoritm, null);
 			keyGen.generate(keysize);
@@ -52,12 +59,11 @@ public class UseKeyTool {
 			X509Certificate[] chain = new X509Certificate[1];
 			chain[0] = cert;
 
-			String alias = "Luis Chavez";
 			char[] pass = password.toCharArray();
 
 			// Store the certificate chain
-			KeyStore ks = storeKeyAndCertificateChain(alias, pass, keystore, privateKey,
-					"lchavez1234".toCharArray(), chain);
+			KeyStore ks = storeKeyAndCertificateChain(alias, pass, keystore, privateKey, passnewentry.toCharArray(),
+					chain);
 			// clearKeyStore(alias, ks);
 			System.out.println("Metodo print");
 			printAllCerts(ks);
@@ -112,9 +118,8 @@ public class UseKeyTool {
 			ks.load(null, null);
 			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
-			
-		}
 
+		}
 		return ks;
 	}
 
