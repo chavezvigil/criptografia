@@ -31,39 +31,38 @@ public class UseKeyTool {
 
 	public static void main(String[] args) throws Exception {
 
+		/*
+		 * // Lchavez String alias = "Luis Chavez"; String commonName = "Luis Chávez";
+		 * String organizationalUnit = "IT"; String organization = "BANDESAL"; String
+		 * city = "San Salvador"; String state = "San Salvador"; String country = "SV";
+		 * String passnewentry = "lchavez1234";
+		 * 
+		 * // Evert String aliasE = "Evert Juarez"; String commonNameE = "Evert Juárez";
+		 * String organizationalUnitE = "IT"; String organizationE = "CLARO"; String
+		 * cityE = "San Salvador"; String stateE = "San Salvador"; String countryE =
+		 * "SV"; String passnewentryE = "ejuarez1234";
+		 * 
+		 * // Nestor String aliasN = "Nestor Flores"; String commonNameN =
+		 * "Nestor FLores"; String organizationalUnitN = "IT"; String organizationN =
+		 * "Grant Thronton El Salvador"; String cityN = "San Salvador"; String stateN =
+		 * "San Salvador"; String countryN = "SV"; String passnewentryN = "nflores1234";
+		 * 
+		 * createCertificate(alias, commonName, organizationalUnit, organization, city,
+		 * state, country, passnewentry); createCertificate(aliasE, commonNameE,
+		 * organizationalUnitE, organizationE, cityE, stateE, countryE, passnewentryE);
+		 * createCertificate(aliasN, commonNameN, organizationalUnitN, organizationN,
+		 * cityN, stateN, countryN, passnewentryN);
+		 */
 		// Lchavez
-		String alias = "Luis Chavez";
-		String commonName = "Luis Chávez";
+		String alias = "Mario Cruz";
+		String commonName = "Mario Cruz";
 		String organizationalUnit = "IT";
 		String organization = "BANDESAL";
 		String city = "San Salvador";
 		String state = "San Salvador";
 		String country = "SV";
-		String passnewentry = "lchavez1234";
-		
-		// Evert
-		String aliasE = "Evert Juarez";
-		String commonNameE = "Evert Juárez";
-		String organizationalUnitE = "IT";
-		String organizationE = "CLARO";
-		String cityE = "San Salvador";
-		String stateE = "San Salvador";
-		String countryE = "SV";
-		String passnewentryE = "ejuarez1234";
-
-		// Nestor
-		String aliasN = "Nestor Flores";
-		String commonNameN = "Nestor FLores";
-		String organizationalUnitN = "IT";
-		String organizationN = "Grant Thronton El Salvador";
-		String cityN = "San Salvador";
-		String stateN = "San Salvador";
-		String countryN = "SV";
-		String passnewentryN = "nflores1234";
-
+		String passnewentry = "mcruz1234";
 		createCertificate(alias, commonName, organizationalUnit, organization, city, state, country, passnewentry);
-		createCertificate(aliasE, commonNameE, organizationalUnitE, organizationE, cityE, stateE, countryE, passnewentryE);
-		createCertificate(aliasN, commonNameN, organizationalUnitN, organizationN, cityN, stateN, countryN, passnewentryN);
 	}
 
 	public static void createCertificate(String alias, String commonName, String organizationalUnit,

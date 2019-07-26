@@ -19,8 +19,8 @@ import edu.udb.cri.utils.UtilMessage;
 public class TestMain {
 
 	public static void main(String[] arg) {
-		URL keyStoreUrl = TestMain.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path.test"));
-		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
+		URL keyStoreUrl = TestMain.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 		printAllCerts(keyStoreUrl, password);
 		algoritmosProvider();
 		//testCypherMain();
