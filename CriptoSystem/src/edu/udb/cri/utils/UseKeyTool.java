@@ -25,13 +25,15 @@ public class UseKeyTool {
 
 	private static final int keysize = 4096;
 	private static final String rsa = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa");
-	private static final String asimetricalgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
-	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
-	private static final String keystore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test.path");
+	private static final String asimetricAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
+	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
+	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.src");
 
 	public static void main(String[] args) throws Exception {
+
+		// Lchavez
 		String alias = "Luis Chavez";
-		String commonName = "Luis Chavez";
+		String commonName = "Luis Chávez";
 		String organizationalUnit = "IT";
 		String organization = "BANDESAL";
 		String city = "San Salvador";
@@ -39,17 +41,38 @@ public class UseKeyTool {
 		String country = "SV";
 		String passnewentry = "lchavez1234";
 		
+		// Evert
+		String aliasE = "Evert Juarez";
+		String commonNameE = "Evert Juárez";
+		String organizationalUnitE = "IT";
+		String organizationE = "CLARO";
+		String cityE = "San Salvador";
+		String stateE = "San Salvador";
+		String countryE = "SV";
+		String passnewentryE = "ejuarez1234";
+
+		// Nestor
+		String aliasN = "Nestor Flores";
+		String commonNameN = "Nestor FLores";
+		String organizationalUnitN = "IT";
+		String organizationN = "Grant Thronton El Salvador";
+		String cityN = "San Salvador";
+		String stateN = "San Salvador";
+		String countryN = "SV";
+		String passnewentryN = "nflores1234";
+
 		createCertificate(alias, commonName, organizationalUnit, organization, city, state, country, passnewentry);
+		createCertificate(aliasE, commonNameE, organizationalUnitE, organizationE, cityE, stateE, countryE, passnewentryE);
+		createCertificate(aliasN, commonNameN, organizationalUnitN, organizationN, cityN, stateN, countryN, passnewentryN);
 	}
 
-	public static void createCertificate(String alias, String commonName, String organizationalUnit, String organization,
-			String city, String state, String country, String passnewentry) {
-		
+	public static void createCertificate(String alias, String commonName, String organizationalUnit,
+			String organization, String city, String state, String country, String passNewEntry) {
+
 		try {
-			CertAndKeyGen keyGen = new CertAndKeyGen(rsa, asimetricalgoritm, null);
+			CertAndKeyGen keyGen = new CertAndKeyGen(rsa, asimetricAlgoritm, null);
 			keyGen.generate(keysize);
 			PrivateKey privateKey = keyGen.getPrivateKey();
-			System.out.println(privateKey);
 
 			X500Name x500Name = new X500Name(commonName, organizationalUnit, organization, city, state, country);
 			X509Certificate cert = keyGen.getSelfCertificate(x500Name, (long) 365 * 24 * 60 * 60);
@@ -62,10 +85,9 @@ public class UseKeyTool {
 			char[] pass = password.toCharArray();
 
 			// Store the certificate chain
-			KeyStore ks = storeKeyAndCertificateChain(alias, pass, keystore, privateKey, passnewentry.toCharArray(),
+			KeyStore ks = storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(),
 					chain);
 			// clearKeyStore(alias, ks);
-			System.out.println("Metodo print");
 			printAllCerts(ks);
 		} catch (
 
@@ -100,14 +122,14 @@ public class UseKeyTool {
 		return outCert;
 	}
 
-	private static KeyStore storeKeyAndCertificateChain(String alias, char[] password, String keystore, Key key,
+	private static KeyStore storeKeyAndCertificateChain(String alias, char[] password, String pathkeystore, Key key,
 			char[] passnewentry, X509Certificate[] chain) throws Exception {
 
 		KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
 		ks.load(null, null);
 
 		// Store away the keystore
-		File file = new File(keystore);
+		File file = new File(pathkeystore);
 		if (file.exists()) {
 			// if exists, load
 			ks.load(new FileInputStream(file), password);
@@ -118,18 +140,17 @@ public class UseKeyTool {
 			ks.load(null, null);
 			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
-
 		}
 		return ks;
 	}
 
-	private static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
+	/*private static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
 		try {
 			keystore.deleteEntry(alias);
 		} catch (Exception exception) {
 			throw exception;
 		}
-	}
+	}*/
 
 	public static void printAllCerts(KeyStore keystore) {
 		try {

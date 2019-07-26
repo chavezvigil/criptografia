@@ -23,8 +23,8 @@ public class DigitalSingController {
 
 	private Stage dialogStage;
 	private boolean okClicked = false;
-	private URL keyStoreUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path.test"));
-	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
+	private URL keyStoreUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private String digestAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.digest");
 
 	// Fields for signing
