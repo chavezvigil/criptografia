@@ -2,6 +2,7 @@ package edu.udb.cri;
 
 import java.io.IOException;
 
+import edu.udb.cri.utils.UtilMessage;
 import edu.udb.cri.view.DigitalSingController;
 import edu.udb.cri.view.InicioOverviewController;
 import javafx.application.Application;
@@ -24,7 +25,7 @@ public class MainApp extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-		this.primaryStage.setTitle("CriptoSystem");
+		this.primaryStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.title"));
 		initRootLayout();
 		showInicioOverview();
 	}
@@ -40,7 +41,7 @@ public class MainApp extends Application {
 		try {
 			// Load root layout from fxml file.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/RootLayout.fxml"));
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.root")));
 			rootLayout = (BorderPane) loader.load();
 
 			// Show the scene containing the root layout.
@@ -59,7 +60,7 @@ public class MainApp extends Application {
 		try {
 			// Load begin overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(MainApp.class.getResource("view/InicioOverview.fxml"));
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.init")));
 			AnchorPane inicioOverview = (AnchorPane) loader.load();
 
 			// Set begin overview into the center of root layout.
@@ -76,11 +77,11 @@ public class MainApp extends Application {
 	    try {
 	        // Load digital sing overview.
 	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource("view/DigitalSing.fxml"));
+	        loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.sign")));
 	        AnchorPane digitalSingOverview = (AnchorPane) loader.load();
 
 	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle("Firma digital");
+	        dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.sign.title"));
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(primaryStage);
 	        Scene scene = new Scene(digitalSingOverview);

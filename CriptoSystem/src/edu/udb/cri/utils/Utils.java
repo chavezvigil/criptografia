@@ -25,8 +25,8 @@ import javafx.collections.ObservableList;
 public class Utils {
 
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
-	static String algoritmoAsimetrico = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
-	static String algoritmoFirma = "SHA512withRSA";
+	static String algoritmoAsimetrico = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric");
+	static String algoritmoFirma = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
 
 	public static String dataToDigest(byte[] byteDataToDigest, String digesto) {
 		String strMDofDataToDigest = new String();

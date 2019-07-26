@@ -5,6 +5,7 @@ import java.net.URL;
 import javax.swing.JOptionPane;
 
 import edu.udb.cri.MainApp;
+import edu.udb.cri.utils.UtilMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -50,7 +51,7 @@ public class InicioOverviewController {
 	}
 
 	public void simetricCipher() {
-		URL imgSimetric = getClass().getResource("/resources/simetric.png");
+		URL imgSimetric = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.simetric"));
 		Image imageSimetric = new Image(imgSimetric.toString());
 		simetricoButton.setGraphic(new ImageView(imageSimetric));
 		simetricoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -62,7 +63,7 @@ public class InicioOverviewController {
 	}
 
 	public void asimetricCipher() {
-		URL imgAsimetric = getClass().getResource("/resources/asimetric.png");
+		URL imgAsimetric = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.asimetric"));
 		Image imageAsimetric = new Image(imgAsimetric.toString());
 		asimetricoButton.setGraphic(new ImageView(imageAsimetric));
 		asimetricoButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -74,7 +75,7 @@ public class InicioOverviewController {
 	}
 
 	public void digitalSing() {
-		URL imgDs = getClass().getResource("/resources/digital_sing.png");
+		URL imgDs = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.digital.sign"));
 		Image imageDs = new Image(imgDs.toString());
 		digitalSingButton.setGraphic(new ImageView(imageDs));
 	}

@@ -21,8 +21,8 @@ public class UseKeyTool {
 	public static void main(String[] args) throws Exception {
 
 		KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-		String pass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-		String keyStorePath = UtilMessage.getMensaje("edu.udb.cri.keystore.path");
+		String pass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
+		String keyStorePath = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test");
 
 		char[] password = pass.toCharArray();
 		ks.load(null, password);

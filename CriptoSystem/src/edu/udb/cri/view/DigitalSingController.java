@@ -2,6 +2,8 @@ package edu.udb.cri.view;
 
 import java.net.URL;
 import java.security.cert.X509Certificate;
+
+import edu.udb.cri.utils.UtilMessage;
 import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,9 +23,9 @@ public class DigitalSingController {
 
 	private Stage dialogStage;
 	private boolean okClicked = false;
-	private URL keyStoreUrl = getClass().getResource("/resources/keystore/testkeystore.ks");
-	private String keyStorePass = "test1234";
-	private String digestAlgoritm = "SHA-512";
+	private URL keyStoreUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
+	private String digestAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.digest");
 
 	// Fields for signing
 	@FXML
@@ -75,9 +77,9 @@ public class DigitalSingController {
 	}
 
 	public void firmarInitialize() {
-		URL imgDigital = getClass().getResource("/resources/digital_sing.png");
-		URL imgReset = getClass().getResource("/resources/reset.png");
-		URL imgEscaneo = getClass().getResource("/resources/escaneo_sign.png");
+		URL imgDigital = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.digital.sign"));
+		URL imgReset = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.reset"));
+		URL imgEscaneo = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.escaneo"));
 
 		Image imageDigital = new Image(imgDigital.toString());
 		Image imageReset = new Image(imgReset.toString());
@@ -160,21 +162,24 @@ public class DigitalSingController {
 
 			if (msg == null || msg.isEmpty()) {
 				valid = false;
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el texto a firmar");
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.texto.firma"));
 				alert.showAndWait();
 			} else if (nameCert == null || nameCert.isEmpty()) {
 				valid = false;
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para firmar");
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.cert.firma"));
 				alert.showAndWait();
 			} else if (passphase == null || passphase.isEmpty()) {
 				valid = false;
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el passphase de la clave privada");
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.llave.privada"));
 				alert.showAndWait();
 			}
 
 			if (valid == true) {
 				Alert alert = new Alert(AlertType.CONFIRMATION,
-						"¿Esta seguro de firmar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.firmar.cert"), ButtonType.YES,
 						ButtonType.CANCEL);
 				alert.showAndWait();
 
@@ -204,7 +209,8 @@ public class DigitalSingController {
 
 	public void restablecerDatos() {
 		try {
-			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?", ButtonType.YES,
+			Alert alert = new Alert(AlertType.CONFIRMATION,
+					UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.reset"), ButtonType.YES,
 					ButtonType.CANCEL);
 			alert.showAndWait();
 
@@ -225,7 +231,8 @@ public class DigitalSingController {
 
 	public void restablecerDatosVerify() {
 		try {
-			Alert alert = new Alert(AlertType.CONFIRMATION, "¿Desea restablecer los campos?", ButtonType.YES,
+			Alert alert = new Alert(AlertType.CONFIRMATION,
+					UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.reset"), ButtonType.YES,
 					ButtonType.CANCEL);
 			alert.showAndWait();
 
@@ -251,29 +258,30 @@ public class DigitalSingController {
 
 			if (msg == null || msg.isEmpty()) {
 				valid = false;
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, ingrese el texto a verificar");
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.text.verificar"));
 				alert.showAndWait();
 			} else if (nameCert == null || nameCert.isEmpty()) {
 				valid = false;
-				Alert alert = new Alert(AlertType.ERROR, "Por favor, seleccione un certificado para verificar");
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.cert.verificar"));
 				alert.showAndWait();
 			}
 
 			if (valid == true) {
 				Alert alert = new Alert(AlertType.CONFIRMATION,
-						"¿Esta seguro de verificar con el certificado " + nameCert + " seleccionado?", ButtonType.YES,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.verificar.cert"), ButtonType.YES,
 						ButtonType.CANCEL);
 				alert.showAndWait();
 
 				if (alert.getResult() == ButtonType.YES) {
 					String message = messageTextVerify.getText();
-					
+
 					boolean base64 = Utils.isStringBase64(message);
 					if (base64 == true) {
 						String tramaOriginal = Utils.bytesToString(Utils.base64ToBytes(message));
 						String originalText = Utils.getOriginalMessageFromTrama(tramaOriginal);
-						String digesto = Utils.dataToDigest(originalText.getBytes(),
-								digestAlgoritm);
+						String digesto = Utils.dataToDigest(originalText.getBytes(), digestAlgoritm);
 						String firma = Utils.getDigitalSignFromTrama(tramaOriginal);
 						boolean valido = Utils.validateSign(keyStoreUrl, keyStorePass, nameCert, digesto.getBytes(),
 								firma);
@@ -283,19 +291,22 @@ public class DigitalSingController {
 							publicKey.setText(String.valueOf(Utils.getPublicKey(cert)));
 							firmaTextVerify.setText(firma);
 							originalMessage.setText(originalText);
-							
-							Alert msgVerify = new Alert(AlertType.INFORMATION, "Firma verificada!");
+
+							Alert msgVerify = new Alert(AlertType.INFORMATION,
+									UtilMessage.getMensaje("edu.udb.cri.system.alert.information.firma"));
 							msgVerify.showAndWait();
-							
+
 						} else {
-							Alert msgVerify = new Alert(AlertType.ERROR, "No se pudo verificar firma!");
+							Alert msgVerify = new Alert(AlertType.ERROR,
+									UtilMessage.getMensaje("edu.udb.cri.system.alert.error.firma.verificar"));
 							msgVerify.showAndWait();
 						}
 					} else {
-						Alert msgBase64 = new Alert(AlertType.ERROR, "Estimado usuario, el texto ingresado no es formato base64!");
+						Alert msgBase64 = new Alert(AlertType.ERROR,
+								UtilMessage.getMensaje("edu.udb.cri.system.alert.error.format.base64"));
 						msgBase64.showAndWait();
 					}
-					
+
 				}
 			}
 		} catch (Exception e) {

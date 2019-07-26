@@ -19,15 +19,15 @@ public class SymmetricEncrypt {
 	String strCipherText = new String();
 	String strDecryptedText = new String();
 	static KeyGenerator keyGen;
-	private static String strHexVal = "0123456789abcdef";
-	static String algoritmoAsimetrico = "RSA/ECB/OAEPWITHSHA-256ANDMGF1PADDING";
+	private static String strHexVal = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.string.hex");
+	static String algoritmoAsimetrico = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric");
 
 	public static SecretKey getSecret() {
 		try {
-			keyGen = KeyGenerator.getInstance("AES");
+			keyGen = KeyGenerator.getInstance(UtilMessage.getMensaje("edu.udb.cri.system.algoritm.simetric.aes"));
 			keyGen.init(128);
 		} catch (Exception exp) {
-			System.out.println(" Exception inside constructor " + exp);
+			System.out.println(exp.getMessage());
 		}
 
 		SecretKey secretKey = keyGen.generateKey();
@@ -41,7 +41,7 @@ public class SymmetricEncrypt {
 		try {
 			Cipher aesCipher = Cipher.getInstance(Algorithm);
 
-			if (Algorithm.equals("AES")) {
+			if (Algorithm.equals(UtilMessage.getMensaje("edu.udb.cri.system.algoritm.simetric.aes"))) {
 				aesCipher.init(Cipher.ENCRYPT_MODE, secretKey, aesCipher.getParameters());
 			} else if (Algorithm.equals(algoritmoAsimetrico)) {
 				aesCipher.init(Cipher.ENCRYPT_MODE, secretKey);
@@ -74,7 +74,7 @@ public class SymmetricEncrypt {
 
 		try {
 			Cipher aesCipher = Cipher.getInstance(Algorithm);
-			if (Algorithm.equals("AES")) {
+			if (Algorithm.equals(UtilMessage.getMensaje("edu.udb.cri.system.algoritm.simetric.aes"))) {
 				aesCipher.init(Cipher.DECRYPT_MODE, secretKey, aesCipher.getParameters());
 			} else if (Algorithm.equals(algoritmoAsimetrico)) {
 				aesCipher.init(Cipher.DECRYPT_MODE, secretKey);

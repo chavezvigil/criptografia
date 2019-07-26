@@ -14,12 +14,13 @@ import java.security.Security;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 import edu.udb.cri.utils.PublicKeyCryptography;
+import edu.udb.cri.utils.UtilMessage;
 
 public class TestMain {
 
 	public static void main(String[] arg) {
-		URL keyStoreUrl = TestMain.class.getResource("/resources/keystore/testkeystore.ks");
-		String password = "test1234";
+		URL keyStoreUrl = TestMain.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 		printAllCerts(keyStoreUrl, password);
 		algoritmosProvider();
 		//testCypherMain();
