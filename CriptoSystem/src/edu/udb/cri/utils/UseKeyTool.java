@@ -84,10 +84,8 @@ public class UseKeyTool {
 			char[] pass = password.toCharArray();
 
 			// Store the certificate chain
-			KeyStore ks = storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(),
+			storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(),
 					chain);
-			// clearKeyStore(alias, ks);
-			printAllCerts(ks);
 		} catch (
 
 		Exception ex) {
@@ -121,7 +119,7 @@ public class UseKeyTool {
 		return outCert;
 	}
 
-	private static KeyStore storeKeyAndCertificateChain(String alias, char[] password, String pathkeystore, Key key,
+	private static void storeKeyAndCertificateChain(String alias, char[] password, String pathkeystore, Key key,
 			char[] passnewentry, X509Certificate[] chain) throws Exception {
 
 		KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -140,7 +138,6 @@ public class UseKeyTool {
 			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
 		}
-		return ks;
 	}
 
 	public static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
