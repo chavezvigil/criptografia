@@ -3,116 +3,143 @@ package edu.udb.cri.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+
+import java.security.Key;
 import java.security.KeyStore;
+import java.security.KeyStoreException;
 
+import java.security.Principal;
+import java.security.PrivateKey;
+import java.security.cert.X509Certificate;
+import java.util.Enumeration;
 
+import sun.security.x509.BasicConstraintsExtension;
+import sun.security.tools.keytool.CertAndKeyGen;
+import sun.security.x509.CertificateExtensions;
+import sun.security.x509.X500Name;
+import sun.security.x509.X509CertImpl;
+import sun.security.x509.X509CertInfo;
+
+@SuppressWarnings("restriction")
 public class UseKeyTool {
 
-	/*
-	 * private static final int keysize = 1024; private static final String
-	 * commonName = "www.test.de"; private static final String organizationalUnit =
-	 * "IT"; private static final String organization = "test"; private static final
-	 * String city = "test"; private static final String state = "test"; private
-	 * static final String country = "DE"; private static final long validity =
-	 * 1096; // 3 years private static final String alias = "tomcat"; private static
-	 * final char[] keyPass = "changeit".toCharArray();
-	 */
+	private static final int keysize = 4096;
+	private static final String commonName = "Luis Chavez";
+	private static final String organizationalUnit = "IT";
+	private static final String organization = "BANDESAL";
+	private static final String city = "San Salvador";
+	private static final String state = "San Salvador";
+	private static final String country = "SV";
+	private static final String rsa = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa");
+	private static final String asimetricalgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
 
 	public static void main(String[] args) throws Exception {
 
+		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
+		String keystore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test.path");
+
+		try {
+			CertAndKeyGen keyGen = new CertAndKeyGen(rsa, asimetricalgoritm, null);
+			keyGen.generate(keysize);
+			PrivateKey privateKey = keyGen.getPrivateKey();
+			System.out.println(privateKey);
+
+			X500Name x500Name = new X500Name(commonName, organizationalUnit, organization, city, state, country);
+			X509Certificate cert = keyGen.getSelfCertificate(x500Name, (long) 365 * 24 * 60 * 60);
+
+			cert = createSignedCertificate(cert, cert, privateKey);
+
+			X509Certificate[] chain = new X509Certificate[1];
+			chain[0] = cert;
+
+			String alias = "Luis Chavez";
+			char[] pass = password.toCharArray();
+
+			// Store the certificate chain
+			KeyStore ks = storeKeyAndCertificateChain(alias, pass, keystore, privateKey,
+					"lchavez1234".toCharArray(), chain);
+			// clearKeyStore(alias, ks);
+			System.out.println("Metodo print");
+			printAllCerts(ks);
+		} catch (
+
+		Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private static X509Certificate createSignedCertificate(X509Certificate cetrificate,
+			X509Certificate issuerCertificate, PrivateKey issuerPrivateKey) {
+		X509CertImpl outCert = null;
+		try {
+			Principal issuer = issuerCertificate.getSubjectDN();
+			String issuerSigAlg = issuerCertificate.getSigAlgName();
+
+			byte[] inCertBytes = cetrificate.getTBSCertificate();
+			X509CertInfo info = new X509CertInfo(inCertBytes);
+
+			info.set(X509CertInfo.ISSUER, issuer);
+
+			// No need to add the BasicContraint for leaf cert
+			CertificateExtensions exts = new CertificateExtensions();
+			BasicConstraintsExtension bce = new BasicConstraintsExtension(true, -1);
+			exts.set(BasicConstraintsExtension.NAME, new BasicConstraintsExtension(false, bce.getExtensionValue()));
+			info.set(X509CertInfo.EXTENSIONS, exts);
+
+			outCert = new X509CertImpl(info);
+			outCert.sign(issuerPrivateKey, issuerSigAlg);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return outCert;
+	}
+
+	private static KeyStore storeKeyAndCertificateChain(String alias, char[] password, String keystore, Key key,
+			char[] passnewentry, X509Certificate[] chain) throws Exception {
+
 		KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-		String pass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass.test");
-		String keyStorePath = UtilMessage.getMensaje("edu.udb.cri.keystore.path.test");
+		ks.load(null, null);
 
-		char[] password = pass.toCharArray();
-		ks.load(null, password);
-
-		// Store away the keystore		
-		File file = new File(keyStorePath);
+		// Store away the keystore
+		File file = new File(keystore);
 		if (file.exists()) {
 			// if exists, load
 			ks.load(new FileInputStream(file), password);
+			ks.setKeyEntry(alias, key, passnewentry, chain);
+			ks.store(new FileOutputStream(file), password);
 		} else {
 			// if not exists, create
 			ks.load(null, null);
+			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
+			
 		}
-		
-		
 
-		/*
-		 * java.security.KeyPairGenerator generator =
-		 * KeyPairGenerator.getInstance("RSA"); generator.initialize(4096,
-		 * SecureRandom.getInstance("SHA1WithRSA")); java.security.KeyPair keyPair =
-		 * generator.generateKeyPair(); java.security.PrivateKey privatekey =
-		 * keyPair.getPrivate();
-		 * 
-		 * javax.security.auth.x500.X500Principal principal = new
-		 * X500Principal("Prueba de certificado");
-		 * 
-		 * java.security.cert.CertificateFactory certFactory =
-		 * CertificateFactory.getInstance("X.509"); // Proposed new API:
-		 * java.security.cert.X509Certificate selfSignedCert =
-		 * certFactory.getSelfSignedCertificate(principal, 365, 8); // this allows to
-		 * generate a self-signed X.509 v3 certificate, which is valid for 365 days.
-		 * 
-		 * 
-		 * 
-		 * KeyStore keyStore = KeyStore.getInstance("JKS"); keyStore.load(null, null);
-		 * 
-		 * CertAndKeyGen keypaiar = new CertAndKeyGen("RSA", "SHA1WithRSA", null);
-		 * 
-		 * X500Name x500Name = new X500Name(commonName, organizationalUnit,
-		 * organization, city, state, country); javax.security.auth.x500.X500Principal
-		 * principal = new X500Principal("DN");
-		 * 
-		 * keypair.generate(keysize); PrivateKey privKey = keypair.getPrivateKey();
-		 * 
-		 * X509Certificate[] chain = new X509Certificate[1];
-		 * 
-		 * chain[0] = keypair.getSelfCertificate(principal, new Date(), (long) validity
-		 * * 24 * 60 * 60);
-		 * 
-		 * keyStore.setKeyEntry(alias, privKey, keyPass, chain);
-		 * 
-		 * keyStore.store(new FileOutputStream(".keystore"), keyPass);
-		 * 
-		 * 
-		 * 
-		 * RSAPrivateKeySpec serPrivateSpec = new RSAPrivateKeySpec(new BigInteger(8),
-		 * new BigInteger(10)); fact = KeyFactory.getInstance("RSA"); PrivateKey
-		 * serverPrivateKey = fact.generatePrivate(serPrivateSpec);
-		 * 
-		 * RSAPublicKeySpec serPublicSpec = new RSAPublicKeySpec( new
-		 * BigInteger(agentCL.getSerPubMod()), new BigInteger(agentCL.getSerPubExp()));
-		 * PublicKey serverPublicKey = fact.generatePublic(serPublicSpec);
-		 * 
-		 * keyStore = KeyStore.getInstance(IMXAgentCL.STORE_TYPE); keyStore.load(null,
-		 * SOMEPWD.toCharArray());
-		 * 
-		 * Security.addProvider(new
-		 * org.bouncycastle.jce.provider.BouncyCastleProvider());
-		 * 
-		 * X509Certificate[] serverChain = new X509Certificate[1];
-		 * X509V3CertificateGenerator serverCertGen = new X509V3CertificateGenerator();
-		 * X500Principal serverSubjectName = new X500Principal("CN=OrganizationName");
-		 * serverCertGen.setSerialNumber(new BigInteger("123456789")); //
-		 * X509Certificate caCert=null; serverCertGen.setIssuerDN(somename);
-		 * serverCertGen.setNotBefore(new Date()); serverCertGen.setNotAfter(new
-		 * Date()); serverCertGen.setSubjectDN(somename);
-		 * serverCertGen.setPublicKey(serverPublicKey);
-		 * serverCertGen.setSignatureAlgorithm("MD5WithRSA"); //
-		 * certGen.addExtension(X509Extensions.AuthorityKeyIdentifier, false,new //
-		 * AuthorityKeyIdentifierStructure(caCert));
-		 * serverCertGen.addExtension(X509Extensions.SubjectKeyIdentifier, false, new
-		 * SubjectKeyIdentifierStructure(serverPublicKey)); serverChain[0] =
-		 * serverCertGen.generateX509Certificate(serverPrivateKey, "BC"); // note:
-		 * private key of CA
-		 * 
-		 * keyStore.setEntry("xyz", new KeyStore.PrivateKeyEntry(serverPrivateKey,
-		 * serverChain), new KeyStore.PasswordProtection("".toCharArray()));
-		 */
+		return ks;
+	}
 
+	private static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
+		try {
+			keystore.deleteEntry(alias);
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	public static void printAllCerts(KeyStore keystore) {
+		try {
+			Enumeration<String> enumeration = keystore.aliases();
+			while (enumeration.hasMoreElements()) {
+				String alias = enumeration.nextElement();
+				System.out.println("alias name: " + alias);
+				X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
+				System.out.println(certificate.toString());
+
+			}
+
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
