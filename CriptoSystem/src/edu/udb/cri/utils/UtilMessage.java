@@ -1,6 +1,7 @@
 package edu.udb.cri.utils;
 
 import java.text.MessageFormat;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class UtilMessage {
@@ -8,7 +9,8 @@ public class UtilMessage {
     private static ResourceBundle rb;  
 
     static {
-        rb = ResourceBundle.getBundle("resources.properties.CriptoSystem");
+    	Locale locale = new Locale("es_SV");
+        rb = ResourceBundle.getBundle("resources.properties.application", locale);
     }
 
     public UtilMessage() {
@@ -17,12 +19,12 @@ public class UtilMessage {
 
     /**
      * Devuelve un mensaje contenido en el archivo de propiedades para mensajes
-     * de la aplicación.
+     * de la aplicaciï¿½n.
      * @param llave Llave en el archivo de propiedades.
-     * @param argumentos Argumentos adicionales que reemplazarán los marcadores
-     * de posición en el mensaje.
-     * @return Mensaje según el archivo de propiedades con los marcadores de
-     * posición llenos según los argumentos enviados en el último parámetro.
+     * @param argumentos Argumentos adicionales que reemplazarï¿½n los marcadores
+     * de posiciï¿½n en el mensaje.
+     * @return Mensaje segï¿½n el archivo de propiedades con los marcadores de
+     * posiciï¿½n llenos segï¿½n los argumentos enviados en el ï¿½ltimo parï¿½metro.
      */
     public static String getMensaje(String llave, Object... argumentos) {
         String mensaje = rb.getString(llave);
