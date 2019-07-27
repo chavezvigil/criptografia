@@ -40,15 +40,15 @@
                                           <PasswordField fx:id="passPhaseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                             <columnConstraints>
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="137.0" />
-                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="269.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="160.0" />
+                                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="246.0" />
                                             </columnConstraints>
                                             <rowConstraints>
                                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                             </rowConstraints>
                                              <children>
-                                                <Button fx:id="firmarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Firmar" />
-                                                <Button fx:id="restaurarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Restaurar" GridPane.columnIndex="1" />
+                                                <Button fx:id="firmarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Firmar" />
+                                                <Button fx:id="restaurarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
                                              </children>
                                           </GridPane>
                                        </children>
@@ -106,12 +106,12 @@
                                           <Label text="Certificado" GridPane.rowIndex="1" />
                                           <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
                                              <children>
-                                                <Button fx:id="verifyButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Verificar" />
-                                                <Button fx:id="restaurarButtonVerify" mnemonicParsing="false" prefHeight="40.0" prefWidth="100.0" text="Restaurar" GridPane.columnIndex="1" />
+                                                <Button fx:id="verifyButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Verificar" />
+                                                <Button fx:id="restaurarButtonVerify" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
                                              </children>
                                              <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="134.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="268.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="196.0" minWidth="10.0" prefWidth="159.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="283.0" minWidth="10.0" prefWidth="243.0" />
                                              </columnConstraints>
                                              <rowConstraints>
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
