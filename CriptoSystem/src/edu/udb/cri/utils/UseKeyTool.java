@@ -29,15 +29,15 @@ public class UseKeyTool {
 	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.src");
 
-	public static void main(String[] args) throws Exception {
-
+	// public static void main(String[] args) throws Exception {
+	public void main() {
 		/*
-		 * // Lchavez String alias = "Luis Chavez"; String commonName = "Luis Chávez";
+		 * // Lchavez String alias = "Luis Chavez"; String commonName = "Luis Chï¿½vez";
 		 * String organizationalUnit = "IT"; String organization = "BANDESAL"; String
 		 * city = "San Salvador"; String state = "San Salvador"; String country = "SV";
 		 * String passnewentry = "lchavez1234";
 		 * 
-		 * // Evert String aliasE = "Evert Juarez"; String commonNameE = "Evert Juárez";
+		 * // Evert String aliasE = "Evert Juarez"; String commonNameE = "Evert Juï¿½rez";
 		 * String organizationalUnitE = "IT"; String organizationE = "CLARO"; String
 		 * cityE = "San Salvador"; String stateE = "San Salvador"; String countryE =
 		 * "SV"; String passnewentryE = "ejuarez1234";
@@ -84,8 +84,7 @@ public class UseKeyTool {
 			char[] pass = password.toCharArray();
 
 			// Store the certificate chain
-			storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(),
-					chain);
+			storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(), chain);
 		} catch (
 
 		Exception ex) {

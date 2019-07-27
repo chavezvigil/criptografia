@@ -18,7 +18,8 @@ import edu.udb.cri.utils.UtilMessage;
 
 public class TestMain {
 
-	public static void main(String[] arg) {
+	//public static void main(String[] arg) {
+	public static void main() {
 		URL keyStoreUrl = TestMain.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
 		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 		printAllCerts(keyStoreUrl, password);
