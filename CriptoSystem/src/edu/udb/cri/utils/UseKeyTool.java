@@ -118,7 +118,7 @@ public class UseKeyTool {
 		return outCert;
 	}
 
-	private static void storeKeyAndCertificateChain(String alias, char[] password, String pathkeystore, Key key,
+	private static KeyStore storeKeyAndCertificateChain(String alias, char[] password, String pathkeystore, Key key,
 			char[] passnewentry, X509Certificate[] chain) throws Exception {
 
 		KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -137,6 +137,8 @@ public class UseKeyTool {
 			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
 		}
+		
+		return ks;
 	}
 
 	public static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
