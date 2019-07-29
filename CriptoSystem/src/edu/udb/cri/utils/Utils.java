@@ -61,9 +61,11 @@ public class Utils {
 		try {
 			ks = KeyStore.getInstance(KeyStore.getDefaultType());
 			char[] password = passKeyStore.toCharArray();
-			java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.getPath());
-			ks.load(fis, password);
-			fis.close();
+			//java.io.FileInputStream fis = new java.io.FileInputStream(keyStoreUrl.getPath());
+			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
+			InputStream is = conn.getInputStream();
+			ks.load(is, password);
+			is.close();
 
 		} catch (Exception e) {
 			e.printStackTrace();
