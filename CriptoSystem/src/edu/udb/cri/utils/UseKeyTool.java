@@ -3,13 +3,17 @@ package edu.udb.cri.utils;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
-
+import java.security.NoSuchAlgorithmException;
 import java.security.Principal;
 import java.security.PrivateKey;
+import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
@@ -29,31 +33,7 @@ public class UseKeyTool {
 	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.src");
 
-	// public static void main(String[] args) throws Exception {
-	public void main() {
-		/*
-		 * // Lchavez String alias = "Luis Chavez"; String commonName = "Luis Ch�vez";
-		 * String organizationalUnit = "IT"; String organization = "BANDESAL"; String
-		 * city = "San Salvador"; String state = "San Salvador"; String country = "SV";
-		 * String passnewentry = "lchavez1234";
-		 * 
-		 * // Evert String aliasE = "Evert Juarez"; String commonNameE = "Evert Ju�rez";
-		 * String organizationalUnitE = "IT"; String organizationE = "CLARO"; String
-		 * cityE = "San Salvador"; String stateE = "San Salvador"; String countryE =
-		 * "SV"; String passnewentryE = "ejuarez1234";
-		 * 
-		 * // Nestor String aliasN = "Nestor Flores"; String commonNameN =
-		 * "Nestor FLores"; String organizationalUnitN = "IT"; String organizationN =
-		 * "Grant Thronton El Salvador"; String cityN = "San Salvador"; String stateN =
-		 * "San Salvador"; String countryN = "SV"; String passnewentryN = "nflores1234";
-		 * 
-		 * createCertificate(alias, commonName, organizationalUnit, organization, city,
-		 * state, country, passnewentry); createCertificate(aliasE, commonNameE,
-		 * organizationalUnitE, organizationE, cityE, stateE, countryE, passnewentryE);
-		 * createCertificate(aliasN, commonNameN, organizationalUnitN, organizationN,
-		 * cityN, stateN, countryN, passnewentryN);
-		 */
-		// Lchavez
+	public void crearCertificadoTest() {
 		String alias = "Mario Cruz";
 		String commonName = "Mario Cruz";
 		String organizationalUnit = "IT";
@@ -85,6 +65,7 @@ public class UseKeyTool {
 
 			// Store the certificate chain
 			storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(), chain);
+			printAllCerts();
 		} catch (
 
 		Exception ex) {
@@ -149,8 +130,17 @@ public class UseKeyTool {
 		}
 	}
 
-	public static void printAllCerts(KeyStore keystore) {
+	public static void printAllCerts() {
 		try {
+			
+			URL keyStoreUrl = UseKeyTool.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+			String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
+			
+			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
+			InputStream is = conn.getInputStream();
+			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+			keystore.load(is, password.toCharArray());
+			
 			Enumeration<String> enumeration = keystore.aliases();
 			while (enumeration.hasMoreElements()) {
 				String alias = enumeration.nextElement();
@@ -160,7 +150,7 @@ public class UseKeyTool {
 
 			}
 
-		} catch (KeyStoreException e) {
+		} catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException e) {
 			e.printStackTrace();
 		}
 	}
