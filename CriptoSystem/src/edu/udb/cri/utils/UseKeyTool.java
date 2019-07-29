@@ -31,7 +31,7 @@ public class UseKeyTool {
 	private static final String rsa = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa");
 	private static final String asimetricAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
 	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.src");
+	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources");
 
 	public void crearCertificadoTest() {
 		String alias = "Mario Cruz";
@@ -65,7 +65,6 @@ public class UseKeyTool {
 
 			// Store the certificate chain
 			storeKeyAndCertificateChain(alias, pass, pathKeyStore, privateKey, passNewEntry.toCharArray(), chain);
-			printAllCerts();
 		} catch (
 
 		Exception ex) {
@@ -118,7 +117,7 @@ public class UseKeyTool {
 			ks.setKeyEntry(alias, key, passnewentry, chain);
 			ks.store(new FileOutputStream(file), password);
 		}
-		
+
 		return ks;
 	}
 
@@ -132,25 +131,26 @@ public class UseKeyTool {
 
 	public static void printAllCerts() {
 		try {
+			URL keyStoreUrl = null;
 			
-			URL keyStoreUrl = UseKeyTool.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
-			String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-			
+			File file = new File(pathKeyStore);
+			keyStoreUrl = file.toURI().toURL();
+			System.out.println("path: " + keyStoreUrl.getPath());
+
 			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
 			InputStream is = conn.getInputStream();
 			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 			keystore.load(is, password.toCharArray());
-			
+
 			Enumeration<String> enumeration = keystore.aliases();
 			while (enumeration.hasMoreElements()) {
 				String alias = enumeration.nextElement();
 				System.out.println("alias name: " + alias);
-				X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
-				System.out.println(certificate.toString());
-
 			}
 
 		} catch (KeyStoreException | IOException | NoSuchAlgorithmException | CertificateException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}

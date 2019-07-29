@@ -1,8 +1,10 @@
 package edu.udb.cri.test;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.security.KeyStore;
@@ -10,7 +12,7 @@ import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.Security;
-import java.security.cert.X509Certificate;
+//import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 import edu.udb.cri.utils.PublicKeyCryptography;
 import edu.udb.cri.utils.UtilMessage;
@@ -18,19 +20,25 @@ import edu.udb.cri.utils.UtilMessage;
 public class TestMain {
 
 	//public static void main(String[] arg) {
-	public static void main() {
-		URL keyStoreUrl = TestMain.class.getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
-		String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-		printAllCerts(keyStoreUrl, password);
-		algoritmosProvider();
-		//testCypherMain();
+	public static void main(String[] arg) {
+		File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources"));
+		URL keyStoreUrl;
+		try {
+			keyStoreUrl = keyStore.toURI().toURL();
+			String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
+			printAllCerts(keyStoreUrl, password);
+			//algoritmosProvider();
+			//testCypherMain();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	public static void printAllCerts(URL keyStoreUrl, String password) {
 		try {
 
-			//File file = new File(keyStoreUrl.getPath());
-			//InputStream is = new FileInputStream(file);
 			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
 			InputStream is = conn.getInputStream();
 			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -41,8 +49,6 @@ public class TestMain {
 			while (enumeration.hasMoreElements()) {
 				String alias = enumeration.nextElement();
 				System.out.println("alias name: " + alias);
-				X509Certificate certificate = (X509Certificate) keystore.getCertificate(alias);
-				System.out.println(certificate.toString());
 
 			}
 

@@ -1,5 +1,7 @@
 package edu.udb.cri.view;
 
+import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 
@@ -23,7 +25,8 @@ public class DigitalSingController {
 
 	private Stage dialogStage;
 	private boolean okClicked = false;
-	private URL keyStoreUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.keystore.path"));
+	private URL keyStoreUrl;
+
 	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private String digestAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.digest");
 
@@ -72,8 +75,15 @@ public class DigitalSingController {
 	@FXML
 	private void initialize() {
 		firmarInitialize();
-		certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
-		certListVerify.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
+		try {
+			File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources"));
+			keyStoreUrl = keyStore.toURI().toURL();
+			certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
+			certListVerify.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
 	}
 
 	public void firmarInitialize() {
