@@ -1,13 +1,8 @@
 package edu.udb.cri.view;
 
 import java.net.URL;
-
-import javax.swing.JOptionPane;
-
 import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.UtilMessage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -54,24 +49,12 @@ public class InicioOverviewController {
 		URL imgSimetric = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.simetric"));
 		Image imageSimetric = new Image(imgSimetric.toString());
 		simetricoButton.setGraphic(new ImageView(imageSimetric));
-		simetricoButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Click en boton simetrico");
-			}
-		});
 	}
 
 	public void asimetricCipher() {
 		URL imgAsimetric = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.asimetric"));
 		Image imageAsimetric = new Image(imgAsimetric.toString());
 		asimetricoButton.setGraphic(new ImageView(imageAsimetric));
-		asimetricoButton.setOnAction(new EventHandler<ActionEvent>() {
-			@Override
-			public void handle(ActionEvent e) {
-				JOptionPane.showMessageDialog(null, "Click en boton asimetrico");
-			}
-		});
 	}
 
 	public void digitalSing() {
@@ -83,6 +66,10 @@ public class InicioOverviewController {
 	
 	public void handleDigitalSing() {
 		mainApp.showDigitalSingOverview();
+	}
+	
+	public void handleSimetricCipher() {
+		mainApp.showSymmetricCipherOverview();
 	}
 
 	

@@ -3,7 +3,6 @@ package edu.udb.cri;
 import java.io.IOException;
 
 import edu.udb.cri.utils.UtilMessage;
-import edu.udb.cri.view.DigitalSingController;
 import edu.udb.cri.view.InicioOverviewController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -73,7 +72,7 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public boolean showDigitalSingOverview() {
+	public void showDigitalSingOverview() {
 	    try {
 	        // Load digital sing overview.
 	        FXMLLoader loader = new FXMLLoader();
@@ -87,18 +86,37 @@ public class MainApp extends Application {
 	        Scene scene = new Scene(digitalSingOverview);
 	        dialogStage.setScene(scene);
 
-	        // Give the controller access to the main app
-	        DigitalSingController controller = loader.getController();
-	        controller.setDialogStage(dialogStage);
+	        //Give the controller access to the main app
+	        //DigitalSingController controller = loader.getController();
+	        //controller.setDialogStage(dialogStage);
 	        //controller.setMainApp(this);
 	        
 	     // Show the dialog and wait until the user closes it
 	        dialogStage.showAndWait();
 
-	        return controller.isOkClicked();
 	    } catch (IOException e) {
 	        e.printStackTrace();
-	        return false;
+	    }
+	}
+	
+	public void showSymmetricCipherOverview() {
+	    try {
+	        // Load digital sing overview.
+	        FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.simmetric")));
+	        AnchorPane symmetricEncryptionOverview = (AnchorPane) loader.load();
+
+	        Stage dialogStage = new Stage();
+	        dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.symmetric.title"));
+	        dialogStage.initModality(Modality.WINDOW_MODAL);
+	        dialogStage.initOwner(primaryStage);
+	        Scene scene = new Scene(symmetricEncryptionOverview);
+	        dialogStage.setScene(scene);
+	        
+
+	        dialogStage.showAndWait();
+	    } catch (IOException e) {
+	        e.printStackTrace();
 	    }
 	}
 	
