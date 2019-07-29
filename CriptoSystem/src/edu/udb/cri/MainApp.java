@@ -3,6 +3,7 @@ package edu.udb.cri;
 import java.io.IOException;
 
 import edu.udb.cri.utils.UtilMessage;
+import edu.udb.cri.view.ConfigurationViewController;
 import edu.udb.cri.view.InicioOverviewController;
 import edu.udb.cri.view.RootLayoutController;
 import javafx.application.Application;
@@ -133,6 +134,9 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(configurationOverview);
 			dialogStage.setScene(scene);
+			
+			ConfigurationViewController  controller = loader.getController();
+			controller.setMainApp(this);
 
 			dialogStage.showAndWait();
 

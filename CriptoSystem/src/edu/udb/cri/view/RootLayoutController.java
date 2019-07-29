@@ -35,9 +35,9 @@ public class RootLayoutController {
 	}
 
 	public void configurationView() {
-		URL imgSimetric = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.simetric"));
-		Image imageSimetric = new Image(imgSimetric.toString());
-		configuracionItem.setGraphic(new ImageView(imageSimetric));
+		URL imgConf = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.configuration"));
+		Image imgConfImg = new Image(imgConf.toString());
+		configuracionItem.setGraphic(new ImageView(imgConfImg));
 	}
 	
 	
