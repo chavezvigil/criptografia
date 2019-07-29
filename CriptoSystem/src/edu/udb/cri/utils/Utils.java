@@ -18,6 +18,7 @@ import java.util.Enumeration;
 
 import org.apache.commons.codec.binary.Base64;
 
+import edu.udb.cri.dto.CertInfoDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -201,8 +202,6 @@ public class Utils {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		try {
 
-			//File file = new File(keyStoreUrl.getPath());
-			//InputStream is = new FileInputStream(file);
 			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
 			InputStream is = conn.getInputStream();
 			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
@@ -213,6 +212,41 @@ public class Utils {
 				String alias = enumeration.nextElement();
 				if (alias != null && !alias.isEmpty()) {
 					items.add(alias);
+				}
+			}
+
+		} catch (java.security.cert.CertificateException e) {
+			e.printStackTrace();
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (KeyStoreException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return items;
+	}
+	
+	
+	public static ObservableList<CertInfoDto> getAllCerts(URL keyStoreUrl, String password) {
+		ObservableList<CertInfoDto> items = FXCollections.observableArrayList();
+		CertInfoDto dto;
+		try {
+			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
+			InputStream is = conn.getInputStream();
+			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+			keystore.load(is, password.toCharArray());
+
+			Enumeration<String> enumeration = keystore.aliases();
+			while (enumeration.hasMoreElements()) {
+				dto = new CertInfoDto();
+				String alias = enumeration.nextElement();
+				if (alias != null && !alias.isEmpty()) {
+					dto.setAlias(alias);
+					items.add(dto);
 				}
 			}
 
