@@ -1,11 +1,10 @@
 package edu.udb.cri.utils;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
 import java.security.Key;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -201,8 +200,10 @@ public class Utils {
 		ObservableList<String> items = FXCollections.observableArrayList();
 		try {
 
-			File file = new File(keyStoreUrl.getPath());
-			InputStream is = new FileInputStream(file);
+			//File file = new File(keyStoreUrl.getPath());
+			//InputStream is = new FileInputStream(file);
+			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
+			InputStream is = conn.getInputStream();
 			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
 			keystore.load(is, password.toCharArray());
 
