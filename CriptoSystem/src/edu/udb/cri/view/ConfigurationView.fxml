@@ -24,8 +24,11 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <TextArea prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                              <Label text="Elegir ruta" />
+                              <Label text="Password keystore" GridPane.rowIndex="1" />
+                              <Label text="Ruta keystore" />
+                              <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Button mnemonicParsing="false" text="Crear Keystore" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Button mnemonicParsing="false" text="Elegir Ruta" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children></AnchorPane>
