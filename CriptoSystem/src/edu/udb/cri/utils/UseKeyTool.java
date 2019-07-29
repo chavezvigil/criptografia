@@ -20,7 +20,7 @@ import sun.security.x509.X500Name;
 import sun.security.x509.X509CertImpl;
 import sun.security.x509.X509CertInfo;
 
-//@SuppressWarnings("restriction")
+@SuppressWarnings("restriction")
 public class UseKeyTool {
 
 	private static final int keysize = 4096;
