@@ -76,7 +76,7 @@ public class DigitalSingController {
 	private void initialize() {
 		firmarInitialize();
 		try {
-			File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources"));
+			File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore"));
 			keyStoreUrl = keyStore.toURI().toURL();
 			certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
 			certListVerify.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));

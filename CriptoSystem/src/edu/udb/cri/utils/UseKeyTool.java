@@ -31,7 +31,7 @@ public class UseKeyTool {
 	private static final String rsa = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa");
 	private static final String asimetricAlgoritm = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
 	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources");
+	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore");
 
 	public void crearCertificadoTest() {
 		String alias = "Mario Cruz";

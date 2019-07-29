@@ -21,7 +21,7 @@ public class TestMain {
 
 	//public static void main(String[] arg) {
 	public static void main(String[] arg) {
-		File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources"));
+		File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore"));
 		URL keyStoreUrl;
 		try {
 			keyStoreUrl = keyStore.toURI().toURL();
