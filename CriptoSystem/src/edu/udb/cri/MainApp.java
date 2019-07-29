@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import edu.udb.cri.utils.UtilMessage;
 import edu.udb.cri.view.InicioOverviewController;
+import edu.udb.cri.view.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -16,9 +17,9 @@ public class MainApp extends Application {
 
 	private Stage primaryStage;
 	private BorderPane rootLayout;
-	
+
 	public MainApp() {
-		
+
 	}
 
 	@Override
@@ -46,6 +47,9 @@ public class MainApp extends Application {
 			// Show the scene containing the root layout.
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
+
+			RootLayoutController controller = loader.getController();
+			controller.setMainApp(this);
 			primaryStage.show();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -64,68 +68,86 @@ public class MainApp extends Application {
 
 			// Set begin overview into the center of root layout.
 			rootLayout.setCenter(inicioOverview);
-			
+
 			InicioOverviewController controller = loader.getController();
 			controller.setMainApp(this);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showDigitalSingOverview() {
-	    try {
-	        // Load digital sing overview.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.sign")));
-	        AnchorPane digitalSingOverview = (AnchorPane) loader.load();
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.sign")));
+			AnchorPane digitalSingOverview = (AnchorPane) loader.load();
 
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.sign.title"));
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(primaryStage);
-	        Scene scene = new Scene(digitalSingOverview);
-	        dialogStage.setScene(scene);
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.sign.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(digitalSingOverview);
+			dialogStage.setScene(scene);
 
-	        //Give the controller access to the main app
-	        //DigitalSingController controller = loader.getController();
-	        //controller.setDialogStage(dialogStage);
-	        //controller.setMainApp(this);
-	        
-	     // Show the dialog and wait until the user closes it
-	        dialogStage.showAndWait();
+			// Give the controller access to the main app
 
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
+
 	public void showSymmetricCipherOverview() {
-	    try {
-	        // Load digital sing overview.
-	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.simmetric")));
-	        AnchorPane symmetricEncryptionOverview = (AnchorPane) loader.load();
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.simmetric")));
+			AnchorPane symmetricEncryptionOverview = (AnchorPane) loader.load();
 
-	        Stage dialogStage = new Stage();
-	        dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.symmetric.title"));
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(primaryStage);
-	        Scene scene = new Scene(symmetricEncryptionOverview);
-	        dialogStage.setScene(scene);
-	        
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.symmetric.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(symmetricEncryptionOverview);
+			dialogStage.setScene(scene);
 
-	        dialogStage.showAndWait();
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
+			dialogStage.showAndWait();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
-	
-	 /**
-     * Returns the main stage.
-     * @return
-     */
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
+
+	public void showConfigurationOverview() {
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.configuration")));
+			AnchorPane configurationOverview = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.configuration.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(configurationOverview);
+			dialogStage.setScene(scene);
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Returns the main stage.
+	 * 
+	 * @return
+	 */
+	public Stage getPrimaryStage() {
+		return primaryStage;
+	}
 
 }
