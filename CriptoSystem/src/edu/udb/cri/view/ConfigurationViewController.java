@@ -36,7 +36,7 @@ public class ConfigurationViewController {
 	private MainApp mainApp;
 	private URL keyStoreUrl;
 	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
-	
+
 	@FXML
 	private Button createKeystoreButton;
 
@@ -66,7 +66,8 @@ public class ConfigurationViewController {
 	private TableView<CertInfoDto> certTable;
 	@FXML
 	private TableColumn<CertInfoDto, String> aliasColumn;
-
+	@FXML
+	private TableColumn<CertInfoDto, Number> numberColumn;
 
 	/**
 	 * Is called by the main application to give a reference back to itself.
@@ -79,18 +80,28 @@ public class ConfigurationViewController {
 
 	@FXML
 	private void initialize() {
-		// Create button
 		initializeGui();
 		try {
 			File keyStore = new File(UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore"));
 			keyStoreUrl = keyStore.toURI().toURL();
-			ObservableList<CertInfoDto> lista = Utils.getAllCerts(keyStoreUrl, keyStorePass);
-			certTable.setItems(lista);
-			aliasColumn.setCellValueFactory(cellData-> cellData.getValue().getAlias());
+			refrescarCertificados();
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
-		}	
+		}
 
+	}
+
+	public void refrescarCertificados() {
+		try {
+			ObservableList<CertInfoDto> lista = Utils.getAllCerts(keyStoreUrl, keyStorePass);
+			certTable.setItems(lista);
+			
+			aliasColumn.setCellValueFactory(cellData -> cellData.getValue().getAlias());
+			numberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
+			numberColumn.setStyle("-fx-alignment: CENTER;");
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
 	}
 
 	public void initializeGui() {

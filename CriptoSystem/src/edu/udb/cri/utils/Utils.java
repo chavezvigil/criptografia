@@ -241,11 +241,14 @@ public class Utils {
 			keystore.load(is, password.toCharArray());
 
 			Enumeration<String> enumeration = keystore.aliases();
+			int count = 0;
 			while (enumeration.hasMoreElements()) {
+				count = count + 1;
 				dto = new CertInfoDto();
 				String alias = enumeration.nextElement();
 				if (alias != null && !alias.isEmpty()) {
 					dto.setAlias(alias);
+					dto.setNumber(count);
 					items.add(dto);
 				}
 			}
