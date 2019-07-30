@@ -2,12 +2,12 @@ package edu.udb.cri;
 
 import java.io.IOException;
 
+import edu.udb.cri.controller.CertificateViewController;
+import edu.udb.cri.controller.ConfigurationViewController;
+import edu.udb.cri.controller.InicioOverviewController;
+import edu.udb.cri.controller.RootLayoutController;
 import edu.udb.cri.dto.CertInfoDto;
 import edu.udb.cri.utils.UtilMessage;
-import edu.udb.cri.view.CertificateViewController;
-import edu.udb.cri.view.ConfigurationViewController;
-import edu.udb.cri.view.InicioOverviewController;
-import edu.udb.cri.view.RootLayoutController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

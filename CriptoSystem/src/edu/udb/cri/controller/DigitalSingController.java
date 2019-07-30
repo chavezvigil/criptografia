@@ -1,4 +1,4 @@
-package edu.udb.cri.view;
+package edu.udb.cri.controller;
 
 import java.io.File;
 import java.net.MalformedURLException;
