@@ -144,6 +144,27 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	public void showAboutOverview() {
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(
+					MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.about")));
+			AnchorPane aboutOverview = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.help.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(aboutOverview);
+			dialogStage.setScene(scene);
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Returns the main stage.
