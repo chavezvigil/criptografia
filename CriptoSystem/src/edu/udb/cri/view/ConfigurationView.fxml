@@ -42,15 +42,15 @@
                               <TextField fx:id="stateText" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                               <GridPane GridPane.columnIndex="1" GridPane.rowIndex="9">
                                 <columnConstraints>
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="171.0" />
-                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="283.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="222.0" minWidth="10.0" prefWidth="145.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="327.0" />
                                 </columnConstraints>
                                 <rowConstraints>
                                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                 </rowConstraints>
                                  <children>
-                                    <Button fx:id="createCertButton" mnemonicParsing="false" onAction="#crearCertificadoKeyStore" prefHeight="40.0" prefWidth="150.0" text="Guardar" />
-                                    <Button fx:id="resetCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
+                                    <Button fx:id="createCertButton" mnemonicParsing="false" onAction="#crearCertificadoKeyStore" prefHeight="40.0" prefWidth="120.0" text="Guardar" />
+                                    <Button fx:id="resetCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="120.0" text="Restaurar" GridPane.columnIndex="1" />
                                  </children>
                               </GridPane>
                               <Label text="Organización" GridPane.rowIndex="3" />

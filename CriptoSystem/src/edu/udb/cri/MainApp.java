@@ -29,6 +29,7 @@ public class MainApp extends Application {
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.title"));
+		this.primaryStage.setResizable(false);
 		initRootLayout();
 		showInicioOverview();
 	}
@@ -92,6 +93,7 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(digitalSingOverview);
 			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
 
 			// Give the controller access to the main app
 
@@ -115,6 +117,7 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(symmetricEncryptionOverview);
 			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
 
 			dialogStage.showAndWait();
 		} catch (IOException e) {
@@ -136,6 +139,7 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(configurationOverview);
 			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
 			
 			ConfigurationViewController  controller = loader.getController();
 			controller.setMainApp(this);
@@ -161,6 +165,7 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(certificateOverview);
 			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
 			
 			  // Set the person into the controller.
 			CertificateViewController controller = loader.getController();
@@ -187,6 +192,7 @@ public class MainApp extends Application {
 			dialogStage.initOwner(primaryStage);
 			Scene scene = new Scene(aboutOverview);
 			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
