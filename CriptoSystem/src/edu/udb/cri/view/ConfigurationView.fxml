@@ -76,7 +76,8 @@
                                     <GridPane layoutX="-46.0" layoutY="-19.0" prefHeight="78.0" prefWidth="648.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="13.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="635.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="173.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="635.0" minWidth="10.0" prefWidth="465.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -84,18 +85,24 @@
                                         <RowConstraints maxHeight="21.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Eliminar" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Button fx:id="verCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Ver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Button fx:id="eliminarCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Eliminar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                  <children>
-                                    <TableView fx:id="certTable" layoutX="31.0" layoutY="14.0" prefHeight="535.0" prefWidth="648.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                    <TableView fx:id="certTable" layoutX="31.0" layoutY="14.0" prefHeight="535.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                       <columns>
                                           <TableColumn fx:id="numberColumn" prefWidth="67.0" text="Número" />
-                                        <TableColumn fx:id="aliasColumn" prefWidth="364.0" text="Alias" />
-                                        <TableColumn prefWidth="141.0" text="Nombre" />
+                                        <TableColumn fx:id="aliasColumn" prefWidth="130.0" text="Alias" />
+                                        <TableColumn fx:id="commonNameColumn" prefWidth="155.0" text="Nombre" />
+                                          <TableColumn fx:id="organizationColumn" prefWidth="160.0" text="Organización" />
+                                          <TableColumn fx:id="organizationUnitColumn" prefWidth="215.0" text="Unidad" />
+                                          <TableColumn fx:id="cityColumn" prefWidth="155.0" text="Ciudad" />
+                                          <TableColumn fx:id="stateColumn" prefWidth="155.0" text="Estado" />
+                                          <TableColumn fx:id="countryColumn" prefWidth="155.0" text="Pais" />
                                       </columns>
                                     </TableView>
                                  </children>

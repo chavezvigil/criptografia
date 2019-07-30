@@ -31,6 +31,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
+
 public class ConfigurationViewController {
 
 	private MainApp mainApp;
@@ -44,6 +45,11 @@ public class ConfigurationViewController {
 	private Button createCertButton;
 	@FXML
 	private Button resetCertButton;
+	
+	@FXML
+	private Button verCertButton;
+	@FXML
+	private Button eliminarCertButton;
 
 	@FXML
 	private TextField aliasText;
@@ -65,9 +71,21 @@ public class ConfigurationViewController {
 	@FXML
 	private TableView<CertInfoDto> certTable;
 	@FXML
+	private TableColumn<CertInfoDto, Number> numberColumn;
+	@FXML
 	private TableColumn<CertInfoDto, String> aliasColumn;
 	@FXML
-	private TableColumn<CertInfoDto, Number> numberColumn;
+	private TableColumn<CertInfoDto, String> commonNameColumn;
+	@FXML
+	private TableColumn<CertInfoDto, String> organizationColumn;
+	@FXML
+	private TableColumn<CertInfoDto, String> organizationUnitColumn;
+	@FXML
+	private TableColumn<CertInfoDto, String> cityColumn;
+	@FXML
+	private TableColumn<CertInfoDto, String> stateColumn;
+	@FXML
+	private TableColumn<CertInfoDto, String> countryColumn;
 
 	/**
 	 * Is called by the main application to give a reference back to itself.
@@ -95,10 +113,16 @@ public class ConfigurationViewController {
 		try {
 			ObservableList<CertInfoDto> lista = Utils.getAllCerts(keyStoreUrl, keyStorePass);
 			certTable.setItems(lista);
-			
-			aliasColumn.setCellValueFactory(cellData -> cellData.getValue().getAlias());
+
 			numberColumn.setCellValueFactory(cellData -> cellData.getValue().getNumber());
 			numberColumn.setStyle("-fx-alignment: CENTER;");
+			aliasColumn.setCellValueFactory(cellData -> cellData.getValue().getAlias());
+			commonNameColumn.setCellValueFactory(cellData -> cellData.getValue().getCommonName());
+			organizationColumn.setCellValueFactory(cellData -> cellData.getValue().getOrganization());
+			organizationUnitColumn.setCellValueFactory(cellData -> cellData.getValue().getOrganizationUnit());
+			cityColumn.setCellValueFactory(cellData -> cellData.getValue().getCity());
+			stateColumn.setCellValueFactory(cellData -> cellData.getValue().getState());
+			countryColumn.setCellValueFactory(cellData -> cellData.getValue().getCountry());
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
@@ -124,6 +148,15 @@ public class ConfigurationViewController {
 				restablecerDatos();
 			}
 		});
+		
+		URL imgVer = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.view"));
+		Image imageVer = new Image(imgVer.toString());
+		verCertButton.setGraphic(new ImageView(imageVer));
+		
+		URL imgDel = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.delete"));
+		Image imageDel = new Image(imgDel.toString());
+		eliminarCertButton.setGraphic(new ImageView(imageDel));
+		
 	}
 
 	public void restablecerDatos() {

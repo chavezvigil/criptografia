@@ -16,17 +16,22 @@ import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.Enumeration;
 
+import javax.security.auth.x500.X500Principal;
+import sun.security.x509.X500Name;
+
 import org.apache.commons.codec.binary.Base64;
 
 import edu.udb.cri.dto.CertInfoDto;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+@SuppressWarnings("restriction")
 public class Utils {
 
 	static SymmetricEncrypt encryptUtil = new SymmetricEncrypt();
 	static String algoritmoAsimetrico = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric");
 	static String algoritmoFirma = UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.sha");
+	static String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 
 	public static String dataToDigest(byte[] byteDataToDigest, String digesto) {
 		String strMDofDataToDigest = new String();
@@ -247,8 +252,25 @@ public class Utils {
 				dto = new CertInfoDto();
 				String alias = enumeration.nextElement();
 				if (alias != null && !alias.isEmpty()) {
-					dto.setAlias(alias);
 					dto.setNumber(count);
+					dto.setAlias(alias);
+					
+					try {
+						X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, alias, keyStorePass);
+						X500Principal principal = cert.getSubjectX500Principal();
+						X500Name x500name =new X500Name(principal.getName());
+						
+						if (x500name != null) {
+							dto.setCommonName(x500name.getCommonName());
+							dto.setOrganization(x500name.getOrganization());
+							dto.setOrganizationUnit(x500name.getOrganizationalUnit());
+							dto.setCity(x500name.getLocality());
+							dto.setState(x500name.getState());
+							dto.setCountry(x500name.getCountry());
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 					items.add(dto);
 				}
 			}
