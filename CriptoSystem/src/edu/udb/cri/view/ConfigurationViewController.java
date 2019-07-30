@@ -278,6 +278,14 @@ public class ConfigurationViewController {
 
 		return valid;
 	}
+	
+	public void handleViewCertificate() {
+		try {
+			this.mainApp.showCertificateOverview();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	/**
 	 * Opens a FileChooser to let the user select a file to save to.

@@ -85,7 +85,7 @@
                                         <RowConstraints maxHeight="21.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
-                                          <Button fx:id="verCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Ver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Button fx:id="verCertButton" mnemonicParsing="false" onAction="#handleViewCertificate" prefHeight="40.0" prefWidth="150.0" text="Ver" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <Button fx:id="eliminarCertButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Eliminar" GridPane.columnIndex="2" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
