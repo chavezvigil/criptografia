@@ -2,7 +2,9 @@ package edu.udb.cri;
 
 import java.io.IOException;
 
+import edu.udb.cri.dto.CertInfoDto;
 import edu.udb.cri.utils.UtilMessage;
+import edu.udb.cri.view.CertificateViewController;
 import edu.udb.cri.view.ConfigurationViewController;
 import edu.udb.cri.view.InicioOverviewController;
 import edu.udb.cri.view.RootLayoutController;
@@ -145,7 +147,7 @@ public class MainApp extends Application {
 		}
 	}
 	
-	public void showCertificateOverview() {
+	public void showCertificateOverview(CertInfoDto cert) {
 		try {
 			// Load digital sing overview.
 			FXMLLoader loader = new FXMLLoader();
@@ -160,6 +162,10 @@ public class MainApp extends Application {
 			Scene scene = new Scene(certificateOverview);
 			dialogStage.setScene(scene);
 			
+			  // Set the person into the controller.
+			CertificateViewController controller = loader.getController();
+	        controller.setCertificate(cert);
+
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {

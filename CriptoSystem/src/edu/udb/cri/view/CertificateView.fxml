@@ -18,7 +18,7 @@
         </rowConstraints>
          <children>
             <Label text="Certificado" />
-            <TextArea fx:id="certText" prefHeight="288.0" prefWidth="478.0" GridPane.columnIndex="1" />
+            <TextArea fx:id="certText" prefHeight="288.0" prefWidth="478.0" wrapText="true" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

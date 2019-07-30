@@ -281,7 +281,22 @@ public class ConfigurationViewController {
 	
 	public void handleViewCertificate() {
 		try {
-			this.mainApp.showCertificateOverview();
+			int selectedIndex = certTable.getSelectionModel().getSelectedIndex();
+		    if (selectedIndex >= 0) {
+		    	//certTable.getItems().remove(selectedIndex);
+		    	CertInfoDto selectedCert = certTable.getSelectionModel().getSelectedItem();
+		        if (selectedCert != null) {
+		        	
+		        	this.mainApp.showCertificateOverview(selectedCert);
+		        }
+		    	
+		    } else {
+		        // Nothing selected.
+		    	Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.cert.selected"));
+				alert.showAndWait();
+		    }
+			
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
