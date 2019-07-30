@@ -33,18 +33,6 @@ public class UseKeyTool {
 	private static final String password = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private static final String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore");
 
-	public void crearCertificadoTest() {
-		String alias = "Mario Cruz";
-		String commonName = "Mario Cruz";
-		String organizationalUnit = "IT";
-		String organization = "BANDESAL";
-		String city = "San Salvador";
-		String state = "San Salvador";
-		String country = "SV";
-		String passnewentry = "mcruz1234";
-		createCertificate(alias, commonName, organizationalUnit, organization, city, state, country, passnewentry);
-	}
-
 	public static void createCertificate(String alias, String commonName, String organizationalUnit,
 			String organization, String city, String state, String country, String passNewEntry) {
 
