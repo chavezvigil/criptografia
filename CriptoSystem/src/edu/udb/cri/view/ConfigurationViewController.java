@@ -211,6 +211,7 @@ public class ConfigurationViewController {
 					UseKeyTool.createCertificate(dto.getAlias(), dto.getCommonName(), dto.getOrganization(),
 							dto.getOrganizationUnit(), dto.getCity(), dto.getState(), dto.getCountry(),
 							dto.getPassword());
+					refrescarCertificados();
 
 					Alert msgSuccess = new Alert(AlertType.INFORMATION,
 							UtilMessage.getMensaje("edu.udb.cri.system.alert.information.cert"));
@@ -286,8 +287,38 @@ public class ConfigurationViewController {
 		    	//certTable.getItems().remove(selectedIndex);
 		    	CertInfoDto selectedCert = certTable.getSelectionModel().getSelectedItem();
 		        if (selectedCert != null) {
-		        	
 		        	this.mainApp.showCertificateOverview(selectedCert);
+		        }
+		    	
+		    } else {
+		        // Nothing selected.
+		    	Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.cert.selected"));
+				alert.showAndWait();
+		    }
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	public void handleDeleteCertificate() {
+		try {
+			int selectedIndex = certTable.getSelectionModel().getSelectedIndex();
+		    if (selectedIndex >= 0) {
+		    	
+		    	CertInfoDto selectedCert = certTable.getSelectionModel().getSelectedItem();
+		        if (selectedCert != null) {
+		        	Alert alert = new Alert(AlertType.CONFIRMATION,
+							UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.cert.delete"), ButtonType.YES,
+							ButtonType.CANCEL);
+					alert.showAndWait();
+
+					if (alert.getResult() == ButtonType.YES) {
+						certTable.getItems().remove(selectedIndex);
+			        	//Eliminar del keystore
+						//refrescarCertificados();
+					}
 		        }
 		    	
 		    } else {
