@@ -65,7 +65,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Certificados">
+            <Tab text="Certificados Digitales">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -112,7 +112,7 @@
                      </children></AnchorPane>
               </content>
             </Tab>
-          <Tab text="Crear Keystore">
+          <Tab disable="true" text="Crear Keystore">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

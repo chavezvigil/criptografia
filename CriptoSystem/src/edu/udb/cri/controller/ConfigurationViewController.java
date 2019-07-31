@@ -37,6 +37,7 @@ public class ConfigurationViewController {
 	private MainApp mainApp;
 	private URL keyStoreUrl;
 	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
+	private String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore");
 
 	@FXML
 	private Button createKeystoreButton;
@@ -315,9 +316,10 @@ public class ConfigurationViewController {
 					alert.showAndWait();
 
 					if (alert.getResult() == ButtonType.YES) {
-						certTable.getItems().remove(selectedIndex);
 			        	//Eliminar del keystore
-						//refrescarCertificados();
+						UseKeyTool.clearKeyStore(keyStoreUrl, pathKeyStore, selectedCert.getAlias().getValue(), keyStorePass);
+						certTable.getItems().remove(selectedIndex);
+						refrescarCertificados();
 					}
 		        }
 		    	

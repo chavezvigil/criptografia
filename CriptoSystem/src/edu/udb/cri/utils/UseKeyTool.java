@@ -24,6 +24,7 @@ import sun.security.x509.X500Name;
 import sun.security.x509.X509CertImpl;
 import sun.security.x509.X509CertInfo;
 
+
 @SuppressWarnings("restriction")
 public class UseKeyTool {
 
@@ -109,9 +110,16 @@ public class UseKeyTool {
 		return ks;
 	}
 
-	public static void clearKeyStore(String alias, KeyStore keystore) throws Exception {
+	public static void clearKeyStore(URL keyStoreUrl, String path, String alias, String password) throws Exception {
 		try {
+			
+			URLConnection conn = (URLConnection) keyStoreUrl.openConnection();
+			InputStream is = conn.getInputStream();
+			KeyStore keystore = KeyStore.getInstance(KeyStore.getDefaultType());
+			keystore.load(is, password.toCharArray());
+			
 			keystore.deleteEntry(alias);
+			keystore.store(new FileOutputStream(path), password.toCharArray());
 		} catch (Exception exception) {
 			throw exception;
 		}
