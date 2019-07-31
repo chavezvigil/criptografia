@@ -199,6 +199,31 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
+	
+	
+	public void showAsymmetricCipherOverview() {
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.asimmetric")));
+			AnchorPane asymmetricOverview = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.asymmetric.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(asymmetricOverview);
+			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
+
+			// Give the controller access to the main app
+
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Returns the main stage.

@@ -71,7 +71,9 @@ public class InicioOverviewController {
 	public void handleSimetricCipher() {
 		mainApp.showSymmetricCipherOverview();
 	}
-
 	
+	public void handleAsimetricCipher() {
+		mainApp.showAsymmetricCipherOverview();
+	}
 
 }
