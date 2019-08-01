@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.udb.cri.view.AboutController">
    <children>
       <GridPane layoutX="81.0" layoutY="68.0" prefHeight="286.0" prefWidth="356.0">
         <columnConstraints>
@@ -37,5 +36,6 @@
             </GridPane>
          </children>
       </GridPane>
+      <Button fx:id="btnGuiaUsuario" layoutX="81.0" layoutY="368.0" mnemonicParsing="false" onAction="#getGuiaUsuario" text="Guia de Usuario" />
    </children>
 </AnchorPane>

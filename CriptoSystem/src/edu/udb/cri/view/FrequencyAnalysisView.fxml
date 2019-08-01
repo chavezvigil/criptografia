@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="600.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.FrequencyAnalysisController">
+   <children>
+      <Pane prefHeight="600.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="btnIniciarFre" layoutX="37.0" layoutY="78.0" mnemonicParsing="false" onAction="#StartFrecuency" prefHeight="25.0" prefWidth="97.0" text="Iniciar" />
+            <Label layoutX="6.0" layoutY="28.0" prefHeight="50.0" prefWidth="161.0" text="Paso1 : Buscar  cadenas de &#10;             3 letras o trigramas" />
+            <Separator layoutX="172.0" orientation="VERTICAL" prefHeight="600.0" prefWidth="6.0" />
+            <Label layoutX="6.0" layoutY="172.0" prefHeight="25.0" prefWidth="161.0" text="Paso2 : Analisis de trigramas" />
+            <Button fx:id="btnAnalizarFre" layoutX="37.0" layoutY="197.0" mnemonicParsing="false" onAction="#AnalyticFrecuency" prefHeight="25.0" prefWidth="97.0" text="Analizar" />
+            <Button fx:id="btnDividirFre" layoutX="37.0" layoutY="349.0" mnemonicParsing="false" onAction="#DivideFrecuency" prefHeight="25.0" prefWidth="97.0" text="Dividir" />
+            <Label layoutX="6.0" layoutY="299.0" prefHeight="50.0" prefWidth="161.0" text="Paso3 : Dividir cadena entre &#10;            posible logitud de key" />
+            <Label layoutX="6.0" layoutY="443.0" prefHeight="25.0" prefWidth="161.0" text="Paso4 : Creacion de Alfabetos" />
+            <Button fx:id="btnCrearFre" layoutX="37.0" layoutY="468.0" mnemonicParsing="false" onAction="#CreatedFrecuency" prefHeight="25.0" prefWidth="97.0" text="Crear" />
+            <TextArea fx:id="txtStrCifrado" layoutX="197.0" layoutY="28.0" prefHeight="110.0" prefWidth="380.0" promptText="Ingrese texto cifrado con mas de 100 letras, para analizar" wrapText="true" />
+            <TextArea fx:id="txtStrAnalizado" editable="false" layoutX="197.0" layoutY="172.0" prefHeight="110.0" prefWidth="380.0" promptText="Muestra resultados de trigramas" wrapText="true" />
+            <TextArea fx:id="txtStrDividido" editable="false" layoutX="197.0" layoutY="311.0" prefHeight="110.0" prefWidth="380.0" promptText="Divide cadena en posible longitud de clave" wrapText="true" />
+            <TextArea fx:id="txtStrAlfabetos" editable="false" layoutX="197.0" layoutY="452.0" prefHeight="110.0" prefWidth="380.0" promptText="Muestra alfabetos encontrados" wrapText="true" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
