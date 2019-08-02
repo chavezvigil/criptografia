@@ -1,32 +1,43 @@
 package edu.udb.cri.controller;
 
-import java.awt.Button;
-import java.awt.event.ActionEvent;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-
+import java.io.File;
+import javafx.application.HostServices;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 
 public class AboutController {
-	
+	public File file;
+	HostServices hostServices;
+
     @FXML
     private Button btnGuiaUsuario;
 
     @FXML
     void getGuiaUsuario(ActionEvent event) {
-    	try {
-    		  FileWriter fl = new FileWriter("test.txt");
-    		  PrintWriter pw = new PrintWriter(fl);
+    	//FileChooser file = new FileChooser();
+    	//FileChooser.ExtensionFilter extFile = new FileChooser().getExtensionFilters();
+    	file = new File("/CriptoSystem/recursos/keystore/Manual_Usuario.pdf");
+    	//hostServices.showDocument(file.getAbsolutePath());
+    	//HostServices hostServices.getClass()
+    	//hostServices.showDocument(file.getAbsolutePath());
+        /*FileChooser fileChooser = new FileChooser();
+        
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilter = 
+                new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        fileChooser.getExtensionFilters().add(extFilter);
+          
+        //Show open file dialog
+        File file = new File("/CriptoSystem/recursos/keystore/Manual_Usuario.pdf");*/
 
-    		  for(int i = 0; i < 10; i++) {
-    		    pw.println(i + 1);
-    		    System.out.println(i + 1);
-    		  }
-
-    		  pw.close();
-    		} catch(IOException e) {
-    		  e.printStackTrace();
-    		}
+        HostServices hostServices = getHostServices();
+        hostServices.showDocument(file.getAbsolutePath());
     }
+
+	private HostServices getHostServices() {
+		return hostServices;
+	}
+
+
 }
