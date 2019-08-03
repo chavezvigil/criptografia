@@ -11,6 +11,7 @@ import edu.udb.cri.utils.UtilMessage;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -30,6 +31,7 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.title"));
 		this.primaryStage.setResizable(false);
+		this.primaryStage.getIcons().add(new Image(MainApp.class.getResourceAsStream(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo")))); 
 		initRootLayout();
 		showInicioOverview();
 	}
