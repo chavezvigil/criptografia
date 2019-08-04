@@ -22,7 +22,6 @@ import javafx.scene.image.ImageView;
 public class AsymmetricEncryptionController {
 	
 	private URL keyStoreUrl;
-
 	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 
 	// Fields for crypt
@@ -164,7 +163,7 @@ public class AsymmetricEncryptionController {
 		decryptButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				cifrarMensaje();
+				descifrarMensaje();
 			}
 		});
 		
@@ -203,6 +202,55 @@ public class AsymmetricEncryptionController {
 
 				if (alert.getResult() == ButtonType.YES) {
 					//String message = messageText.getText();
+					
+				}
+			}
+
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	public void descifrarMensaje() {
+		try {
+			
+			boolean valid = true;
+			String nameCert = certListDecrypt.getValue();
+			String algoritmo = algoritmListDecrypt.getValue();
+			String msg = messageTextDecrypt.getText();
+			String passphase = passPhaseField.getText();
+
+			if (msg == null || msg.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.texto"));
+				alert.showAndWait();
+			} else if (algoritmo == null || algoritmo.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.algoritmo"));
+				alert.showAndWait();
+			} else if (nameCert == null || nameCert.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.cert"));
+				alert.showAndWait();
+			} else if (passphase == null || passphase.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.pass"));
+				alert.showAndWait();
+			}
+
+			if (valid == true) {
+				Alert alert = new Alert(AlertType.CONFIRMATION,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.descifrar.cert"), ButtonType.YES,
+						ButtonType.CANCEL);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.YES) {
+					//String message = messageTextDecrypt.getText();
 					
 				}
 			}
