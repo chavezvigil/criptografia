@@ -61,7 +61,7 @@ public class Utils {
 		}
 		return recvcert;
 	}
-	
+
 	public static KeyStore getKeyStore(URL keyStoreUrl, String passKeyStore) {
 		KeyStore ks = null;
 		try {
@@ -139,7 +139,7 @@ public class Utils {
 
 		return strgDataToTransmit;
 	}
-	
+
 	public static String messageToTransmit(String message, String digitalSing) throws Exception {
 		String strgDataToTransmit = new String();
 		try {
@@ -191,7 +191,7 @@ public class Utils {
 		}
 		return bytesRecoverer;
 	}
-	
+
 	public static String bytesToString(byte[] bytesConvert) throws Exception {
 		String strResult = new String();
 		try {
@@ -199,7 +199,7 @@ public class Utils {
 		} catch (Exception exception) {
 			throw exception;
 		}
-		
+
 		return strResult;
 	}
 
@@ -234,8 +234,7 @@ public class Utils {
 
 		return items;
 	}
-	
-	
+
 	public static ObservableList<CertInfoDto> getAllCerts(URL keyStoreUrl, String password) {
 		ObservableList<CertInfoDto> items = FXCollections.observableArrayList();
 		CertInfoDto dto;
@@ -254,12 +253,12 @@ public class Utils {
 				if (alias != null && !alias.isEmpty()) {
 					dto.setNumber(count);
 					dto.setAlias(alias);
-					
+
 					try {
 						X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, alias, keyStorePass);
 						X500Principal principal = cert.getSubjectX500Principal();
-						X500Name x500name =new X500Name(principal.getName());
-						
+						X500Name x500name = new X500Name(principal.getName());
+
 						if (x500name != null) {
 							dto.setCommonName(x500name.getCommonName());
 							dto.setOrganization(x500name.getOrganization());
@@ -289,10 +288,9 @@ public class Utils {
 
 		return items;
 	}
-	
-	
-	public static String getOriginalMessageFromTrama(String tramaOriginal) throws Exception{
-		String originalMessage = new String ();
+
+	public static String getOriginalMessageFromTrama(String tramaOriginal) throws Exception {
+		String originalMessage = new String();
 		try {
 			String[] arreglo = tramaOriginal.split("_");
 			if (arreglo != null && arreglo.length > 0) {
@@ -303,9 +301,9 @@ public class Utils {
 		}
 		return originalMessage;
 	}
-	
-	public static String getDigitalSignFromTrama(String tramaOriginal) throws Exception{
-		String originalMessage = new String ();
+
+	public static String getDigitalSignFromTrama(String tramaOriginal) throws Exception {
+		String originalMessage = new String();
 		try {
 			String[] arreglo = tramaOriginal.split("_");
 			if (arreglo != null && arreglo.length > 1) {
@@ -316,8 +314,8 @@ public class Utils {
 		}
 		return originalMessage;
 	}
-	
-	public static boolean isStringBase64(String mensajeBase64) throws Exception{
+
+	public static boolean isStringBase64(String mensajeBase64) throws Exception {
 		boolean valid = true;
 		try {
 			valid = Base64.isBase64(mensajeBase64.getBytes());
@@ -325,6 +323,20 @@ public class Utils {
 			throw exception;
 		}
 		return valid;
+	}
+
+	public static ObservableList<String> getAllAsymmetricAlgoritm() {
+		ObservableList<String> items = FXCollections.observableArrayList();
+		try {
+
+			items.add(UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.rsa"));
+			items.add(UtilMessage.getMensaje("edu.udb.cri.system.algoritm.asimetric.dsa"));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return items;
 	}
 
 }
