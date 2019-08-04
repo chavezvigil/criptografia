@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="650.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.udb.cri.view.AsymmetricEncryptionController">
+<AnchorPane prefHeight="481.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.udb.cri.view.AsymmetricEncryptionController">
    <children>
       <TabPane layoutX="26.0" layoutY="42.0" prefHeight="800.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -17,7 +17,7 @@
                            <items>
                               <AnchorPane prefHeight="619.0" prefWidth="570.0">
                                  <children>
-                                    <GridPane layoutX="28.0" layoutY="23.0" prefHeight="525.0" prefWidth="480.0">
+                                    <GridPane layoutX="28.0" layoutY="23.0" prefHeight="387.0" prefWidth="480.0">
                                        <children>
                                           <Label text="Mensaje a cifrar" wrapText="true" />
                                           <TextArea fx:id="messageText" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
@@ -45,25 +45,25 @@
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="51.0" minHeight="0.0" prefHeight="25.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                          <RowConstraints minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="51.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="105.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="100.0" minHeight="10.0" prefHeight="23.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
                                  </children>
                               </AnchorPane>
                               <AnchorPane prefHeight="200.0" prefWidth="200.0">
                                  <children>
-                                    <GridPane layoutX="19.0" layoutY="22.0" prefHeight="553.0" prefWidth="600.0">
+                                    <GridPane layoutX="19.0" layoutY="22.0" prefHeight="402.0" prefWidth="600.0">
                                        <children>
                                           <Label text="Certificado" />
                                           <Label text="Llave pública" GridPane.rowIndex="2" />
                                           <TextArea fx:id="publicKey" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <Label text="Texto cifrado" GridPane.rowIndex="4" />
-                                          <TextArea fx:id="textoCifrado" prefHeight="59.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextArea fx:id="textoCifrado" prefHeight="150.0" prefWidth="505.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                           <TextArea fx:id="certText" prefHeight="200.0" prefWidth="200.0" wrapText="true" GridPane.columnIndex="1" />
                                        </children>
                                        <columnConstraints>
@@ -75,9 +75,9 @@
                                           <RowConstraints maxHeight="129.0" minHeight="10.0" prefHeight="11.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="90.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="12.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="132.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="18.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
                                  </children></AnchorPane>
@@ -94,23 +94,23 @@
                           <items>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="619.0" prefWidth="544.0">
                                  <children>
-                                    <GridPane layoutX="28.0" layoutY="30.0" prefHeight="485.0" prefWidth="489.0">
+                                    <GridPane layoutX="28.0" layoutY="30.0" prefHeight="391.0" prefWidth="489.0">
                                       <columnConstraints>
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="83.0" />
-                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="406.0" minWidth="10.0" prefWidth="406.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="81.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="408.0" />
                                       </columnConstraints>
                                       <rowConstraints>
-                                        <RowConstraints maxHeight="182.0" minHeight="10.0" prefHeight="178.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="189.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="101.0" minHeight="8.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                        <RowConstraints minHeight="10.0" prefHeight="120.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="11.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="107.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label text="Mensaje a descrifrar" wrapText="true" />
-                                          <TextArea fx:id="messageTextDecrypt" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
+                                          <TextArea fx:id="messageTextDecrypt" prefHeight="114.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
                                           <ComboBox fx:id="certListDecrypt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                           <Label text="Certificado" GridPane.rowIndex="2" />
                                           <Label text="Passphase" GridPane.rowIndex="3" />
@@ -136,19 +136,16 @@
                               </AnchorPane>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                  <children>
-                                    <GridPane layoutX="24.0" layoutY="28.0" prefHeight="544.0" prefWidth="596.0">
+                                    <GridPane layoutX="24.0" layoutY="28.0" prefHeight="384.0" prefWidth="596.0">
                                       <columnConstraints>
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="91.0" />
                                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.0" minWidth="10.0" prefWidth="505.0" />
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints maxHeight="172.0" minHeight="0.0" prefHeight="163.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="129.0" minHeight="9.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                                        <RowConstraints maxHeight="270.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="238.0" minHeight="10.0" prefHeight="22.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="37.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="21.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="218.0" minHeight="10.0" prefHeight="121.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="129.0" minHeight="8.0" prefHeight="54.0" vgrow="SOMETIMES" />
+                                        <RowConstraints maxHeight="358.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="358.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label text="Certificado" />
