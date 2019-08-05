@@ -3,7 +3,9 @@ package edu.udb.cri.view;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.cert.X509Certificate;
 
+import edu.udb.cri.utils.UseAsymmetricTool;
 import edu.udb.cri.utils.UtilMessage;
 import edu.udb.cri.utils.Utils;
 import javafx.event.ActionEvent;
@@ -84,6 +86,9 @@ public class AsymmetricEncryptionController {
 		messageText.setText("");
 		certList.setValue("");
 		algoritmList.setValue("");
+		textoCifrado.setText("");
+		certText.setText("");
+		publicKey.setText("");
 	}
 	
 	public void resetFieldsDecrypt() {
@@ -201,8 +206,12 @@ public class AsymmetricEncryptionController {
 				alert.showAndWait();
 
 				if (alert.getResult() == ButtonType.YES) {
-					//String message = messageText.getText();
-					
+					// Extraer certificado de almacen
+					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
+					String strgCipherData = UseAsymmetricTool.cifrarAsimetrico(cert, msg, algoritmo);
+					textoCifrado.setText(strgCipherData);
+					certText.setText(String.valueOf(cert));
+					publicKey.setText(String.valueOf(Utils.getPublicKey(cert)));
 				}
 			}
 
@@ -251,6 +260,11 @@ public class AsymmetricEncryptionController {
 
 				if (alert.getResult() == ButtonType.YES) {
 					//String message = messageTextDecrypt.getText();
+					// Extraer certificado de almacen
+					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
+					String strgCipherData = UseAsymmetricTool.descifrarAsimetrico(keyStoreUrl, keyStorePass, nameCert, passphase, msg, algoritmo);
+					originalMessage.setText(strgCipherData);
+					certTextDecrypt.setText(String.valueOf(cert));
 					
 				}
 			}

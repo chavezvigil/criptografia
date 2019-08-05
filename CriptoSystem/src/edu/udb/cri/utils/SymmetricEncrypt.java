@@ -34,7 +34,6 @@ public class SymmetricEncrypt {
 		return secretKey;
 	}
 
-
 	public byte[] encryptData(byte[] byteDataToEncrypt, Key secretKey, String Algorithm) {
 		byte[] byteCipherText = new byte[200];
 
@@ -67,9 +66,9 @@ public class SymmetricEncrypt {
 		return byteCipherText;
 	}
 
-
-
-	public byte[] decryptData(byte[] byteCipherText, Key secretKey, String Algorithm) {
+	public byte[] decryptData(byte[] byteCipherText, Key secretKey, String Algorithm)
+			throws NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException,
+			IllegalBlockSizeException, InvalidAlgorithmParameterException {
 		byte[] byteDecryptedText = new byte[200];
 
 		try {
@@ -84,19 +83,25 @@ public class SymmetricEncrypt {
 			strDecryptedText = new String(byteDecryptedText);
 		} catch (NoSuchAlgorithmException noSuchAlgo) {
 			System.out.println(" No Such Algorithm exists " + noSuchAlgo);
+			throw noSuchAlgo;
 		} catch (NoSuchPaddingException noSuchPad) {
 			System.out.println(" No Such Padding exists " + noSuchPad);
+			throw noSuchPad;
 		} catch (InvalidKeyException invalidKey) {
 			System.out.println(" Invalid Key " + invalidKey);
 			invalidKey.printStackTrace();
+			throw invalidKey;
 		} catch (BadPaddingException badPadding) {
 			System.out.println(" Bad Padding " + badPadding);
 			badPadding.printStackTrace();
+			throw badPadding;
 		} catch (IllegalBlockSizeException illegalBlockSize) {
 			System.out.println(" Illegal Block Size " + illegalBlockSize);
 			illegalBlockSize.printStackTrace();
+			throw illegalBlockSize;
 		} catch (InvalidAlgorithmParameterException invalidParam) {
 			System.out.println(" Invalid Parameter " + invalidParam);
+			throw invalidParam;
 		}
 
 		return byteDecryptedText;
