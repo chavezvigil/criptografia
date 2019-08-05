@@ -96,6 +96,8 @@ public class AsymmetricEncryptionController {
 		certListDecrypt.setValue("");
 		algoritmListDecrypt.setValue("");
 		passPhaseField.setText("");
+		originalMessage.setText("");
+		certTextDecrypt.setText("");
 	}
 	
 	public void restablecerDatos() {

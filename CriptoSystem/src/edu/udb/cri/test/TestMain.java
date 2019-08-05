@@ -3,7 +3,6 @@ package edu.udb.cri.test;
 import java.security.Provider;
 import java.security.Security;
 import java.util.Enumeration;
-
 import edu.udb.cri.utils.UseKeyTool;
 
 
@@ -13,7 +12,7 @@ public class TestMain {
 	public static void main(String[] arg) {
 		
 		try {
-			//algoritmosProvider();
+			algoritmosProvider();
 			UseKeyTool.printAllCerts();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
