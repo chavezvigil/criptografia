@@ -21,9 +21,9 @@
                                        <children>
                                           <Label text="Mensaje a cifrar" wrapText="true" />
                                           <TextArea fx:id="messageText" prefHeight="33.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
-                                          <ComboBox fx:id="certList" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Certificado" GridPane.rowIndex="2" />
-                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                          <ComboBox fx:id="certList" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Certificado" GridPane.rowIndex="1" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="3">
                                              <children>
                                                 <Button fx:id="cifrarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Cifrar" />
                                                 <Button fx:id="restaurarButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
@@ -36,8 +36,6 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                           </GridPane>
-                                          <Label text="Algoritmo" GridPane.rowIndex="1" />
-                                          <ComboBox fx:id="algoritmList" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                        <columnConstraints>
                                           <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="83.0" />
@@ -45,7 +43,6 @@
                                        </columnConstraints>
                                        <rowConstraints>
                                           <RowConstraints maxHeight="190.0" minHeight="10.0" prefHeight="190.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="104.0" minHeight="10.0" prefHeight="42.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="114.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="51.0" minHeight="0.0" prefHeight="13.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="68.0" minHeight="10.0" prefHeight="67.0" vgrow="SOMETIMES" />
@@ -101,7 +98,6 @@
                                       </columnConstraints>
                                       <rowConstraints>
                                         <RowConstraints maxHeight="189.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="171.0" minHeight="10.0" prefHeight="38.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="156.0" minHeight="10.0" prefHeight="35.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="101.0" minHeight="8.0" prefHeight="37.0" vgrow="SOMETIMES" />
                                           <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="11.0" vgrow="SOMETIMES" />
@@ -111,11 +107,11 @@
                                        <children>
                                           <Label text="Mensaje a descrifrar" wrapText="true" />
                                           <TextArea fx:id="messageTextDecrypt" prefHeight="114.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
-                                          <ComboBox fx:id="certListDecrypt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <Label text="Certificado" GridPane.rowIndex="2" />
-                                          <Label text="Passphase" GridPane.rowIndex="3" />
-                                          <PasswordField fx:id="passPhaseField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                          <ComboBox fx:id="certListDecrypt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <Label text="Certificado" GridPane.rowIndex="1" />
+                                          <Label text="Passphase" GridPane.rowIndex="2" />
+                                          <PasswordField fx:id="passPhaseField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
                                             <columnConstraints>
                                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="160.0" />
                                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="246.0" />
@@ -128,8 +124,6 @@
                                                 <Button fx:id="restaurarButtonDecrypt" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
                                              </children>
                                           </GridPane>
-                                          <Label text="Algoritmo" GridPane.rowIndex="1" />
-                                          <ComboBox fx:id="algoritmListDecrypt" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>

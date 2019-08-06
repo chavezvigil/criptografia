@@ -41,8 +41,6 @@ public class AsymmetricEncryptionController {
 	private TextArea textoCifrado;
 	@FXML
 	private ComboBox<String> certList;
-	@FXML
-	private ComboBox<String> algoritmList;
 
 
 	// Fields for decrypt
@@ -59,8 +57,6 @@ public class AsymmetricEncryptionController {
 	@FXML
 	private ComboBox<String> certListDecrypt;
 	@FXML
-	private ComboBox<String> algoritmListDecrypt;
-	@FXML
 	PasswordField passPhaseField;
 
 	public AsymmetricEncryptionController() {
@@ -75,8 +71,6 @@ public class AsymmetricEncryptionController {
 			keyStoreUrl = keyStore.toURI().toURL();
 			certList.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
 			certListDecrypt.getItems().addAll(Utils.getAllNameCerts(keyStoreUrl, keyStorePass));
-			algoritmList.getItems().addAll(Utils.getAllAsymmetricAlgoritm());
-			algoritmListDecrypt.getItems().addAll(Utils.getAllAsymmetricAlgoritm());
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
@@ -85,7 +79,6 @@ public class AsymmetricEncryptionController {
 	public void resetFields() {
 		messageText.setText("");
 		certList.setValue("");
-		algoritmList.setValue("");
 		textoCifrado.setText("");
 		certText.setText("");
 		publicKey.setText("");
@@ -94,7 +87,6 @@ public class AsymmetricEncryptionController {
 	public void resetFieldsDecrypt() {
 		messageTextDecrypt.setText("");
 		certListDecrypt.setValue("");
-		algoritmListDecrypt.setValue("");
 		passPhaseField.setText("");
 		originalMessage.setText("");
 		certTextDecrypt.setText("");
@@ -181,18 +173,12 @@ public class AsymmetricEncryptionController {
 			
 			boolean valid = true;
 			String nameCert = certList.getValue();
-			String algoritmo = algoritmList.getValue();
 			String msg = messageText.getText();
 
 			if (msg == null || msg.isEmpty()) {
 				valid = false;
 				Alert alert = new Alert(AlertType.ERROR,
 						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.asymmetric.texto"));
-				alert.showAndWait();
-			} else if (algoritmo == null || algoritmo.isEmpty()) {
-				valid = false;
-				Alert alert = new Alert(AlertType.ERROR,
-						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.asymmetric.algoritmo"));
 				alert.showAndWait();
 			} else if (nameCert == null || nameCert.isEmpty()) {
 				valid = false;
@@ -210,7 +196,7 @@ public class AsymmetricEncryptionController {
 				if (alert.getResult() == ButtonType.YES) {
 					// Extraer certificado de almacen
 					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
-					String strgCipherData = UseAsymmetricTool.cifrarAsimetrico(cert, msg, algoritmo);
+					String strgCipherData = UseAsymmetricTool.cifrarAsimetrico(cert, msg);
 					textoCifrado.setText(strgCipherData);
 					certText.setText(String.valueOf(cert));
 					publicKey.setText(String.valueOf(Utils.getPublicKey(cert)));
@@ -228,7 +214,6 @@ public class AsymmetricEncryptionController {
 			
 			boolean valid = true;
 			String nameCert = certListDecrypt.getValue();
-			String algoritmo = algoritmListDecrypt.getValue();
 			String msg = messageTextDecrypt.getText();
 			String passphase = passPhaseField.getText();
 
@@ -236,11 +221,6 @@ public class AsymmetricEncryptionController {
 				valid = false;
 				Alert alert = new Alert(AlertType.ERROR,
 						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.texto"));
-				alert.showAndWait();
-			} else if (algoritmo == null || algoritmo.isEmpty()) {
-				valid = false;
-				Alert alert = new Alert(AlertType.ERROR,
-						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.decrypt.algoritmo"));
 				alert.showAndWait();
 			} else if (nameCert == null || nameCert.isEmpty()) {
 				valid = false;
@@ -264,7 +244,7 @@ public class AsymmetricEncryptionController {
 					//String message = messageTextDecrypt.getText();
 					// Extraer certificado de almacen
 					X509Certificate cert = Utils.getX509Certificate(keyStoreUrl, nameCert, keyStorePass);
-					String strgCipherData = UseAsymmetricTool.descifrarAsimetrico(keyStoreUrl, keyStorePass, nameCert, passphase, msg, algoritmo);
+					String strgCipherData = UseAsymmetricTool.descifrarAsimetrico(keyStoreUrl, keyStorePass, nameCert, passphase, msg);
 					originalMessage.setText(strgCipherData);
 					certTextDecrypt.setText(String.valueOf(cert));
 					
