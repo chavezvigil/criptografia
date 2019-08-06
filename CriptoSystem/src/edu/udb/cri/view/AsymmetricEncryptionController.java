@@ -58,6 +58,18 @@ public class AsymmetricEncryptionController {
 	private ComboBox<String> certListDecrypt;
 	@FXML
 	PasswordField passPhaseField;
+	
+	// Fields for analysis
+	@FXML
+	private Button analysisButton;
+	@FXML
+	private Button restaurarButtonAnalysis;
+	@FXML
+	private TextArea messageTextAnalysis;
+	@FXML
+	private TextArea textAnalysis;
+	@FXML
+	private TextArea textPrimo;
 
 	public AsymmetricEncryptionController() {
 
@@ -92,6 +104,12 @@ public class AsymmetricEncryptionController {
 		certTextDecrypt.setText("");
 	}
 	
+	public void resetFieldsAnalysis() {
+		messageTextAnalysis.setText("");
+		textAnalysis.setText("");
+		textPrimo.setText("");
+	}
+	
 	public void restablecerDatos() {
 		try {
 			Alert alert = new Alert(AlertType.CONFIRMATION,
@@ -101,6 +119,22 @@ public class AsymmetricEncryptionController {
 
 			if (alert.getResult() == ButtonType.YES) {
 				resetFields();
+			}
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	public void restablecerDatosAnalysis() {
+		try {
+			Alert alert = new Alert(AlertType.CONFIRMATION,
+					UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.reset"), ButtonType.YES,
+					ButtonType.CANCEL);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES) {
+				resetFieldsAnalysis();
 			}
 		} catch (Exception e) {
 			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
@@ -155,6 +189,14 @@ public class AsymmetricEncryptionController {
 			}
 		});
 		
+		restaurarButtonAnalysis.setGraphic(new ImageView(imageReset));
+		restaurarButtonAnalysis.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				restablecerDatosAnalysis();
+			}
+		});
+		
 		
 		URL imgDecryp = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.asimetric.decrypt"));
 		Image imageDecrypt = new Image(imgDecryp.toString());
@@ -163,6 +205,16 @@ public class AsymmetricEncryptionController {
 			@Override
 			public void handle(ActionEvent e) {
 				descifrarMensaje();
+			}
+		});
+		
+		URL imgAnalysis = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.asimetric.analysis"));
+		Image imageAnalysis = new Image(imgAnalysis.toString());
+		analysisButton.setGraphic(new ImageView(imageAnalysis));
+		analysisButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				analizarMensaje();
 			}
 		});
 		
@@ -247,6 +299,38 @@ public class AsymmetricEncryptionController {
 					String strgCipherData = UseAsymmetricTool.descifrarAsimetrico(keyStoreUrl, keyStorePass, nameCert, passphase, msg);
 					originalMessage.setText(strgCipherData);
 					certTextDecrypt.setText(String.valueOf(cert));
+					
+				}
+			}
+
+		} catch (Exception e) {
+			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+			alert.showAndWait();
+		}
+	}
+	
+	public void analizarMensaje() {
+		try {
+			
+			boolean valid = true;
+			String msg = messageTextAnalysis.getText();
+
+			if (msg == null || msg.isEmpty()) {
+				valid = false;
+				Alert alert = new Alert(AlertType.ERROR,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.error.analysis.texto"));
+				alert.showAndWait();
+			}
+
+			if (valid == true) {
+				Alert alert = new Alert(AlertType.CONFIRMATION,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.analysis.text"), ButtonType.YES,
+						ButtonType.CANCEL);
+				alert.showAndWait();
+
+				if (alert.getResult() == ButtonType.YES) {
+					String message = UseAsymmetricTool.getStringMsg(msg);
+					textAnalysis.setText(message);
 					
 				}
 			}

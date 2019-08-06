@@ -50,4 +50,18 @@ public class UseAsymmetricTool {
 		}
 		return strgCipherData;
 	}
+	
+	
+	public static String getStringMsg(String msgBase64) throws Exception{
+		String strgData = new String();
+		try {
+			byte[] base64ToBytes = Utils.base64ToBytes(msgBase64);
+			strgData = Utils.bytesToString(base64ToBytes);
+			System.out.println("String data: " + strgData);
+		} catch (Exception exception) {
+			LOGGER.log(Level.SEVERE, "Exception occur", exception);
+			throw exception;
+		}	
+		return strgData;
+	}
 }

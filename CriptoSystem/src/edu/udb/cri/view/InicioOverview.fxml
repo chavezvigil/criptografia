@@ -36,7 +36,7 @@
                      <font>
                         <Font size="16.0" />
                      </font></Label>
-                  <Label fx:id="msgInicio" layoutX="14.0" layoutY="74.0" prefHeight="341.0" prefWidth="518.0" textAlignment="JUSTIFY" wrapText="true" />
+                  <Label fx:id="msgInicio" layoutX="14.0" layoutY="74.0" prefHeight="299.0" prefWidth="518.0" textAlignment="JUSTIFY" wrapText="true" />
                   <ImageView fx:id="imageView" fitHeight="85.0" fitWidth="105.0" layoutX="487.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true" />
                </children></AnchorPane>
         </items>
