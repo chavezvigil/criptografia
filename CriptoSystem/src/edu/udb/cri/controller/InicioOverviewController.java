@@ -5,6 +5,7 @@ import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.UtilMessage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -16,10 +17,13 @@ public class InicioOverviewController {
 	private Button asimetricoButton;
 	@FXML
 	private Button digitalSingButton;
-	
+	@FXML
+	private Label msgInicio;
+	@FXML
+	private ImageView imageView;
+
 	private MainApp mainApp;
-	
-	
+
 	/**
 	 * Is called by the main application to give a reference back to itself.
 	 * 
@@ -28,7 +32,6 @@ public class InicioOverviewController {
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
 	}
-	
 
 	public InicioOverviewController() {
 
@@ -42,6 +45,8 @@ public class InicioOverviewController {
 		asimetricCipher();
 		// Digital sing button
 		digitalSing();
+		// Init
+		inicioMsg();
 
 	}
 
@@ -62,16 +67,22 @@ public class InicioOverviewController {
 		Image imageDs = new Image(imgDs.toString());
 		digitalSingButton.setGraphic(new ImageView(imageDs));
 	}
-	
-	
+
+	public void inicioMsg() {
+		msgInicio.setText(UtilMessage.getMensaje("edu.udb.cri.ini.msg"));
+		URL logoUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo.original"));
+		Image image = new Image(logoUrl.toString());
+		imageView = new ImageView(image);
+	}
+
 	public void handleDigitalSing() {
 		mainApp.showDigitalSingOverview();
 	}
-	
+
 	public void handleSimetricCipher() {
 		mainApp.showSymmetricCipherOverview();
 	}
-	
+
 	public void handleAsimetricCipher() {
 		mainApp.showAsymmetricCipherOverview();
 	}
