@@ -132,10 +132,13 @@ public class SymmetricEncryptionController {
 	    		disableProperty();
 	    		
 	    	}else {
-	    		JOptionPane.showMessageDialog(null,"Error: Falta llenar algun campo");
+	    		Alert alert = new Alert(AlertType.CONFIRMATION,	
+	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.information.encryption"), ButtonType.YES,
+	    				ButtonType.CANCEL);alert.showAndWait();
 	    	}			
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
+			Alert alert = new Alert(AlertType.ERROR, ex.getMessage());
+			alert.showAndWait();
 		}
     }
 
@@ -163,10 +166,13 @@ public class SymmetricEncryptionController {
 	    		txtOutputSinDes.setText(objSimmControl.descifrar(inputStrCifDes,inputKeyDescifraDes,inputStrVecIni));
 
 	    	}else {
-	    		JOptionPane.showMessageDialog(null,"Error: Falta ingresar clave para descifrado de " + inputStrTamBit + "bit");
+	    		Alert alert = new Alert(AlertType.CONFIRMATION,	
+	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.information.decode"), ButtonType.YES,
+	    				ButtonType.CANCEL);alert.showAndWait();
 	    	}			
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
+			Alert alert = new Alert(AlertType.ERROR, ex.getMessage());
+			alert.showAndWait();
 		}
 
     }
@@ -197,10 +203,13 @@ public class SymmetricEncryptionController {
 	    		this.flagEnaProperty = 2;
 	    		disableProperty();
 	    	}else {
-	    		JOptionPane.showMessageDialog(null,"Error: Falta llenar algun campo");
+	    		Alert alert = new Alert(AlertType.CONFIRMATION,	
+	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.information.encryption"), ButtonType.YES,
+	    				ButtonType.CANCEL);alert.showAndWait();
 	    	}			
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
+			Alert alert = new Alert(AlertType.ERROR, ex.getMessage());
+			alert.showAndWait();
 		}		
     }
 
@@ -227,15 +236,13 @@ public class SymmetricEncryptionController {
 	    			txtOutputSinAes.setText(objSimmControl.descifrar(inputStrCifAes, inputStrKeyCif, inputStrVecIni));
 	    		
 	    	}else {
-	    		//JOptionPane.showMessageDialog(null,"Error: Falta ingresar clave para descifrado de " + inputStrTamBit + "bit");
-				/*Alert alert = new Alert(AlertType.ERROR, e.getMessage());
-				alert.showAndWait();*/
 	    		Alert alert = new Alert(AlertType.CONFIRMATION,	
-	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.cert.delete"), ButtonType.YES,
+	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.information.decode"), ButtonType.YES,
 	    				ButtonType.CANCEL);alert.showAndWait();
 	    	}			
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
+			Alert alert = new Alert(AlertType.ERROR, ex.getMessage());
+			alert.showAndWait();
 		}
     }
     
