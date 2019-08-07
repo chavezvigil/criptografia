@@ -58,7 +58,8 @@
                         </HBox>
                      </children>
                   </GridPane>
-               </children></AnchorPane>
+               </children>
+          </AnchorPane>
         </items>
       </SplitPane>
    </children>
