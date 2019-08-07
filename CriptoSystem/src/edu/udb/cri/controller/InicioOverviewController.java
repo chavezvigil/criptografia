@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 
 public class InicioOverviewController {
 
@@ -19,8 +20,6 @@ public class InicioOverviewController {
 	private Button digitalSingButton;
 	@FXML
 	private Label msgInicio;
-	@FXML
-	private ImageView imageViewLogo;
 
 	private MainApp mainApp;
 
@@ -70,10 +69,6 @@ public class InicioOverviewController {
 
 	public void inicioMsg() {
 		msgInicio.setText(UtilMessage.getMensaje("edu.udb.cri.ini.msg"));
-		URL logoUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo.original"));
-		Image image = new Image(logoUrl.toString());
-		imageViewLogo = new ImageView(image); 
-		imageViewLogo.setVisible(true);
 	}
 
 	public void handleDigitalSing() {
