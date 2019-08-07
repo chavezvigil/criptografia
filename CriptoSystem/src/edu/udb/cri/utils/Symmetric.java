@@ -10,6 +10,7 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import javax.swing.JOptionPane;
 
 
 public class Symmetric {
@@ -25,6 +26,7 @@ public class Symmetric {
     //Código interno que representa el padding PKC5
     public final static int PADDING_PKCS = 40;
     public final static int PADDING_ISO = 41;
+    public final static int PADDING_NO = 42;
     //Código interno que representa el modo cifrador
     public final static int CIFRADOR = 100;
     public final static int DESCIFRADOR = 101;
@@ -71,7 +73,7 @@ public class Symmetric {
             	}else {
             		this.modo = Symmetric.MODO_CFB;
             	}
-            	this.padding = Symmetric.PADDING_ISO;
+            	this.padding = Symmetric.PADDING_PKCS;
                 generadoClave_des = KeyGenerator.getInstance("DES");
                 generadoClave_des.init(IntTamBit);
             }
@@ -161,6 +163,9 @@ public class Symmetric {
             case Symmetric.PADDING_ISO:
                 valor = "ISO10126Padding";
                 break;
+            case Symmetric.PADDING_NO:
+            	valor = "NoPadding";
+            	break;
         }
 
         return valor;
@@ -210,11 +215,9 @@ public class Symmetric {
             System.err.println("Error: Alguno mecanismos de padding (PKCS5 o ISO 10126) no están disponibles en"
                     + " el sistema. " + nspe.getMessage());
         } catch (InvalidKeyException ike) {
-            System.err.println("Error: Llave inválida (codificación no válida, longitud incorrecta, no inicializada). "
-                    + ike.getMessage());
+            JOptionPane.showMessageDialog(null,"Error: Llave inválida , " + ike.getMessage());
         } catch (InvalidAlgorithmParameterException iape) {
-            System.err.println("Error: Parámetro del algoritmo inválido (Revisar IV). "
-                    + iape.getMessage());
+            JOptionPane.showMessageDialog(null,"Error: Revisar IV , " + iape.getMessage());
         }
         return cifrador;
     }
