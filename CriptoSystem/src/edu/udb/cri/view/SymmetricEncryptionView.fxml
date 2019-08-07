@@ -11,11 +11,62 @@
       	<children>
       		<TabPane prefHeight="600.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
       			<tabs>
-      				<Tab text="CIFRADO DES">
+      				<Tab fx:id="tabSelectAes" onSelectionChanged="#openTabAes" text="CIFRADO AES">
       					<content>
       						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
       							<children>
-      								<RadioButton fx:id="rbCFBDes" layoutX="169.0" layoutY="72.0" mnemonicParsing="false" text="CFB">
+      								<Label layoutX="57.0" layoutY="157.0" text="Texto a cifrar" />
+      								<Label layoutX="57.0" layoutY="230.0" text="Vector inicial (VI)" />
+      								<TextField fx:id="txtInputSinAes" layoutX="157.0" layoutY="153.0" prefHeight="25.0" prefWidth="386.0" />
+      								<TextField fx:id="txtVectorAes" layoutX="157.0" layoutY="226.0" prefHeight="25.0" prefWidth="386.0" />
+      								<Button fx:id="btnCifradoAes" layoutX="253.0" layoutY="318.0" mnemonicParsing="false" onAction="#EncryptionAes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
+      								<Separator layoutX="57.0" layoutY="355.0" prefHeight="0.0" prefWidth="486.0" />
+      								<TextField fx:id="txtKeyDescifraAes" layoutX="157.0" layoutY="385.0" prefHeight="25.0" prefWidth="386.0" />
+      								<Label layoutX="57.0" layoutY="389.0" text="Clave descifrado" />
+      								<RadioButton fx:id="rbECBAes" layoutX="338.0" layoutY="67.0" mnemonicParsing="false" onAction="#radioSelect" selected="true" text="ECB">
+      									<toggleGroup>
+      										<ToggleGroup fx:id="groupRbModOpAes" />
+      									</toggleGroup>
+      								</RadioButton>
+      								<RadioButton fx:id="rbCBCAes" layoutX="337.0" layoutY="88.0" mnemonicParsing="false" onAction="#radioSelect" text="CBC" toggleGroup="$groupRbModOpAes">
+								</RadioButton>
+      								<RadioButton fx:id="rbOFBAes" layoutX="436.0" layoutY="67.0" mnemonicParsing="false" onAction="#radioSelect" text="OFB" toggleGroup="$groupRbModOpAes">
+								</RadioButton>
+      								<TextArea fx:id="txtOutputConAes" layoutX="159.0" layoutY="262.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
+      								<Button fx:id="btnDescifradoAes" layoutX="306.0" layoutY="483.0" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
+      								<TextField fx:id="txtKeyCifraAes" layoutX="157.0" layoutY="189.0" prefHeight="25.0" prefWidth="386.0" />
+      								<Label layoutX="58.0" layoutY="193.0" text="Clave de cifrado" />
+      								<Label layoutX="57.0" layoutY="262.0" text="Texto cifrado" />
+      								<Label layoutX="57.0" layoutY="422.0" text="Texto descifrado" />
+      								<TextArea fx:id="txtOutputSinAes" editable="false" layoutX="159.0" layoutY="422.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
+      								<Separator layoutX="57.0" layoutY="125.0" prefHeight="0.0" prefWidth="486.0" />
+      								<Separator layoutX="251.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
+      								<Separator layoutX="57.0" layoutY="38.0" prefHeight="0.0" prefWidth="486.0" />
+      								<Separator layoutX="497.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
+      								<Separator layoutX="13.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
+      								<Label layoutX="67.0" layoutY="41.0" text="Tamaño de clave en bit" />
+      								<Label layoutX="305.0" layoutY="41.0" text="Modo de operación" />
+      								<RadioButton fx:id="rbCFBAes" layoutX="436.0" layoutY="88.0" mnemonicParsing="false" onAction="#radioSelect" text="CFB" toggleGroup="$groupRbModOpAes">
+								</RadioButton>
+      								<RadioButton fx:id="rb128Aes" layoutX="78.0" layoutY="76.0" mnemonicParsing="false" onAction="#radioSelect" selected="true" text="128">
+      									<toggleGroup>
+      										<ToggleGroup fx:id="groupRbTamBitAes" />
+      									</toggleGroup>
+      								</RadioButton>
+      								<RadioButton fx:id="rb192Aes" layoutX="146.0" layoutY="76.0" mnemonicParsing="false" onAction="#radioSelect" text="192" toggleGroup="$groupRbTamBitAes">
+								</RadioButton>
+      								<RadioButton fx:id="rb256Aes" layoutX="213.0" layoutY="76.0" mnemonicParsing="false" onAction="#radioSelect" text="256" toggleGroup="$groupRbTamBitAes">
+								</RadioButton>
+                              <Button fx:id="btnLimpiarAes" layoutX="342.0" layoutY="318.0" mnemonicParsing="false" onAction="#CleanPropertyAes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" />
+      							</children>
+      						</AnchorPane>
+      					</content>
+      				</Tab>
+      				<Tab fx:id="tabSelectDes" onSelectionChanged="#openTabDes" text="CIFRADO DES">
+      					<content>
+      						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+      							<children>
+      								<RadioButton fx:id="rbCFBDes" layoutX="169.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" text="CFB">
       									<toggleGroup>
       										<ToggleGroup fx:id="groupRbModOpDes" />
       									</toggleGroup>
@@ -23,78 +74,27 @@
       								<Label layoutX="60.0" layoutY="43.0" text="Modo de Operacion" />
       								<Separator layoutX="58.0" layoutY="102.0" prefHeight="0.0" prefWidth="486.0" />
       								<Separator layoutX="57.0" layoutY="337.0" prefHeight="0.0" prefWidth="486.0" />
-      								<RadioButton fx:id="rbOFBDes" layoutX="222.0" layoutY="72.0" mnemonicParsing="false" text="OFB" toggleGroup="$groupRbModOpDes">
+      								<RadioButton fx:id="rbOFBDes" layoutX="222.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" text="OFB" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
-      								<RadioButton fx:id="rbCBCDes" layoutX="118.0" layoutY="72.0" mnemonicParsing="false" text="CBC" toggleGroup="$groupRbModOpDes">
+      								<RadioButton fx:id="rbCBCDes" layoutX="118.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" text="CBC" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
-      								<RadioButton fx:id="rbECBDes" layoutX="66.0" layoutY="72.0" mnemonicParsing="false" selected="true" text="ECB" toggleGroup="$groupRbModOpDes">
+      								<RadioButton fx:id="rbECBDes" layoutX="66.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" selected="true" text="ECB" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
-      								<Label layoutX="60.0" layoutY="205.0" text="Vector Inicial" />
-      								<Label layoutX="60.0" layoutY="169.0" text="Clave Cifrado" />
+      								<Label layoutX="60.0" layoutY="205.0" text="Vector inicial (VI)" />
+      								<Label layoutX="60.0" layoutY="169.0" text="Clave de cifrado" />
       								<TextField fx:id="txtVectorDes" layoutX="157.0" layoutY="201.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextArea fx:id="txtOutputConDes" editable="false" layoutX="157.0" layoutY="236.0" prefHeight="50.0" prefWidth="383.0" />
-      								<Button fx:id="btnCifradoDes" layoutX="241.0" layoutY="294.0" mnemonicParsing="false" onAction="#EncryptionDes" prefHeight="25.0" prefWidth="77.0" text="Cifrar" />
+      								<TextArea fx:id="txtOutputConDes" layoutX="157.0" layoutY="236.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
+      								<Button fx:id="btnCifradoDes" layoutX="250.0" layoutY="294.0" mnemonicParsing="false" onAction="#EncryptionDes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
       								<TextField fx:id="txtKeyCifraDes" layoutX="156.0" layoutY="165.0" prefHeight="25.0" prefWidth="386.0" />
       								<TextField fx:id="txtInputSinDes" layoutX="156.0" layoutY="127.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="60.0" layoutY="131.0" text="Texto a Cifrar" />
-      								<Label layoutX="60.0" layoutY="236.0" text="Texto Cifrado" />
-      								<Label layoutX="58.0" layoutY="371.0" text="Clave Descifrado" />
+      								<Label layoutX="60.0" layoutY="131.0" text="Texto a cifrar" />
+      								<Label layoutX="60.0" layoutY="236.0" text="Texto cifrado" />
+      								<Label layoutX="58.0" layoutY="371.0" text="Clave descifrado" />
       								<TextField fx:id="txtKeyDescifraDes" layoutX="156.0" layoutY="367.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextArea fx:id="txtOutputSinDes" editable="false" layoutX="157.0" layoutY="405.0" prefHeight="50.0" prefWidth="383.0" />
-      								<Label layoutX="57.0" layoutY="405.0" text="Texto Decifrado" />
-      								<Button fx:id="btnDecifradoDes" layoutX="286.0" layoutY="464.0" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="25.0" prefWidth="77.0" text="Descifrar" />
-                              <Button fx:id="btnLimpiarDes" layoutX="332.0" layoutY="294.0" mnemonicParsing="false" onAction="#CleanPropertyDes" prefHeight="25.0" prefWidth="77.0" text="Habilitar" />
-      							</children>
-      						</AnchorPane>
-      					</content>
-      				</Tab>
-      				<Tab text="CIFRADO AES">
-      					<content>
-      						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-      							<children>
-      								<Label layoutX="57.0" layoutY="157.0" text="Texto a Cifrar" />
-      								<Label layoutX="57.0" layoutY="230.0" text="Vector Inicial" />
-      								<TextField fx:id="txtInputSinAes" layoutX="157.0" layoutY="153.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextField fx:id="txtVectorAes" layoutX="157.0" layoutY="226.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Button fx:id="btnCifradoAes" layoutX="267.0" layoutY="323.0" mnemonicParsing="false" onAction="#EncryptionAes" prefHeight="25.0" prefWidth="77.0" text="Cifrar" />
-      								<Separator layoutX="57.0" layoutY="355.0" prefHeight="0.0" prefWidth="486.0" />
-      								<TextField fx:id="txtKeyDescifraAes" layoutX="157.0" layoutY="385.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="57.0" layoutY="389.0" text="Clave Descifrado" />
-      								<RadioButton fx:id="rbECBAes" layoutX="338.0" layoutY="67.0" mnemonicParsing="false" selected="true" text="ECB">
-      									<toggleGroup>
-      										<ToggleGroup fx:id="groupRbModOpAes" />
-      									</toggleGroup>
-      								</RadioButton>
-      								<RadioButton fx:id="rbCBCAes" layoutX="337.0" layoutY="88.0" mnemonicParsing="false" text="CBC" toggleGroup="$groupRbModOpAes">
-								</RadioButton>
-      								<RadioButton fx:id="rbOFBAes" layoutX="436.0" layoutY="67.0" mnemonicParsing="false" text="OFB" toggleGroup="$groupRbModOpAes">
-								</RadioButton>
-      								<TextArea fx:id="txtOutputConAes" editable="false" layoutX="159.0" layoutY="262.0" prefHeight="50.0" prefWidth="383.0" />
-      								<Button fx:id="btnDescifradoAes" layoutX="306.0" layoutY="483.0" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="25.0" prefWidth="77.0" text="Descifrar" />
-      								<TextField fx:id="txtKeyCifraAes" layoutX="157.0" layoutY="189.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="58.0" layoutY="193.0" text="Clave Cifrado" />
-      								<Label layoutX="57.0" layoutY="262.0" text="Texto Cifrado" />
-      								<Label layoutX="57.0" layoutY="422.0" text="Texto Decifrado" />
-      								<TextArea fx:id="txtOutputSinAes" editable="false" layoutX="159.0" layoutY="422.0" prefHeight="50.0" prefWidth="383.0" />
-      								<Separator layoutX="57.0" layoutY="125.0" prefHeight="0.0" prefWidth="486.0" />
-      								<Separator layoutX="251.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
-      								<Separator layoutX="57.0" layoutY="38.0" prefHeight="0.0" prefWidth="486.0" />
-      								<Separator layoutX="497.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
-      								<Separator layoutX="13.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
-      								<Label layoutX="67.0" layoutY="41.0" text="Tamano en bit" />
-      								<Label layoutX="305.0" layoutY="41.0" text="Modo de Operacion" />
-      								<RadioButton fx:id="rbCFBAes" layoutX="436.0" layoutY="88.0" mnemonicParsing="false" text="CFB" toggleGroup="$groupRbModOpAes">
-								</RadioButton>
-      								<RadioButton fx:id="rb128Aes" layoutX="78.0" layoutY="76.0" mnemonicParsing="false" selected="true" text="128">
-      									<toggleGroup>
-      										<ToggleGroup fx:id="groupRbTamBitAes" />
-      									</toggleGroup>
-      								</RadioButton>
-      								<RadioButton fx:id="rb192Aes" layoutX="146.0" layoutY="76.0" mnemonicParsing="false" text="192" toggleGroup="$groupRbTamBitAes">
-								</RadioButton>
-      								<RadioButton fx:id="rb256Aes" layoutX="213.0" layoutY="76.0" mnemonicParsing="false" text="256" toggleGroup="$groupRbTamBitAes">
-								</RadioButton>
-                              <Button fx:id="btnLimpiarAes" layoutX="356.0" layoutY="323.0" mnemonicParsing="false" onAction="#CleanPropertyAes" prefHeight="25.0" prefWidth="77.0" text="Habilitar" />
+      								<TextArea fx:id="txtOutputSinDes" editable="false" layoutX="157.0" layoutY="405.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
+      								<Label layoutX="57.0" layoutY="405.0" text="Texto descifrado" />
+      								<Button fx:id="btnDecifradoDes" layoutX="309.0" layoutY="465.0" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
+                              <Button fx:id="btnLimpiarDes" layoutX="370.0" layoutY="294.0" mnemonicParsing="false" onAction="#CleanPropertyDes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" />
       							</children>
       						</AnchorPane>
       					</content>
