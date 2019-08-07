@@ -31,7 +31,8 @@ public class MainApp extends Application {
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.title"));
 		this.primaryStage.setResizable(false);
-		this.primaryStage.getIcons().add(new Image(MainApp.class.getResourceAsStream(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo")))); 
+		this.primaryStage.getIcons().add(
+				new Image(MainApp.class.getResourceAsStream(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo"))));
 		initRootLayout();
 		showInicioOverview();
 	}
@@ -142,8 +143,8 @@ public class MainApp extends Application {
 			Scene scene = new Scene(configurationOverview);
 			dialogStage.setScene(scene);
 			dialogStage.setResizable(false);
-			
-			ConfigurationViewController  controller = loader.getController();
+
+			ConfigurationViewController controller = loader.getController();
 			controller.setMainApp(this);
 
 			dialogStage.showAndWait();
@@ -152,7 +153,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showCertificateOverview(CertInfoDto cert) {
 		try {
 			// Load digital sing overview.
@@ -168,10 +169,10 @@ public class MainApp extends Application {
 			Scene scene = new Scene(certificateOverview);
 			dialogStage.setScene(scene);
 			dialogStage.setResizable(false);
-			
-			  // Set the person into the controller.
+
+			// Set the person into the controller.
 			CertificateViewController controller = loader.getController();
-	        controller.setCertificate(cert);
+			controller.setCertificate(cert);
 
 			dialogStage.showAndWait();
 
@@ -179,13 +180,12 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void showAboutOverview() {
 		try {
 			// Load digital sing overview.
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(
-					MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.about")));
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.about")));
 			AnchorPane aboutOverview = (AnchorPane) loader.load();
 
 			Stage dialogStage = new Stage();
@@ -201,8 +201,7 @@ public class MainApp extends Application {
 			e.printStackTrace();
 		}
 	}
-	
-	
+
 	public void showAsymmetricCipherOverview() {
 		try {
 			// Load digital sing overview.

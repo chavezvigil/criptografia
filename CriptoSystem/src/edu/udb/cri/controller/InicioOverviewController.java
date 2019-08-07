@@ -20,7 +20,7 @@ public class InicioOverviewController {
 	@FXML
 	private Label msgInicio;
 	@FXML
-	private ImageView imageView;
+	private ImageView imageViewLogo;
 
 	private MainApp mainApp;
 
@@ -72,7 +72,8 @@ public class InicioOverviewController {
 		msgInicio.setText(UtilMessage.getMensaje("edu.udb.cri.ini.msg"));
 		URL logoUrl = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.logo.original"));
 		Image image = new Image(logoUrl.toString());
-		imageView = new ImageView(image);
+		imageViewLogo = new ImageView(image); 
+		imageViewLogo.setVisible(true);
 	}
 
 	public void handleDigitalSing() {
