@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
@@ -15,14 +16,6 @@
       					<content>
       						<AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
       							<children>
-      								<Label layoutX="57.0" layoutY="157.0" text="Texto a cifrar" />
-      								<Label layoutX="57.0" layoutY="230.0" text="Vector inicial (VI)" />
-      								<TextField fx:id="txtInputSinAes" layoutX="157.0" layoutY="153.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextField fx:id="txtVectorAes" layoutX="157.0" layoutY="226.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Button fx:id="btnCifradoAes" layoutX="253.0" layoutY="318.0" mnemonicParsing="false" onAction="#EncryptionAes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
-      								<Separator layoutX="57.0" layoutY="355.0" prefHeight="0.0" prefWidth="486.0" />
-      								<TextField fx:id="txtKeyDescifraAes" layoutX="157.0" layoutY="385.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="57.0" layoutY="389.0" text="Clave descifrado" />
       								<RadioButton fx:id="rbECBAes" layoutX="338.0" layoutY="67.0" mnemonicParsing="false" onAction="#radioSelect" selected="true" text="ECB">
       									<toggleGroup>
       										<ToggleGroup fx:id="groupRbModOpAes" />
@@ -32,13 +25,6 @@
 								</RadioButton>
       								<RadioButton fx:id="rbOFBAes" layoutX="436.0" layoutY="67.0" mnemonicParsing="false" onAction="#radioSelect" text="OFB" toggleGroup="$groupRbModOpAes">
 								</RadioButton>
-      								<TextArea fx:id="txtOutputConAes" layoutX="159.0" layoutY="262.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
-      								<Button fx:id="btnDescifradoAes" layoutX="306.0" layoutY="483.0" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
-      								<TextField fx:id="txtKeyCifraAes" layoutX="157.0" layoutY="189.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="58.0" layoutY="193.0" text="Clave de cifrado" />
-      								<Label layoutX="57.0" layoutY="262.0" text="Texto cifrado" />
-      								<Label layoutX="57.0" layoutY="422.0" text="Texto descifrado" />
-      								<TextArea fx:id="txtOutputSinAes" editable="false" layoutX="159.0" layoutY="422.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
       								<Separator layoutX="57.0" layoutY="125.0" prefHeight="0.0" prefWidth="486.0" />
       								<Separator layoutX="251.0" layoutY="76.0" prefHeight="11.0" prefWidth="88.0" rotate="90.0" />
       								<Separator layoutX="57.0" layoutY="38.0" prefHeight="0.0" prefWidth="486.0" />
@@ -57,7 +43,62 @@
 								</RadioButton>
       								<RadioButton fx:id="rb256Aes" layoutX="213.0" layoutY="76.0" mnemonicParsing="false" onAction="#radioSelect" text="256" toggleGroup="$groupRbTamBitAes">
 								</RadioButton>
-                              <Button fx:id="btnLimpiarAes" layoutX="342.0" layoutY="318.0" mnemonicParsing="false" onAction="#CleanPropertyAes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" />
+                              <GridPane layoutX="60.0" layoutY="143.0" prefHeight="156.0" prefWidth="482.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="120.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="419.0" minWidth="10.0" prefWidth="388.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                    <RowConstraints maxHeight="202.0" minHeight="40.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="302.0" minHeight="40.0" prefHeight="33.0" vgrow="SOMETIMES" />
+                                  <RowConstraints maxHeight="202.0" minHeight="40.0" prefHeight="23.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.0" minHeight="40.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.0" minHeight="70.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.0" minHeight="40.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.0" minHeight="40.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                    <RowConstraints maxHeight="202.0" minHeight="70.0" prefHeight="46.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+            								<Label text="Texto a cifrar" wrapText="true" />
+            								<TextField fx:id="txtInputSinAes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" />
+            								<Label text="Clave de cifrado" GridPane.rowIndex="1" />
+            								<TextField fx:id="txtKeyCifraAes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            								<Label text="Vector inicial (VI)" GridPane.rowIndex="2" />
+            								<TextField fx:id="txtVectorAes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            								<Label text="Texto cifrado" GridPane.rowIndex="3" />
+            								<TextArea fx:id="txtOutputConAes" prefHeight="40.0" prefWidth="373.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            								<Label text="Clave descifrado" GridPane.rowIndex="5" />
+            								<TextField fx:id="txtKeyDescifraAes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            								<Label text="Texto descifrado" GridPane.rowIndex="6" />
+            								<TextArea fx:id="txtOutputSinAes" editable="false" prefHeight="50.0" prefWidth="383.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <GridPane prefHeight="40.0" prefWidth="327.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                  								<Button fx:id="btnCifradoAes" mnemonicParsing="false" onAction="#EncryptionAes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
+                                          <Button fx:id="btnLimpiarAes" mnemonicParsing="false" onAction="#CleanPropertyAes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                  								<Button fx:id="btnDescifradoAes" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
+                                          <Button fx:id="btnDescifradoAes1" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
       							</children>
       						</AnchorPane>
       					</content>
@@ -71,30 +112,69 @@
       										<ToggleGroup fx:id="groupRbModOpDes" />
       									</toggleGroup>
       								</RadioButton>
-      								<Label layoutX="60.0" layoutY="43.0" text="Modo de Operacion" />
-      								<Separator layoutX="58.0" layoutY="102.0" prefHeight="0.0" prefWidth="486.0" />
-      								<Separator layoutX="57.0" layoutY="337.0" prefHeight="0.0" prefWidth="486.0" />
+      								<Label layoutX="66.0" layoutY="42.0" text="Modo de Operacion" />
       								<RadioButton fx:id="rbOFBDes" layoutX="222.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" text="OFB" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
       								<RadioButton fx:id="rbCBCDes" layoutX="118.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" text="CBC" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
       								<RadioButton fx:id="rbECBDes" layoutX="66.0" layoutY="72.0" mnemonicParsing="false" onAction="#radioSelect" selected="true" text="ECB" toggleGroup="$groupRbModOpDes">
 								</RadioButton>
-      								<Label layoutX="60.0" layoutY="205.0" text="Vector inicial (VI)" />
-      								<Label layoutX="60.0" layoutY="169.0" text="Clave de cifrado" />
-      								<TextField fx:id="txtVectorDes" layoutX="157.0" layoutY="201.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextArea fx:id="txtOutputConDes" layoutX="157.0" layoutY="236.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
-      								<Button fx:id="btnCifradoDes" layoutX="250.0" layoutY="294.0" mnemonicParsing="false" onAction="#EncryptionDes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
-      								<TextField fx:id="txtKeyCifraDes" layoutX="156.0" layoutY="165.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextField fx:id="txtInputSinDes" layoutX="156.0" layoutY="127.0" prefHeight="25.0" prefWidth="386.0" />
-      								<Label layoutX="60.0" layoutY="131.0" text="Texto a cifrar" />
-      								<Label layoutX="60.0" layoutY="236.0" text="Texto cifrado" />
-      								<Label layoutX="58.0" layoutY="371.0" text="Clave descifrado" />
-      								<TextField fx:id="txtKeyDescifraDes" layoutX="156.0" layoutY="367.0" prefHeight="25.0" prefWidth="386.0" />
-      								<TextArea fx:id="txtOutputSinDes" editable="false" layoutX="157.0" layoutY="405.0" prefHeight="50.0" prefWidth="383.0" wrapText="true" />
-      								<Label layoutX="57.0" layoutY="405.0" text="Texto descifrado" />
-      								<Button fx:id="btnDecifradoDes" layoutX="309.0" layoutY="465.0" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
-                              <Button fx:id="btnLimpiarDes" layoutX="370.0" layoutY="294.0" mnemonicParsing="false" onAction="#CleanPropertyDes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" />
+                              <GridPane layoutX="65.0" layoutY="120.0" prefHeight="375.0" prefWidth="472.0">
+                                <columnConstraints>
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="246.0" minWidth="10.0" prefWidth="114.0" />
+                                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="368.0" minWidth="10.0" prefWidth="368.0" />
+                                </columnConstraints>
+                                <rowConstraints>
+                                  <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                    <RowConstraints minHeight="40.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                  <RowConstraints minHeight="70.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                </rowConstraints>
+                                 <children>
+            								<Label text="Texto a cifrar" />
+            								<TextField fx:id="txtInputSinDes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" />
+            								<Label text="Clave de cifrado" GridPane.rowIndex="1" />
+            								<TextField fx:id="txtKeyCifraDes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            								<Label text="Vector inicial (IV)" GridPane.rowIndex="2" />
+            								<TextField fx:id="txtVectorDes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            								<Label text="Texto cifrado" GridPane.rowIndex="3" />
+            								<TextArea fx:id="txtOutputConDes" prefHeight="50.0" prefWidth="383.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                  								<Button fx:id="btnCifradoDes" mnemonicParsing="false" onAction="#EncryptionDes" prefHeight="30.0" prefWidth="80.0" text="Cifrar" />
+                                          <Button fx:id="btnLimpiarDes" mnemonicParsing="false" onAction="#CleanPropertyDes" prefHeight="30.0" prefWidth="80.0" text="Habilitar" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+            								<Label text="Clave descifrado" GridPane.rowIndex="5" />
+            								<TextField fx:id="txtKeyDescifraDes" prefHeight="25.0" prefWidth="386.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            								<Label text="Texto descifrado" GridPane.rowIndex="6" />
+            								<TextArea fx:id="txtOutputSinDes" editable="false" prefHeight="50.0" prefWidth="383.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                    <GridPane GridPane.columnIndex="1" GridPane.rowIndex="7">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                  								<Button fx:id="btnDecifradoDes" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
+                                          <Button fx:id="btnDecifradoDes1" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </GridPane>
       							</children>
       						</AnchorPane>
       					</content>

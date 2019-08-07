@@ -8,7 +8,9 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TextArea;
@@ -19,6 +21,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.Alert.AlertType;
 import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.Symmetric;
 import edu.udb.cri.utils.UtilMessage;
@@ -224,7 +227,12 @@ public class SymmetricEncryptionController {
 	    			txtOutputSinAes.setText(objSimmControl.descifrar(inputStrCifAes, inputStrKeyCif, inputStrVecIni));
 	    		
 	    	}else {
-	    		JOptionPane.showMessageDialog(null,"Error: Falta ingresar clave para descifrado de " + inputStrTamBit + "bit");
+	    		//JOptionPane.showMessageDialog(null,"Error: Falta ingresar clave para descifrado de " + inputStrTamBit + "bit");
+				/*Alert alert = new Alert(AlertType.ERROR, e.getMessage());
+				alert.showAndWait();*/
+	    		Alert alert = new Alert(AlertType.CONFIRMATION,	
+	    				UtilMessage.getMensaje("edu.udb.cri.system.alert.confirm.cert.delete"), ButtonType.YES,
+	    				ButtonType.CANCEL);alert.showAndWait();
 	    	}			
 		} catch (Exception ex) {
 			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
