@@ -1,5 +1,8 @@
 package edu.udb.cri.controller;
 
+
+import java.util.ArrayList;
+
 import javax.swing.JOptionPane;
 
 import javafx.event.ActionEvent;
@@ -32,53 +35,50 @@ public class FrequencyAnalysisController {
     @FXML
     private TextArea txtStrAlfabetos;
 
-	private String[] arrTrisilabos;
+	private ArrayList<String> arrTrisilabos;
+	Analysis getCadena;
+	
+    @FXML
+    private TextArea txtStrResCadenas  = new TextArea();
 
     @FXML
     void StartFrecuency(ActionEvent event) {
     	String inputStrCifrado = txtStrCifrado.getText().toString();
-    	String strTrisilabaA;
-    	String strTrisilabaB;
-    	String strTrisilaba=null;
-    	int numPosicionIni = 0;
-    	int numPosicionFin = 0;
-    	int numRepeticiones = 0;
-    	arrTrisilabos = new String[inputStrCifrado.length()];
+    	getCadena = new Analysis();
     	
     	try {
-        	if (inputStrCifrado.length() > 6) {        		
-        		/*
-        		for (int i=0; i<inputStrCifrado.length()-3; i++) {
-        			strTrisilaba = inputStrCifrado.substring(i,i+3);
-        			//numRepeticiones = inputStrCifrado.indexOf(strTrisilaba);
-        			arrTrisilabos[i] = strTrisilaba.toString();
-        			//strEncontrada = inputStrCifrado.indexOf(strTrisilaba);
-        			if (strEncontrada > -1) {
-        				txtStrAnalizado.setText(strTrisilaba);
-        			}
-        			
-				}*/
+        	if (inputStrCifrado.length() > 6) {
+        		arrTrisilabos = getCadena.searchString(inputStrCifrado, 3);
         		
-        		for (int a=0; a<inputStrCifrado.length()-2; a++) {
+        		for ( int I=0 ; I < arrTrisilabos.size() ; I++ ) {
+        			System.out.println( arrTrisilabos.get(I)  );
+        			txtStrResCadenas.setText(arrTrisilabos.get(I) .toString() );
+        		}
+        		
+        		/*for (int a=0; a<inputStrCifrado.length(); a++) {
         			strTrisilabaA = inputStrCifrado.substring(a,a+3);
-        			for (int b=0; b<inputStrCifrado.length()-2; b++) {
+        			
+        			for (int b=0; a<inputStrCifrado.length(); b++) {
         				strTrisilabaB = inputStrCifrado.substring(b,b+3);
-        				if(strTrisilabaA.contentEquals(strTrisilabaB)) {
+        				
+        				if(strTrisilabaA.contains(strTrisilabaB)) {
         					numRepeticiones = numRepeticiones+1;        					
-        					if(numRepeticiones==2) { 						
+        					if(numRepeticiones == 2) { 						
         						numPosicionIni= b+3;
         						strTrisilaba = strTrisilabaA;
         					}else if(numRepeticiones==3) {
         						numPosicionFin = b;
-        					}        					
+        					} 
+        					if(numRepeticiones >= 2) {
+        						System.out.println(strTrisilaba +" : "+ numRepeticiones );
+        					}  
         				}
+        				b=b+2;
         			}
-					txtStrAnalizado.setText(strTrisilaba +", PosicionIni: " + numPosicionIni + ", PosicionFin: " +
-					numPosicionFin + ", numRepeciones: " + numRepeticiones + " Distancia : " + (numPosicionFin-numPosicionIni));
-        			numRepeticiones = 0;
-        			numPosicionIni = 0;
-        			numPosicionFin = 0;	
-        		}
+        			System.out.println(strTrisilabaA  );
+        			a=a+2;
+        		}*/
+
         	}else {
         		JOptionPane.showMessageDialog(null,"La logitud de texto debe ser mayor a 100 letras");
         	}
@@ -101,5 +101,5 @@ public class FrequencyAnalysisController {
     void CreatedFrecuency(ActionEvent event) {
 
     }
-
+    
 }
