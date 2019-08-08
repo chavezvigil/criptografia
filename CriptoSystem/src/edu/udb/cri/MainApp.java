@@ -2,6 +2,7 @@ package edu.udb.cri;
 
 import java.io.IOException;
 
+import edu.udb.cri.controller.AboutController;
 import edu.udb.cri.controller.CertificateViewController;
 import edu.udb.cri.controller.ConfigurationViewController;
 import edu.udb.cri.controller.InicioOverviewController;
@@ -195,6 +196,10 @@ public class MainApp extends Application {
 			Scene scene = new Scene(aboutOverview);
 			dialogStage.setScene(scene);
 			dialogStage.setResizable(false);
+			
+			
+			AboutController controller = loader.getController();
+			controller.setMainApp(this);
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
