@@ -10,24 +10,25 @@ import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import javax.swing.JOptionPane;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 
 
 public class Symmetric {
 	
-    //Código interno que representa el algoritmo AES.
+    //codigo interno que representa el algoritmo AES.
     public final static int ALGORITMO_AES = 20;
     public final static int ALGORITMO_DES = 22;
-    //Código interno que representa el modo CBC.
+    //codigo interno que representa el modo CBC.
     public final static int MODO_CBC = 30;
     public final static int MODO_CFB = 31;
     public final static int MODO_ECB = 32;
     public final static int MODO_OFB = 33;
-    //Código interno que representa el padding PKC5
+    //codigo interno que representa el padding PKC5
     public final static int PADDING_PKCS = 40;
     public final static int PADDING_ISO = 41;
     public final static int PADDING_NO = 42;
-    //Código interno que representa el modo cifrador
+    //codigo interno que representa el modo cifrador
     public final static int CIFRADOR = 100;
     public final static int DESCIFRADOR = 101;
 
@@ -79,42 +80,42 @@ public class Symmetric {
             }
             
         } catch (NoSuchAlgorithmException nsae) {
-            System.err.println("Error: Alguno de los algoritmos de encriptación (AES o DES) no"
-                    + " están disponible en el sistema. " + nsae.getMessage());
+            System.err.println("Error: Alguno de los algoritmos de encriptacion (AES o DES) no"
+                    + " estan disponible en el sistema. " + nsae.getMessage());
         }
     }
 
-    // Método que devuelve el código interno del algoritmo instanciado
+    // Metodo que devuelve el codigo interno del algoritmo instanciado
     public int getAlgoritmo() {
         return this.algoritmo;
     }
 
-    //Método que devuelve el código interno del modo actual del encriptador.
+    //Metodo que devuelve el codigo interno del modo actual del encriptador.
     public int getModo() {
         return this.modo;
     }
 
-    //Método que devuelve el código interno del padding actual del encriptador.
+    //Metodo que devuelve el codigo interno del padding actual del encriptador.
     public int getPadding() {
         return this.padding;
     }
 
-    //Método para cambiar el algoritmo actual del encriptador
+    //Metodo para cambiar el algoritmo actual del encriptador
     public void setAlgoritmo(int algoritmo) {
         this.algoritmo = algoritmo;
     }
 
-    //Método para cambiar el modo actual del encriptador
+    //Metodo para cambiar el modo actual del encriptador
     public void setModo(int modo) {
         this.modo = modo;
     }
 
-    //Método para cambiar el padding actual del encriptador
+    //Metodo para cambiar el padding actual del encriptador
     public void setPadding(int padding) {
         this.padding = padding;
     }
 
-    //Método que devuelve una cadena de texto con el algoritmo seleccionado
+    //Metodo que devuelve una cadena de texto con el algoritmo seleccionado
     public String cadenaAlgoritmo() {
         String valor = null;
 
@@ -130,7 +131,7 @@ public class Symmetric {
         return valor;
     }
 
-    //Método que devuelve una cadena de texto con el modo seleccionado para el cifrado
+    //Metodo que devuelve una cadena de texto con el modo seleccionado para el cifrado
     public String cadenaModo() {
         String valor = null;
 
@@ -152,7 +153,7 @@ public class Symmetric {
         return valor;
     }
 
-    //Método que devuelve una cadena de texto con el padding seleccionado
+    //Metodo que devuelve una cadena de texto con el padding seleccionado
     public String cadenaPadding() {
         String valor = null;
 
@@ -171,7 +172,7 @@ public class Symmetric {
         return valor;
     }
 
-    //Método que genera el cifrador con el que se realizarán las operaciones
+    //Metodo que genera el cifrador con el que se realizaran las operaciones
     public Cipher generarCifrador(int func, String inputStrKeyCif, String inputStrVecCif) {
         Cipher cifrador = null;
         SecretKey clave = null;
@@ -209,15 +210,19 @@ public class Symmetric {
                 }
             }
         } catch (NoSuchAlgorithmException nsae) {
-            System.err.println("Error: Alguno de los algoritmos de encriptación (AES o DES) no"
-                    + " están disponible en el sistema. " + nsae.getMessage());
+            System.err.println("Error: Alguno de los algoritmos de encriptacion (AES o DES) no"
+                    + " estan disponible en el sistema. " + nsae.getMessage());
         } catch (NoSuchPaddingException nspe) {
-            System.err.println("Error: Alguno mecanismos de padding (PKCS5 o ISO 10126) no están disponibles en"
+            System.err.println("Error: Alguno mecanismos de padding (PKCS5 o ISO 10126) no estan disponibles en"
                     + " el sistema. " + nspe.getMessage());
         } catch (InvalidKeyException ike) {
-            JOptionPane.showMessageDialog(null,"Error: Llave inválida , " + ike.getMessage());
+        	Alert alert = new Alert(AlertType.ERROR,
+					UtilMessage.getMensaje("edu.udb.cri.system.alert.error.symmetric.key")+ ike.getMessage());
+			alert.showAndWait();
         } catch (InvalidAlgorithmParameterException iape) {
-            JOptionPane.showMessageDialog(null,"Error: Revisar IV , " + iape.getMessage());
+        	Alert alert = new Alert(AlertType.ERROR,
+					UtilMessage.getMensaje("edu.udb.cri.system.alert.error.symmetric.iv")+ iape.getMessage());
+			alert.showAndWait();
         }
         return cifrador;
     }
@@ -226,7 +231,7 @@ public class Symmetric {
     	return new SecretKeySpec(key, algoritmo);
     }
     
-    // Método que cifrará el texto según los valores actuales del encriptador
+    // Metodo que cifrara el texto segun los valores actuales del encriptador
     public String cifrar(String inputText, String inputStrKeyCif, String inputStrVecCif) {
         String textoCifrado = null;
 
@@ -245,7 +250,7 @@ public class Symmetric {
         return textoCifrado;
     }
        
-    //Método que descifrará el texto según los valores actuales del encriptador
+    //Metodo que descifrar el texto segun los valores actuales del encriptador
 
     public String descifrar(String inputText, String inputStrKeyCif, String inputStrVecCif) {
         String textoDescifrado = null;
@@ -274,10 +279,10 @@ public class Symmetric {
 
 
     /**
-     * Método que devuelve el número de bloques que tiene un texto.
+     * Metodo que devuelve el numero de bloques que tiene un texto.
      * 
-     * @param texto Texto del que se quieren conocer el número de bloques.
-     * @return Número de bloques del texto.
+     * @param texto Texto del que se quieren conocer el numero de bloques.
+     * @return Numero de bloques del texto.
      */
     public int numeroBloques(String texto) {
         StringBuilder sb = new StringBuilder();
