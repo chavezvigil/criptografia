@@ -1,9 +1,10 @@
 package edu.udb.cri.controller;
 
 import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
+import java.net.URLConnection;
+import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -19,11 +20,11 @@ import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
 public class AboutController {
-	
+
 	private String pathManual = UtilMessage.getMensaje("edu.udb.cri.system.document.manual");
 	private static final Logger LOGGER = Logger.getLogger(AboutController.class.getName());
 	private MainApp mainApp;
-	
+
 	/**
 	 * Is called by the main application to give a reference back to itself.
 	 * 
@@ -74,32 +75,21 @@ public class AboutController {
 			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
 			fileChooser.getExtensionFilters().add(extFilter);
 			// Show save file dialog
+			fileChooser.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.document.manual.text"));
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+			fileChooser.setInitialFileName(UtilMessage.getMensaje("edu.udb.cri.system.document.manual.name"));
 			File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 			if (file != null) {
 				// Make sure it has the correct extension
-				if (!file.getPath().endsWith(".pdf")) {
-					file = new File(file.getPath() + ".pdf");
-					// SaveKeyStore(file, "1234".toCharArray());
-					//SaveFile("Puesb archivoa", file);
-				}
-
+				file = new File(file.getPath());
+				URL manualUrl = AboutController.class.getResource(pathManual);
+				URLConnection conn = (URLConnection) manualUrl.openConnection();
+				InputStream is = conn.getInputStream();							
+				Files.copy(is, file.toPath());
 			}
 		} catch (Exception exception) {
 			LOGGER.log(Level.SEVERE, "Exception occur", exception);
 		}
-	}
-	
-	public void SaveFile(String content, File file) {
-		try {
-			FileWriter fileWriter = null;
-
-			fileWriter = new FileWriter(file);
-			fileWriter.write(content);
-			fileWriter.close();
-		} catch (IOException ex) {
-			ex.getMessage();
-		}
-
 	}
 
 }
