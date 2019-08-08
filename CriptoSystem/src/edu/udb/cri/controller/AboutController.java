@@ -13,8 +13,10 @@ import edu.udb.cri.utils.UtilMessage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -86,6 +88,9 @@ public class AboutController {
 				URLConnection conn = (URLConnection) manualUrl.openConnection();
 				InputStream is = conn.getInputStream();							
 				Files.copy(is, file.toPath());
+				Alert msgVerify = new Alert(AlertType.INFORMATION,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.information.manual"));
+				msgVerify.showAndWait();
 			}
 		} catch (Exception exception) {
 			LOGGER.log(Level.SEVERE, "Exception occur", exception);

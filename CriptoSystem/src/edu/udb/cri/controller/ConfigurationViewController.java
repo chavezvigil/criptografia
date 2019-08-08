@@ -1,13 +1,13 @@
 package edu.udb.cri.controller;
 
 import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.security.KeyStore;
-import java.security.KeyStoreException;
+import java.net.URLConnection;
+import java.nio.file.Files;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import edu.udb.cri.MainApp;
 import edu.udb.cri.dto.CertInfoDto;
@@ -38,6 +38,9 @@ public class ConfigurationViewController {
 	private URL keyStoreUrl;
 	private String keyStorePass = UtilMessage.getMensaje("edu.udb.cri.keystore.pass");
 	private String pathKeyStore = UtilMessage.getMensaje("edu.udb.cri.keystore.path.resources.keystore");
+	
+	private String pathDefaultKeystore = UtilMessage.getMensaje("edu.udb.cri.system.keystore.file");
+	private static final Logger LOGGER = Logger.getLogger(ConfigurationViewController.class.getName());
 
 	@FXML
 	private Button createKeystoreButton;
@@ -335,77 +338,33 @@ public class ConfigurationViewController {
 		}
 	}
 
-	/**
-	 * Opens a FileChooser to let the user select a file to save to.
-	 */
-	@FXML
-	private void handleSaveAs() {
-		FileChooser fileChooser = new FileChooser();
-
-		// Set extension filter
-		FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-		fileChooser.getExtensionFilters().add(extFilter);
-
-		// Show save file dialog
-		File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
-
-		if (file != null) {
-			// Make sure it has the correct extension
-			if (!file.getPath().endsWith(".xml")) {
-				file = new File(file.getPath() + ".xml");
-			}
-
-		}
-	}
-
 	public void handleSaveKeyStore() {
+		
 		try {
 			FileChooser fileChooser = new FileChooser();
 
 			// Set extension filter
-			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("KeyStore files (*.txt)", "*.txt");
+			FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Keystore files (*.ks)", "*.ks");
 			fileChooser.getExtensionFilters().add(extFilter);
 			// Show save file dialog
+			fileChooser.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.keystore.file.text"));
+			fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+			fileChooser.setInitialFileName(UtilMessage.getMensaje("edu.udb.cri.system.keystore.file.name"));
 			File file = fileChooser.showSaveDialog(mainApp.getPrimaryStage());
 			if (file != null) {
 				// Make sure it has the correct extension
-				if (!file.getPath().endsWith(".txt")) {
-					file = new File(file.getPath() + ".txt");
-					// SaveKeyStore(file, "1234".toCharArray());
-					SaveFile("Puesb archivoa", file);
-				}
-
+				file = new File(file.getPath());
+				URL keystoreUrl = AboutController.class.getResource(pathDefaultKeystore);
+				URLConnection conn = (URLConnection) keystoreUrl.openConnection();
+				InputStream is = conn.getInputStream();							
+				Files.copy(is, file.toPath());
+				Alert msgVerify = new Alert(AlertType.INFORMATION,
+						UtilMessage.getMensaje("edu.udb.cri.system.alert.information.keystore"));
+				msgVerify.showAndWait();
 			}
-			System.out.println("Archivo: " + file);
-
-		} catch (Exception e) {
-			e.printStackTrace();
+		} catch (Exception exception) {
+			LOGGER.log(Level.SEVERE, "Exception occur", exception);
 		}
 	}
 
-	public void SaveKeyStore(File file, char[] password) {
-		try {
-			KeyStore ks = KeyStore.getInstance(KeyStore.getDefaultType());
-			ks.load(null, null);
-			ks.store(new FileOutputStream(file), password);
-		} catch (IOException | KeyStoreException ex) {
-			ex.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-	}
-
-	private void SaveFile(String content, File file) {
-		try {
-			FileWriter fileWriter = null;
-
-			fileWriter = new FileWriter(file);
-			fileWriter.write(content);
-			fileWriter.close();
-		} catch (IOException ex) {
-			ex.getMessage();
-		}
-
-	}
 }
