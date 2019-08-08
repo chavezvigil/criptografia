@@ -1,4 +1,4 @@
-# Criptografia
+# Criptografía
 Aplicación JavaFX para el manejo de algoritmos de cifrado y firmas digitales
 
 El sistema cuenta con 3 módulos principales para cifrado simétrico, asimétrico y firmas digitales, además, cuenta con un módulo para configuraciones generales, en el cual, se habilita la opción de creación, eliminación y visualización de certificados digitales.
