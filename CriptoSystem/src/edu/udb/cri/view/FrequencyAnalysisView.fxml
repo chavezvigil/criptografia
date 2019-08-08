@@ -9,27 +9,22 @@
    <children>
       <Pane layoutY="8.0" prefHeight="600.0" prefWidth="600.0">
          <children>
-            <GridPane layoutX="29.0" layoutY="23.0" prefHeight="504.0" prefWidth="544.0">
+            <GridPane layoutX="39.0" layoutY="68.0" prefHeight="453.0" prefWidth="524.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="227.0" minWidth="10.0" prefWidth="165.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="420.0" minWidth="10.0" prefWidth="393.0" />
               </columnConstraints>
               <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                   <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="85.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <TextArea fx:id="txtStrCifrado" prefHeight="43.0" prefWidth="110.0" promptText="Ingrese texto cifrado con mas de 100 letras, para analizar" wrapText="true" GridPane.columnIndex="1" />
-                  <TextArea fx:id="txtStrResCadenas" editable="false" prefHeight="180.0" prefWidth="394.0" promptText="Muestra resultados de trigramas" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <TextArea fx:id="txtStrDividido" editable="false" prefHeight="110.0" prefWidth="380.0" promptText="Muestra resultados de trigramas" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                  <TextArea fx:id="txtStrAlfabetos" editable="false" prefHeight="110.0" prefWidth="380.0" promptText="Divide cadena en posible longitud de clave" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                  <Label prefHeight="79.0" prefWidth="203.0" text="Buscar  cadenas de &#10;3 letras o trigramas" />
-                  <Button fx:id="btnIniciarFre" mnemonicParsing="false" onAction="#StartFrecuency" prefHeight="25.0" prefWidth="97.0" text="Iniciar" GridPane.rowIndex="2" />
+                  <TextArea fx:id="txtStrResCadenas" editable="false" prefHeight="180.0" prefWidth="394.0" promptText="Muestra resultados de silabas" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <TextArea fx:id="txtStrMcd" editable="false" prefHeight="110.0" prefWidth="380.0" promptText="Muestra resultados de MCD" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <GridPane GridPane.rowIndex="4">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,25 +34,39 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="25.0" prefWidth="161.0" text="Analisis de trigramas" />
-                        <Button fx:id="btnAnalizarFre" mnemonicParsing="false" onAction="#AnalyticFrecuency" prefHeight="25.0" prefWidth="97.0" text="Analizar" GridPane.rowIndex="1" />
+                        <Label prefHeight="25.0" prefWidth="161.0" text="Obtener MCD de silabas" />
+                        <Button fx:id="btnAnalizarFre" mnemonicParsing="false" onAction="#AnalyticFrecuency" prefHeight="25.0" prefWidth="125.0" text="Analizar" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
-                  <GridPane GridPane.rowIndex="6">
+                  <GridPane>
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
                     <rowConstraints>
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="50.0" prefWidth="161.0" text="Dividir cadena entre &#10;posible logitud de key" />
-                        <Button fx:id="btnDividirFre" mnemonicParsing="false" onAction="#DivideFrecuency" prefHeight="25.0" prefWidth="97.0" text="Dividir" GridPane.rowIndex="1" />
+                        <Label prefHeight="43.0" prefWidth="157.0" text="Seleccion de numero de &#10;silabas para buscar" />
+                        <ComboBox fx:id="cmbNumSilabas" prefHeight="25.0" prefWidth="125.0" promptText="N° de silabas" GridPane.rowIndex="1" />
+                     </children>
+                  </GridPane>
+                  <GridPane GridPane.rowIndex="2">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Button fx:id="btnIniciarFre" mnemonicParsing="false" onAction="#StartFrecuency" prefHeight="25.0" prefWidth="125.0" text="Iniciar" GridPane.rowIndex="1" />
+                        <Label text="Iniciar analisis de silabas" />
                      </children>
                   </GridPane>
                </children>
             </GridPane>
+            <Label layoutX="247.0" layoutY="14.0" text="ANALISIS DE FLUJO" />
          </children>
       </Pane>
    </children>

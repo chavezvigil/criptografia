@@ -1,106 +1,110 @@
 package edu.udb.cri.controller;
 
-
 import java.util.ArrayList;
-
-import javax.swing.JOptionPane;
-
-import edu.udb.cri.utils.Analysis;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 
 public class FrequencyAnalysisController {
-    @FXML
-    private Button btnAnalizarFre;
-
-    @FXML
-    private TextArea txtStrCifrado;
-
-    @FXML
-    private Button btnIniciarFre;
-
-    @FXML
-    private Button btnDividirFre;
-
-    @FXML
-    private TextArea txtStrDividido;
-
-    @FXML
-    private Button btnCrearFre;
-
-    @FXML
-    private TextArea txtStrAnalizado;
-
-    @FXML
-    private TextArea txtStrAlfabetos;
-
-	private ArrayList<String> arrTrisilabos;
-	Analysis getCadena;
 	
     @FXML
+    private TextArea txtStrMcd;
+    @FXML
+    private Button btnAnalizarFre;
+    @FXML
+    private TextArea txtStrCifrado;
+    @FXML
+    private Button btnIniciarFre;
+    @FXML
+    private ComboBox<String> cmbNumSilabas;
+	private ArrayList<String> arrLisSilabas;
+	Analysis getCadena;	
+    @FXML
     private TextArea txtStrResCadenas  = new TextArea();
+    
+    
+	@FXML
+	private void initialize() {
+		try {
+			cmbNumSilabas.getItems().addAll(
+	    			"Dos",
+	    			"Tres"
+	    			);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
+	
     @FXML
     void StartFrecuency(ActionEvent event) {
     	String inputStrCifrado = txtStrCifrado.getText().toString();
     	getCadena = new Analysis();
+    	String cadenaPrint = new String();
     	
     	try {
-        	if (inputStrCifrado.length() > 6) {
-        		arrTrisilabos = getCadena.searchString(inputStrCifrado, 3);
-        		
-        		for ( int I=0 ; I < arrTrisilabos.size() ; I++ ) {
-        			System.out.println( arrTrisilabos.get(I)  );
-        			txtStrResCadenas.setText(arrTrisilabos.get(I) .toString() );
-        		}
-        		
-        		/*for (int a=0; a<inputStrCifrado.length(); a++) {
-        			strTrisilabaA = inputStrCifrado.substring(a,a+3);
-        			
-        			for (int b=0; a<inputStrCifrado.length(); b++) {
-        				strTrisilabaB = inputStrCifrado.substring(b,b+3);
-        				
-        				if(strTrisilabaA.contains(strTrisilabaB)) {
-        					numRepeticiones = numRepeticiones+1;        					
-        					if(numRepeticiones == 2) { 						
-        						numPosicionIni= b+3;
-        						strTrisilaba = strTrisilabaA;
-        					}else if(numRepeticiones==3) {
-        						numPosicionFin = b;
-        					} 
-        					if(numRepeticiones >= 2) {
-        						System.out.println(strTrisilaba +" : "+ numRepeticiones );
-        					}  
-        				}
-        				b=b+2;
-        			}
-        			System.out.println(strTrisilabaA  );
-        			a=a+2;
-        		}*/
-
+        	if(cmbNumSilabas.getValue().contains("Dos")) {
+                if (inputStrCifrado.length() > 100) {
+             	   arrLisSilabas = getCadena.searchStringTri(inputStrCifrado, 2);                		
+         			for ( int I=1 ; I <arrLisSilabas.size() ; I++ ) {
+         				int valMostrar = Integer.parseInt(arrLisSilabas.get(I).substring(3,4)) ;
+         				if(valMostrar >= 3) {
+     					cadenaPrint += arrLisSilabas.get(I) .toString() + "\n";
+         				}    					              			
+         			}        			
+                }
+                txtStrResCadenas.setText (cadenaPrint);
+                
         	}else {
-        		JOptionPane.showMessageDialog(null,"La logitud de texto debe ser mayor a 100 letras");
+                   if (inputStrCifrado.length() > 100) {
+                	   arrLisSilabas = getCadena.searchStringTri(inputStrCifrado, 3);                		
+            			for ( int I=1 ; I <arrLisSilabas.size() ; I++ ) {
+            				int valMostrar = Integer.parseInt(arrLisSilabas.get(I).substring(4,5)) ;
+            				if(valMostrar >= 3) {
+        					cadenaPrint += arrLisSilabas.get(I) .toString() + "\n";
+            				}    					              			
+            			}        			
+                   }
+                   txtStrResCadenas.setText (cadenaPrint);
         	}
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null,"Error: " + ex.getMessage());
-		}
+
+		}     	
     }
 
+    
     @FXML
     void AnalyticFrecuency(ActionEvent event) {
-
-    }
-
-    @FXML
-    void DivideFrecuency(ActionEvent event) {
-
-    }
-
-    @FXML
-    void CreatedFrecuency(ActionEvent event) {
-
+    	try {
+        	if (arrLisSilabas.isEmpty()) {
+        		//mostrar mensaje
+        	}else {
+        		//Crear array de interos para enviarlos a tra clase
+        		getCadena = new Analysis();
+        		int cadenaPrint;
+        		
+            	if(cmbNumSilabas.getValue().contains("Dos")) {
+            		cadenaPrint = getCadena.getMcd(arrLisSilabas,2);                		
+            		txtStrMcd.setText("El valor de MCD es : " + String.valueOf(cadenaPrint));
+            		if (cadenaPrint == 1) {
+            			txtStrMcd.setText("No se encontro valor para MCD");
+            		}else {
+            			txtStrMcd.setText("El valor de MCD es : " + String.valueOf(cadenaPrint));
+            		}
+            	}else {
+            		cadenaPrint = getCadena.getMcd(arrLisSilabas,3);
+            		if (cadenaPrint == 1) {
+            			txtStrMcd.setText("No se encontro valor para MCD");
+            		}else {
+            			txtStrMcd.setText("El valor de MCD es : " + String.valueOf(cadenaPrint));
+            		}
+            	}	
+        	}
+    	} catch (Exception ex) {
+    		
+    	}
     }
     
 }
