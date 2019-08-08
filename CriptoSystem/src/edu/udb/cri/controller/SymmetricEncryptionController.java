@@ -1,13 +1,9 @@
 package edu.udb.cri.controller;
 
-import java.io.IOException;
 import java.util.function.UnaryOperator;
-import javax.swing.JOptionPane;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -17,17 +13,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
-import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.Symmetric;
 import edu.udb.cri.utils.UtilMessage;
 
 public class SymmetricEncryptionController {
-    //Código interno que representa el algoritmo.
+    //Cï¿½digo interno que representa el algoritmo.
     public static int ALGORITMO_AES = 20;
     public static int ALGORITMO_DES = 22;
     private int flagAlg = 0;
