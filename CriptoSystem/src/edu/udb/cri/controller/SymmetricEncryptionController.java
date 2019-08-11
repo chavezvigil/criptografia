@@ -99,6 +99,8 @@ public class SymmetricEncryptionController {
 
 	@FXML
 	private Button btnAnalisis;
+	@FXML
+	private Button btnAnalisisDes;
 
 	private MainApp mainApp;
 
@@ -353,6 +355,13 @@ public class SymmetricEncryptionController {
 		txtVectorAes.setDisable(true);
 		
 		btnAnalisis.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				handleFrecuencyAnalysisView();
+			}
+		});
+		
+		btnAnalisisDes.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				handleFrecuencyAnalysisView();

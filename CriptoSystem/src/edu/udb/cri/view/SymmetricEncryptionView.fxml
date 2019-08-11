@@ -94,7 +94,7 @@
                                       </rowConstraints>
                                        <children>
                   								<Button fx:id="btnDescifradoAes" mnemonicParsing="false" onAction="#DecodeAes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
-                                          <Button fx:id="btnAnalisis" mnemonicParsing="false"  prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
+                                          <Button fx:id="btnAnalisis" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -170,7 +170,7 @@
                                       </rowConstraints>
                                        <children>
                   								<Button fx:id="btnDecifradoDes" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Descifrar" />
-                                          <Button fx:id="btnDecifradoDes1" mnemonicParsing="false" onAction="#DecodeDes" prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
+                                          <Button fx:id="btnAnalisisDes" mnemonicParsing="false" prefHeight="30.0" prefWidth="80.0" text="Analisis" GridPane.columnIndex="1" />
                                        </children>
                                     </GridPane>
                                  </children>
