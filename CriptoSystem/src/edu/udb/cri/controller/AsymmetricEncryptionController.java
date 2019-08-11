@@ -5,6 +5,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.cert.X509Certificate;
 
+import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.UseAsymmetricTool;
 import edu.udb.cri.utils.UtilMessage;
 import edu.udb.cri.utils.Utils;
@@ -70,6 +71,17 @@ public class AsymmetricEncryptionController {
 	private TextArea textAnalysis;
 	@FXML
 	private TextArea textPrimo;
+	
+	private MainApp mainApp;
+
+	/**
+	 * Is called by the main application to give a reference back to itself.
+	 * 
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
 
 	public AsymmetricEncryptionController() {
 
@@ -189,13 +201,13 @@ public class AsymmetricEncryptionController {
 			}
 		});
 		
-		restaurarButtonAnalysis.setGraphic(new ImageView(imageReset));
+		/*restaurarButtonAnalysis.setGraphic(new ImageView(imageReset));
 		restaurarButtonAnalysis.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
 				restablecerDatosAnalysis();
 			}
-		});
+		});*/
 		
 		
 		URL imgDecryp = getClass().getResource(UtilMessage.getMensaje("edu.udb.cri.system.icon.asimetric.decrypt"));
@@ -214,7 +226,7 @@ public class AsymmetricEncryptionController {
 		analysisButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent e) {
-				analizarMensaje();
+				handleFrecuencyAnalysisView();
 			}
 		});
 		
@@ -307,6 +319,10 @@ public class AsymmetricEncryptionController {
 			Alert alert = new Alert(AlertType.ERROR, e.getMessage());
 			alert.showAndWait();
 		}
+	}
+	
+	public void handleFrecuencyAnalysisView() {
+		mainApp.showFrecuencyAnalysisOverview();
 	}
 	
 	public void analizarMensaje() {

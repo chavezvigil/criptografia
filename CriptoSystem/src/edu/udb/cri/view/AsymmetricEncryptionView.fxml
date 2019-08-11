@@ -156,7 +156,7 @@
                   </AnchorPane>
             </content>
           </Tab>
-            <Tab text="Criptoanalizar RSA">
+            <Tab text="Criptoanalizar Mensajes">
                <content>
                   <AnchorPane prefHeight="200.0" prefWidth="200.0">
                      <children>
@@ -164,18 +164,15 @@
                            <items>
                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="619.0" prefWidth="544.0">
                                  <children>
-                                    <GridPane layoutX="28.0" layoutY="30.0" prefHeight="391.0" prefWidth="489.0">
+                                    <GridPane layoutX="28.0" layoutY="30.0" prefHeight="68.0" prefWidth="489.0">
                                        <children>
-                                          <Label text="Mensaje a analizar" wrapText="true" />
-                                          <TextArea fx:id="messageTextAnalysis" prefHeight="114.0" prefWidth="406.0" wrapText="true" GridPane.columnIndex="1" />
-                                          <GridPane GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                          <GridPane prefHeight="74.0" prefWidth="450.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                              <children>
-                                                <Button fx:id="analysisButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Analizar" />
-                                                <Button fx:id="restaurarButtonAnalysis" mnemonicParsing="false" prefHeight="40.0" prefWidth="150.0" text="Restaurar" GridPane.columnIndex="1" />
+                                                <Button fx:id="analysisButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="183.0" text="Analizar Mensajes" />
                                              </children>
                                              <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="160.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="246.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="249.0" minWidth="10.0" prefWidth="249.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="269.0" minWidth="10.0" prefWidth="159.0" />
                                              </columnConstraints>
                                              <rowConstraints>
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -183,40 +180,17 @@
                                           </GridPane>
                                        </children>
                                        <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="10.0" prefWidth="81.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="414.0" minWidth="10.0" prefWidth="408.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="240.0" minWidth="4.0" prefWidth="39.0" />
+                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="485.0" minWidth="10.0" prefWidth="450.0" />
                                        </columnConstraints>
                                        <rowConstraints>
-                                          <RowConstraints maxHeight="189.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="45.0" minHeight="0.0" prefHeight="18.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="118.0" minHeight="10.0" prefHeight="43.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="122.0" minHeight="10.0" prefHeight="122.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="92.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
+                                          <RowConstraints maxHeight="163.0" minHeight="10.0" prefHeight="131.0" vgrow="SOMETIMES" />
                                        </rowConstraints>
                                     </GridPane>
                                  </children>
                               </AnchorPane>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                 <children>
-                                    <GridPane layoutX="24.0" layoutY="28.0" prefHeight="384.0" prefWidth="596.0">
-                                       <children>
-                                          <Label text="Mensaje original" wrapText="true" />
-                                          <TextArea fx:id="textAnalysis" prefHeight="146.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" />
-                                          <Label text="Numero primo" wrapText="true" GridPane.rowIndex="2" />
-                                          <TextArea fx:id="textPrimo" prefHeight="161.0" prefWidth="443.0" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                       </children>
-                                       <columnConstraints>
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="279.0" minWidth="10.0" prefWidth="91.0" />
-                                          <ColumnConstraints hgrow="SOMETIMES" maxWidth="505.0" minWidth="10.0" prefWidth="505.0" />
-                                       </columnConstraints>
-                                       <rowConstraints>
-                                          <RowConstraints maxHeight="172.0" minHeight="0.0" prefHeight="163.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="129.0" minHeight="8.0" prefHeight="54.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="358.0" minHeight="10.0" prefHeight="189.0" vgrow="SOMETIMES" />
-                                          <RowConstraints maxHeight="358.0" minHeight="10.0" prefHeight="87.0" vgrow="SOMETIMES" />
-                                       </rowConstraints>
-                                    </GridPane>
-                                 </children>
-                              </AnchorPane>
+                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" />
                            </items>
                         </SplitPane>
                      </children>

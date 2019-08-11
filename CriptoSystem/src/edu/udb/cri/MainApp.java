@@ -3,6 +3,7 @@ package edu.udb.cri;
 import java.io.IOException;
 
 import edu.udb.cri.controller.AboutController;
+import edu.udb.cri.controller.AsymmetricEncryptionController;
 import edu.udb.cri.controller.CertificateViewController;
 import edu.udb.cri.controller.ConfigurationViewController;
 import edu.udb.cri.controller.InicioOverviewController;
@@ -227,7 +228,8 @@ public class MainApp extends Application {
 			dialogStage.setResizable(false);
 
 			// Give the controller access to the main app
-
+			AsymmetricEncryptionController controller = loader.getController();
+			controller.setMainApp(this);
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {
