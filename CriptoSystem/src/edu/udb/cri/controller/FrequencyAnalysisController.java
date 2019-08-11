@@ -1,6 +1,8 @@
 package edu.udb.cri.controller;
 
 import java.util.ArrayList;
+
+import edu.udb.cri.utils.Analysis;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
