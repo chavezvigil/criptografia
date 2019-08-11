@@ -27,6 +27,7 @@ public class FrequencyAnalysisController {
     private TextArea txtStrResCadenas  = new TextArea();
     
     
+	
 	@FXML
 	private void initialize() {
 		try {
@@ -108,5 +109,6 @@ public class FrequencyAnalysisController {
     		
     	}
     }
+    
     
 }

@@ -7,6 +7,7 @@ import edu.udb.cri.controller.CertificateViewController;
 import edu.udb.cri.controller.ConfigurationViewController;
 import edu.udb.cri.controller.InicioOverviewController;
 import edu.udb.cri.controller.RootLayoutController;
+import edu.udb.cri.controller.SymmetricEncryptionController;
 import edu.udb.cri.dto.CertInfoDto;
 import edu.udb.cri.utils.UtilMessage;
 import javafx.application.Application;
@@ -122,6 +123,9 @@ public class MainApp extends Application {
 			Scene scene = new Scene(symmetricEncryptionOverview);
 			dialogStage.setScene(scene);
 			dialogStage.setResizable(false);
+			
+			SymmetricEncryptionController controller = loader.getController();
+			controller.setMainApp(this);
 
 			dialogStage.showAndWait();
 		} catch (IOException e) {
@@ -224,6 +228,29 @@ public class MainApp extends Application {
 
 			// Give the controller access to the main app
 
+			dialogStage.showAndWait();
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void showFrecuencyAnalysisOverview() {
+		try {
+			// Load digital sing overview.
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(MainApp.class.getResource(UtilMessage.getMensaje("edu.udb.cri.system.view.frequency")));
+			AnchorPane analysisOverview = (AnchorPane) loader.load();
+
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle(UtilMessage.getMensaje("edu.udb.cri.system.dialog.analysis.title"));
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			dialogStage.initOwner(primaryStage);
+			Scene scene = new Scene(analysisOverview);
+			dialogStage.setScene(scene);
+			dialogStage.setResizable(false);
+			
 			dialogStage.showAndWait();
 
 		} catch (IOException e) {

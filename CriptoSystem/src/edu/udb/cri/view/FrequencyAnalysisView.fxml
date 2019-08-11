@@ -34,7 +34,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="25.0" prefWidth="161.0" text="Obtener MCD de silabas" />
+                        <Label prefHeight="25.0" prefWidth="161.0" text="Obtener MCD de silabas" wrapText="true" />
                         <Button fx:id="btnAnalizarFre" mnemonicParsing="false" onAction="#AnalyticFrecuency" prefHeight="25.0" prefWidth="125.0" text="Analizar" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
@@ -47,7 +47,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <Label prefHeight="43.0" prefWidth="157.0" text="Seleccion de numero de &#10;silabas para buscar" />
+                        <Label prefHeight="43.0" prefWidth="157.0" text="Seleccion de numero de &#10;silabas para buscar" wrapText="true" />
                         <ComboBox fx:id="cmbNumSilabas" prefHeight="25.0" prefWidth="125.0" promptText="N° de silabas" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
@@ -61,7 +61,7 @@
                     </rowConstraints>
                      <children>
                         <Button fx:id="btnIniciarFre" mnemonicParsing="false" onAction="#StartFrecuency" prefHeight="25.0" prefWidth="125.0" text="Iniciar" GridPane.rowIndex="1" />
-                        <Label text="Iniciar analisis de silabas" />
+                        <Label text="Iniciar analisis de silabas" wrapText="true" />
                      </children>
                   </GridPane>
                </children>

@@ -3,6 +3,7 @@ package edu.udb.cri.controller;
 import java.util.function.UnaryOperator;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.control.TextFormatter.Change;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.Alert.AlertType;
+import edu.udb.cri.MainApp;
 import edu.udb.cri.utils.Symmetric;
 import edu.udb.cri.utils.UtilMessage;
 
@@ -94,6 +96,20 @@ public class SymmetricEncryptionController {
 	private Tab tabSelectAes;
 	@FXML
 	private Tab tabSelectDes;
+
+	@FXML
+	private Button btnAnalisis;
+
+	private MainApp mainApp;
+
+	/**
+	 * Is called by the main application to give a reference back to itself.
+	 * 
+	 * @param mainApp
+	 */
+	public void setMainApp(MainApp mainApp) {
+		this.mainApp = mainApp;
+	}
 
 	@FXML
 	void EncryptionDes(ActionEvent event) {
@@ -335,6 +351,13 @@ public class SymmetricEncryptionController {
 		limitTextField(txtKeyCifraDes, 8);
 		txtVectorDes.setDisable(true);
 		txtVectorAes.setDisable(true);
+		
+		btnAnalisis.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent e) {
+				handleFrecuencyAnalysisView();
+			}
+		});
 	}
 
 	@FXML
@@ -408,6 +431,11 @@ public class SymmetricEncryptionController {
 		if (strAlgoritmo.contentEquals("DES")) {
 			this.flagAlg = ALGORITMO_DES;
 		}
+	}
+	
+	
+	public void handleFrecuencyAnalysisView() {
+		mainApp.showFrecuencyAnalysisOverview();
 	}
 
 }
