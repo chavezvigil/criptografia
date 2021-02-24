@@ -13,3 +13,7 @@ Finalmente, el módulo de configuraciones administra los certificados digitales 
 
 
 #Proyecto licenciado bajo GNU
+
+Used Tech
+1. Java FX
+2. Java Cryptography Architecture (JCA)
