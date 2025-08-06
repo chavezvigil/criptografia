@@ -1,22 +1,24 @@
-# Criptografía
-Aplicación JavaFX para el manejo de algoritmos de cifrado y firmas digitales
+# Cryptography
+JavaFX application for managing encryption algorithms and digital signatures.
 
-El sistema cuenta con 3 módulos principales para cifrado simétrico, asimétrico y firmas digitales, además, cuenta con un módulo para configuraciones generales, en el cual, se habilita la opción de creación, eliminación y visualización de certificados digitales.
+The system has three main modules for symmetric encryption, asymmetric encryption, and digital signatures. Additionally, it includes a configuration module that allows the creation, deletion, and viewing of digital certificates.
 
-El módulo de firmas digitales cuenta con la opción de firmado y verificado usando el algoritmo RSA con SHA512.
+The digital signatures module offers signing and verification using the RSA algorithm with SHA512.
 
-El módulo de criptografía asimétrica cuenta con la opción de cifrado y descifrado con el algoritmo RSA.
+The asymmetric cryptography module provides encryption and decryption using the RSA algorithm.
 
-El módulo de criptografía simétrica cuenta con la opción de cifrado y descifrado con los algoritmos AES y DES.
+The symmetric cryptography module supports encryption and decryption with the AES and DES algorithms.
 
-Finalmente, el módulo de configuraciones administra los certificados digitales usando keystore de la Java Cryptography Architecture. 
+Finally, the configuration module manages digital certificates using the Java Cryptography Architecture (JCA) keystore.
 
+#Project licensed under GNU
 
-#Proyecto licenciado bajo GNU
+Used Technologies:
 
-Used Tech
-1. Java FX
+1. JavaFX
+
 2. Java Cryptography Architecture (JCA)
+   
 
 <img width="1209" height="666" alt="image" src="https://github.com/user-attachments/assets/12c4a204-8d9c-4006-bd37-8135e23afd31" />
 
